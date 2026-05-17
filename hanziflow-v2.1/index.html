@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7f2e8">
+<title>HanziFlow v2.1</title>
+<link rel="stylesheet" href="/styles/theme.css">
+</head>
+<body>
+<div id="app">
+
+<!-- ─────────────────────────  HEADER  ───────────────────────── -->
+<header class="header">
+  <div class="logo">
+    <span class="hanzi-mark">漢字</span><span class="accent">Flow</span>
+    <span class="version">v2.1</span>
+  </div>
+  <div class="header-right">
+    <div class="awe-pill" id="awe-pill">AWE ◎</div>
+    <div class="timer-pill" id="timer-pill">
+      <div class="dot" id="timer-dot"></div>
+      <span id="timer-disp">00:00</span>
+    </div>
+  </div>
+</header>
+<div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+
+<!-- ─────────────────────  AWE SIDEBAR  ─────────────────────── -->
+<aside class="awe-panel" id="awe-panel" aria-hidden="true">
+  <button class="awe-close" id="awe-close" aria-label="Close AWE panel">✕</button>
+  <div style="font-family:'IM Fell English',serif;font-size:18px;color:var(--ink)">Adaptive Weakness Engine</div>
+
+  <div class="awe-section">
+    <div class="awe-title">Skill accuracy this session</div>
+    <div class="skill-bar-wrap">
+      <div class="skill-row">
+        <div class="skill-name">Listen</div>
+        <div class="skill-track"><div class="skill-fill listen" id="awe-listen-bar" style="width:0%"></div></div>
+        <div class="skill-pct" id="awe-listen-pct">—</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-name">Speak</div>
+        <div class="skill-track"><div class="skill-fill speak" id="awe-speak-bar" style="width:0%"></div></div>
+        <div class="skill-pct" id="awe-speak-pct">—</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-name">Write</div>
+        <div class="skill-track"><div class="skill-fill write" id="awe-write-bar" style="width:0%"></div></div>
+        <div class="skill-pct" id="awe-write-pct">—</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="awe-section">
+    <div class="awe-title">Flagged weak points</div>
+    <div id="awe-weakpoints" style="display:flex;flex-wrap:wrap;gap:2px;min-height:24px">
+      <span style="font-size:12px;color:var(--muted)">None yet</span>
+    </div>
+  </div>
+
+  <div class="awe-section">
+    <div class="awe-title">Response latency (last 5)</div>
+    <div class="latency-list" id="awe-latency-list">
+      <div style="font-size:12px;color:var(--muted)">No data yet</div>
+    </div>
+  </div>
+
+  <div class="awe-section">
+    <div class="awe-title">Aural discrimination mode</div>
+    <div style="font-size:12px;color:var(--ink-light);line-height:1.6">
+      Activates when listening accuracy falls below
+      <span style="color:var(--blue)">70%</span> across 3+ attempts.
+      Pinyin hides; TTS slows to 0.7×.
+    </div>
+    <div id="aural-status" style="font-size:12px;color:var(--muted)">Status: inactive</div>
+  </div>
+
+  <div class="awe-section">
+    <div class="awe-title">Tomorrow's target</div>
+    <div style="font-size:12px;color:var(--ink-light);line-height:1.6" id="awe-next-target">
+      —
+    </div>
+  </div>
+</aside>
+
+<!-- ─────────────────────────  CONNECT  ───────────────────────── -->
+<section class="screen active" id="screen-connect">
+  <div class="connect-hero">
+    <div class="hero-hanzi" aria-hidden="true">漢字流</div>
+    <div class="paper-card">
+      <h2>Connect to Anki</h2>
+      <p>HanziFlow reads your due cards from a running Anki desktop. Open Anki and ensure the AnkiConnect add-on is installed.</p>
+      <div class="status-row" id="anki-status">
+        <span class="status-icon">◌</span>
+        <span id="anki-status-txt">Not connected</span>
+      </div>
+      <button class="btn" id="check-anki" style="align-self:flex-start">Check connection</button>
+      <hr class="divider">
+      <div class="field-group">
+        <label class="lbl">Deck</label>
+        <select id="deck-sel" disabled><option>— connect Anki first —</option></select>
+      </div>
+      <div class="field-grid">
+        <div class="field-group"><label class="lbl">Hanzi field</label><select id="f-hanzi" disabled></select></div>
+        <div class="field-group"><label class="lbl">Pinyin field</label><select id="f-pinyin" disabled></select></div>
+        <div class="field-group"><label class="lbl">English field</label><select id="f-english" disabled></select></div>
+        <div class="field-group"><label class="lbl">Audio field</label><select id="f-audio" disabled></select></div>
+      </div>
+      <hr class="divider">
+      <div class="field-group">
+        <label class="lbl">Daily new-card limit</label>
+        <input type="number" id="new-limit" value="10" min="1" max="50">
+        <div style="font-size:11px;color:var(--muted)" id="next-target-hint"></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" id="start-demo">Demo session</button>
+        <button class="btn btn-primary" id="start-session" disabled>Begin session →</button>
+      </div>
+      <div class="tip-text">
+        AnkiConnect add-on code: <code>2055492159</code> · Tools → Add-ons → Get Add-ons.<br>
+        If "Check connection" fails with Anki open: go to Tools → Add-ons → AnkiConnect → Config and add <code>"http://localhost:5500"</code> to <code>webCorsOriginList</code>, then <strong>restart Anki</strong>.<br>
+        Confirm AnkiConnect is running: <a href="http://localhost:8765" target="_blank" rel="noopener" style="color:var(--gold)">open localhost:8765</a> — you should see a blank page (not an error).
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────  WIZARD  ───────────────────────── -->
+<section class="screen" id="screen-wizard">
+  <div class="wizard-top">
+    <div class="step-pills">
+      <div class="pill" id="pill-1">1 · Listen</div>
+      <div class="pill" id="pill-2">2 · Speak</div>
+      <div class="pill" id="pill-3">3 · Write</div>
+    </div>
+    <div class="card-meta">
+      Card <strong id="c-cur">1</strong>/<strong id="c-tot">10</strong> &nbsp;·&nbsp;
+      <span id="c-type" style="color:var(--sage)">New</span>
+    </div>
+  </div>
+
+  <div class="awe-alert" id="awe-alert" style="display:none">
+    <span>⚡</span><span id="awe-alert-msg"></span>
+  </div>
+
+  <div class="stash-strip" id="stash-strip">
+    <div class="stash-badge" id="stash-badge-ct">0</div>
+    <span>cards stashed — reviewed at session end</span>
+  </div>
+
+  <!-- ────  STEP 1  ──── -->
+  <div class="step-panel" id="step-1">
+    <div class="section-lbl">Step 1 — Comprehension</div>
+    <div class="card-face">
+      <div class="card-hanzi" id="s1-hanzi"></div>
+      <div class="card-pinyin" id="s1-pinyin"></div>
+      <div class="card-english" id="s1-english"></div>
+      <div class="card-toggle-row">
+        <button class="toggle-chip on" data-toggle="hanzi">Hanzi</button>
+        <button class="toggle-chip on" data-toggle="pinyin">Pinyin</button>
+        <button class="toggle-chip on" data-toggle="english">English</button>
+      </div>
+    </div>
+    <div class="aural-mode-notice" id="aural-notice" style="display:none">
+      🎧 Aural discrimination mode active — visual hints reduced. Try to comprehend from audio alone.
+    </div>
+    <div class="audio-row">
+      <button class="audio-btn" id="play-btn" title="Space = play">▶</button>
+    </div>
+
+    <div class="etym-panel" id="etym-panel">
+      <div class="etym-header" id="etym-header">
+        <span>Character etymology</span>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="etym-char" id="etym-char-preview">—</span>
+          <span style="font-size:14px;color:var(--muted)" id="etym-chevron">▾</span>
+        </div>
+      </div>
+      <div class="etym-body" id="etym-body">
+        <div class="awe-title">Radicals</div>
+        <div class="etym-radical-row" id="etym-radicals"></div>
+        <div class="awe-title" style="margin-top:4px">Historical evolution</div>
+        <div class="etym-evolution" id="etym-evolution"></div>
+        <div class="awe-title" style="margin-top:4px">Cultural context</div>
+        <div class="etym-note" id="etym-note"></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="btn-row">
+      <button class="btn" data-action="stash">Stash</button>
+      <button class="btn btn-primary" data-action="go-step-2">Understood → Speak</button>
+    </div>
+    <div class="kbd-hint"><kbd>Space</kbd> audio &nbsp; <kbd>Enter</kbd> next &nbsp; <kbd>S</kbd> stash</div>
+  </div>
+
+  <!-- ────  STEP 2  ──── -->
+  <div class="step-panel" id="step-2">
+    <div class="section-lbl">Step 2 — Speech verification</div>
+    <div class="speech-zone">
+      <div class="speech-hanzi" id="s2-hanzi"></div>
+      <div class="speech-pinyin-hint" id="s2-pinyin"></div>
+      <button class="mic-btn" id="mic-btn">🎙</button>
+      <div class="speech-feedback" id="speech-fb">Press mic and speak in Mandarin</div>
+    </div>
+    <div class="stpvo-zone" id="stpvo-zone" style="display:none">
+      <div class="section-lbl">Word order correction — STPVO</div>
+      <div class="stpvo-labels">
+        <div class="stpvo-label">Subject</div>
+        <div class="stpvo-label">Time</div>
+        <div class="stpvo-label">Place</div>
+        <div class="stpvo-label">Verb</div>
+        <div class="stpvo-label">Object</div>
+      </div>
+      <div class="stpvo-slots" id="stpvo-slots"></div>
+      <div class="word-bank-row" id="word-bank"></div>
+      <div class="btn-row">
+        <button class="btn" id="stpvo-check">Check order</button>
+        <button class="btn btn-sage" id="stpvo-reveal">Reveal answer</button>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="btn-row">
+      <button class="btn" data-action="go-step-1">← Back</button>
+      <button class="btn" id="speech-override">I was correct (override)</button>
+      <button class="btn btn-primary" id="speech-next" data-action="go-step-3" disabled>Correct → Write</button>
+    </div>
+    <div class="kbd-hint"><kbd>Enter</kbd> mic &nbsp; <kbd>O</kbd> override</div>
+  </div>
+
+  <!-- ────  STEP 3  ──── -->
+  <div class="step-panel" id="step-3">
+    <div class="section-lbl">Step 3 — Hanzi canvas</div>
+    <div class="canvas-area">
+      <div class="canvas-tabs">
+        <button class="canvas-tab active" data-mode="animate">Animate</button>
+        <button class="canvas-tab" data-mode="trace">Trace</button>
+        <button class="canvas-tab" data-mode="quiz">Quiz</button>
+      </div>
+      <div class="char-nav">
+        <button class="char-nav-btn" id="prev-ch">← prev</button>
+        <div class="char-pos" id="char-pos">1 / 1</div>
+        <button class="char-nav-btn" id="next-ch">next →</button>
+      </div>
+      <div class="canvas-wrap">
+        <div class="tian-grid"></div>
+        <div id="hw-target"></div>
+      </div>
+      <div class="stroke-score" id="stroke-dots"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+        <button class="btn" id="hw-replay">↺ Replay</button>
+        <button class="btn" id="hw-show">Show</button>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="btn-row">
+      <button class="btn" data-action="go-step-2">← Back</button>
+      <button class="btn" data-action="stash">Stash</button>
+      <button class="btn btn-primary" data-action="pass">Pass → Next</button>
+    </div>
+    <div class="kbd-hint"><kbd>R</kbd> replay &nbsp; <kbd>Enter</kbd> pass &nbsp; <kbd>S</kbd> stash</div>
+  </div>
+</section>
+
+<!-- ─────────────────────────  WRAP  ───────────────────────── -->
+<section class="screen" id="screen-wrap">
+  <div class="wrap-center">
+    <div>
+      <div class="wrap-idiom" id="wrap-idiom">加油</div>
+      <div class="wrap-sub" id="wrap-sub">Jiāyóu — "Add oil" — keep going!</div>
+    </div>
+    <div class="wrap-stats">
+      <div class="wrap-stat"><div class="wrap-val" id="ws-passed">0</div><div class="wrap-lbl">Passed</div></div>
+      <div class="wrap-stat"><div class="wrap-val" id="ws-stashed">0</div><div class="wrap-lbl">Stashed</div></div>
+      <div class="wrap-stat"><div class="wrap-val" id="ws-time">0m</div><div class="wrap-lbl">Time</div></div>
+    </div>
+
+    <div style="font-size:13px;color:var(--ink-light);max-width:420px;line-height:1.7" id="wrap-pacing-msg"></div>
+
+    <div class="export-card">
+      <h3>Export session · continue on mobile</h3>
+      <div class="qr-wrap"><canvas id="qr-canvas"></canvas></div>
+      <div class="export-hint">Scan with your phone to load a compact session-state summary. Full payload travels in the downloaded .json file.</div>
+      <div class="btn-row" style="justify-content:center">
+        <button class="btn" id="copy-json">Copy JSON</button>
+        <button class="btn btn-gold" id="download-json">Download .json</button>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <button class="btn" id="review-stash" style="display:none">
+        Review stash (<span id="ws-stash-ct">0</span>)
+      </button>
+      <button class="btn btn-primary" id="new-session">New session</button>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────  TIMEBOX MODAL  ─────────────────── -->
+<div class="modal-bg" id="timebox-modal">
+  <div class="modal-box">
+    <h2>25 minutes reached</h2>
+    <p id="modal-msg">You've hit your daily timebox.</p>
+    <div class="btn-row" style="justify-content:center">
+      <button class="btn" id="modal-wrap">Wrap up</button>
+      <button class="btn btn-primary" id="modal-keep">Keep going</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /#app -->
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

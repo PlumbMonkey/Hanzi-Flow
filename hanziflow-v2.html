@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HanziFlow v2</title>
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;500&family=IM+Fell+English:ital@0;1&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --bg:        #0e0c0a;
+  --bg2:       #151210;
+  --bg3:       #1c1915;
+  --surface:   rgba(255,248,235,0.04);
+  --surfaceB:  rgba(255,248,235,0.07);
+  --surfaceC:  rgba(255,248,235,0.11);
+  --border:    rgba(255,248,235,0.10);
+  --borderB:   rgba(255,248,235,0.18);
+  --text:      #f0e8d8;
+  --textB:     #a09070;
+  --textC:     #6a5a40;
+  --vermillion:#d94f3a;
+  --vermDim:   #8b2a1e;
+  --vermGlow:  rgba(217,79,58,0.15);
+  --gold:      #c9962a;
+  --goldGlow:  rgba(201,150,42,0.12);
+  --sage:      #5a8a5a;
+  --sageGlow:  rgba(90,138,90,0.15);
+  --blue:      #4a7ab5;
+  --radius:    6px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Subtle grain */
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+  opacity:0.4;
+}
+
+#app{position:relative;z-index:1}
+
+/* ── HEADER ── */
+.header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 28px;
+  border-bottom:1px solid var(--border);
+  background:rgba(14,12,10,0.85);
+  backdrop-filter:blur(12px);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.logo {
+  font-family:'IM Fell English',serif;
+  font-size:20px;
+  letter-spacing:0.03em;
+  color:var(--text);
+}
+.logo span{color:var(--vermillion)}
+.header-right{display:flex;align-items:center;gap:14px}
+
+.timer-pill {
+  display:flex;align-items:center;gap:6px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:5px 12px;
+  font-size:13px;
+  font-variant-numeric:tabular-nums;
+  color:var(--textB);
+}
+.timer-pill.warn{border-color:var(--vermillion);color:var(--vermillion)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--sage)}
+.dot.warn{background:var(--vermillion);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.awe-pill {
+  font-size:11px;
+  padding:4px 10px;
+  border-radius:20px;
+  border:1px solid var(--border);
+  color:var(--textC);
+  cursor:pointer;
+  transition:all .2s;
+}
+.awe-pill:hover{border-color:var(--gold);color:var(--gold)}
+
+.progress-bar{height:2px;background:var(--surface);position:sticky;top:49px;z-index:99}
+.progress-fill{height:100%;background:var(--vermillion);transition:width .5s ease;width:0%}
+
+/* ── SCREENS ── */
+.screen{display:none;min-height:calc(100vh - 51px);padding:36px 28px;max-width:780px;margin:0 auto}
+.screen.active{display:flex;flex-direction:column}
+
+/* ── CONNECT ── */
+.connect-hero{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:24px;text-align:center
+}
+.hero-hanzi{
+  font-family:'Noto Serif SC',serif;
+  font-size:88px;line-height:1;
+  color:var(--text);opacity:.05;
+  letter-spacing:-2px;user-select:none
+}
+
+.glass-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px 32px;
+  width:100%;max-width:480px;
+  display:flex;flex-direction:column;gap:16px;
+  backdrop-filter:blur(8px);
+}
+.glass-card h2{font-family:'IM Fell English',serif;font-size:19px;font-weight:400;color:var(--text)}
+.glass-card p{font-size:13px;color:var(--textB);line-height:1.7}
+
+.status-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:4px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,0.03);
+  font-size:13px;color:var(--textB);
+}
+.status-icon{font-size:16px}
+
+label.lbl{font-size:11px;color:var(--textC);letter-spacing:.06em;text-transform:uppercase}
+
+select,input[type=number]{
+  width:100%;
+  padding:8px 12px;
+  border:1px solid var(--border);
+  border-radius:4px;
+  background:rgba(255,255,255,0.04);
+  font-family:'Noto Sans SC',sans-serif;
+  font-size:13px;color:var(--text);
+  appearance:none;
+}
+select:focus,input:focus{outline:2px solid var(--vermillion);outline-offset:1px}
+select option{background:#1c1915}
+
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field-group{display:flex;flex-direction:column;gap:4px}
+
+/* Buttons */
+.btn{
+  padding:9px 20px;
+  border:1px solid var(--borderB);
+  border-radius:4px;
+  background:transparent;
+  font-family:'Noto Sans SC',sans-serif;
+  font-size:13px;color:var(--textB);
+  cursor:pointer;letter-spacing:.02em;
+  transition:all .15s;
+}
+.btn:hover{background:var(--surfaceB);color:var(--text)}
+.btn-primary{background:var(--vermillion);border-color:var(--vermillion);color:#fff;font-weight:500}
+.btn-primary:hover{background:var(--vermDim);border-color:var(--vermDim);color:#fff}
+.btn-sage{background:var(--sageGlow);border-color:var(--sage);color:var(--sage)}
+.btn-sage:hover{background:rgba(90,138,90,.3)}
+.btn-gold{background:var(--goldGlow);border-color:var(--gold);color:var(--gold)}
+.btn-gold:hover{background:rgba(201,150,42,.25)}
+.btn-row{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+
+.divider{border:none;border-top:1px solid var(--border)}
+.tip-text{font-size:12px;color:var(--textC);line-height:1.6;border-left:2px solid var(--border);padding-left:12px}
+.tip-text code{font-family:monospace;background:var(--surfaceB);padding:1px 4px;border-radius:2px;font-size:11px;color:var(--textB)}
+
+/* ── WIZARD ── */
+.wizard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:12px;flex-wrap:wrap}
+.step-pills{display:flex;gap:5px}
+.pill{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid var(--border);color:var(--textC);letter-spacing:.04em;transition:all .2s}
+.pill.active{background:var(--vermillion);border-color:var(--vermillion);color:#fff}
+.pill.done{background:var(--sage);border-color:var(--sage);color:#fff}
+
+.card-meta{font-size:12px;color:var(--textC)}
+.card-meta strong{color:var(--textB);font-weight:500}
+
+.awe-alert{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:10px 14px;
+  border-radius:4px;
+  border:1px solid var(--gold);
+  background:var(--goldGlow);
+  font-size:12px;color:var(--gold);
+  line-height:1.6;
+  margin-bottom:4px;
+}
+
+.stash-strip{
+  display:none;align-items:center;gap:10px;
+  padding:8px 14px;border-radius:4px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  font-size:12px;color:var(--textC);
+  margin-bottom:8px;
+}
+.stash-badge{
+  background:var(--vermillion);color:#fff;
+  font-size:10px;font-weight:500;
+  min-width:18px;height:18px;
+  border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 4px;
+}
+
+/* Step panels */
+.step-panel{display:none;flex-direction:column;gap:20px;flex:1}
+.step-panel.active{display:flex}
+
+/* Step 1 */
+.card-face{
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:var(--surface);
+  backdrop-filter:blur(8px);
+  padding:32px 28px;
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+  position:relative;overflow:hidden;
+}
+.card-face::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(217,79,58,0.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.card-hanzi{
+  font-family:'Noto Serif SC',serif;
+  font-size:52px;letter-spacing:6px;
+  color:var(--text);line-height:1.1;
+  text-align:center;min-height:60px;
+}
+.card-pinyin{font-size:18px;color:var(--textB);text-align:center;letter-spacing:.06em;min-height:26px}
+.card-english{
+  font-family:'IM Fell English',serif;
+  font-size:22px;font-style:italic;
+  color:var(--text);text-align:center;line-height:1.4;min-height:30px
+}
+.card-toggle-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.toggle-chip{
+  font-size:11px;padding:4px 12px;
+  border-radius:20px;border:1px solid var(--border);
+  background:transparent;color:var(--textC);
+  cursor:pointer;transition:all .15s;
+}
+.toggle-chip:hover,.toggle-chip.on{border-color:var(--gold);color:var(--gold);background:var(--goldGlow)}
+
+.audio-row{display:flex;align-items:center;justify-content:center;gap:16px}
+.audio-btn{
+  width:50px;height:50px;border-radius:50%;
+  border:1.5px solid var(--borderB);
+  background:transparent;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--textB);transition:all .15s;
+}
+.audio-btn:hover{background:var(--surfaceC);color:var(--text)}
+.audio-btn.playing{background:var(--vermillion);border-color:var(--vermillion);color:#fff}
+.aural-mode-notice{
+  font-size:12px;color:var(--blue);
+  text-align:center;
+  border:1px solid rgba(74,122,181,.3);
+  border-radius:4px;padding:8px 14px;
+  background:rgba(74,122,181,.07);
+}
+
+/* Etymology panel */
+.etym-panel{
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:var(--surface);
+  overflow:hidden;
+}
+.etym-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;border-bottom:1px solid var(--border);
+  cursor:pointer;
+}
+.etym-header span{font-size:12px;color:var(--textC);letter-spacing:.06em;text-transform:uppercase}
+.etym-header .etym-char{font-family:'Noto Serif SC',serif;font-size:18px;color:var(--gold)}
+.etym-body{display:none;padding:16px}
+.etym-body.open{display:flex;flex-direction:column;gap:14px}
+.etym-radical-row{display:flex;gap:10px;flex-wrap:wrap}
+.radical-chip{
+  display:flex;flex-direction:column;align-items:center;
+  background:var(--surfaceB);
+  border:1px solid var(--border);
+  border-radius:4px;padding:10px 16px;gap:4px;
+  min-width:80px;
+}
+.radical-zh{font-family:'Noto Serif SC',serif;font-size:28px;color:var(--gold)}
+.radical-meaning{font-size:11px;color:var(--textB)}
+.radical-stroke{font-size:10px;color:var(--textC)}
+.etym-note{font-size:13px;color:var(--textB);line-height:1.8;border-left:2px solid var(--gold);padding-left:12px}
+.etym-evolution{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.evo-stage{display:flex;flex-direction:column;align-items:center;gap:4px}
+.evo-char{font-family:'Noto Serif SC',serif;font-size:22px;color:var(--textB)}
+.evo-label{font-size:9px;color:var(--textC);letter-spacing:.06em;text-transform:uppercase}
+.evo-arrow{color:var(--textC);font-size:14px}
+
+/* Step 2 */
+.speech-zone{
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+  padding:28px;border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--surface);
+}
+.speech-hanzi{
+  font-family:'Noto Serif SC',serif;
+  font-size:44px;letter-spacing:4px;
+  color:var(--text);text-align:center;
+}
+.speech-pinyin-hint{font-size:15px;color:var(--textB);text-align:center}
+.mic-btn{
+  width:70px;height:70px;border-radius:50%;
+  border:2px solid var(--vermillion);
+  background:var(--vermGlow);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:26px;color:var(--vermillion);transition:all .15s;
+}
+.mic-btn:hover{background:var(--vermillion);color:#fff}
+.mic-btn.listening{background:var(--vermillion);color:#fff;animation:breathe 1.5s infinite}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.speech-feedback{font-size:14px;color:var(--textB);text-align:center;min-height:22px}
+.speech-feedback.ok{color:var(--sage)}
+.speech-feedback.fail{color:var(--vermillion)}
+
+/* STPVO Sort */
+.stpvo-zone{display:flex;flex-direction:column;gap:12px}
+.stpvo-labels{display:flex;gap:0;font-size:10px;color:var(--textC)}
+.stpvo-label{flex:1;text-align:center;letter-spacing:.04em}
+.stpvo-slots{
+  display:flex;gap:4px;
+  min-height:52px;
+  padding:6px;
+  border:1px dashed var(--borderB);
+  border-radius:4px;background:rgba(255,255,255,0.02);
+}
+.stpvo-slot{
+  flex:1;min-height:40px;
+  border:1px dashed var(--border);border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--textC);
+  transition:background .15s;
+  position:relative;
+}
+.stpvo-slot.dragover{background:var(--goldGlow);border-color:var(--gold)}
+.word-bank-row{display:flex;flex-wrap:wrap;gap:6px;padding:10px;border:1px solid var(--border);border-radius:4px;min-height:46px}
+.word-chip{
+  padding:6px 14px;
+  background:var(--surfaceB);
+  border:1px solid var(--borderB);
+  border-radius:3px;
+  font-size:14px;cursor:grab;
+  color:var(--text);
+  user-select:none;
+  transition:all .1s;
+  font-family:'Noto Serif SC',serif;
+}
+.word-chip:hover{background:var(--surfaceC)}
+.word-chip.placed{font-size:13px;padding:4px 10px;cursor:grab}
+
+/* Step 3 */
+.canvas-area{display:flex;flex-direction:column;align-items:center;gap:16px}
+.canvas-tabs{display:flex;gap:1px;background:var(--border);border-radius:4px;padding:1px}
+.canvas-tab{
+  padding:6px 18px;font-size:12px;border:none;border-radius:3px;
+  cursor:pointer;background:transparent;color:var(--textC);transition:all .15s;
+}
+.canvas-tab.active{background:var(--surfaceC);color:var(--text)}
+.char-nav{display:flex;align-items:center;gap:14px}
+.char-nav-btn{
+  padding:5px 14px;border:1px solid var(--border);border-radius:3px;
+  background:transparent;cursor:pointer;font-size:12px;color:var(--textC);transition:all .15s;
+}
+.char-nav-btn:hover:not(:disabled){background:var(--surfaceB);color:var(--text)}
+.char-nav-btn:disabled{opacity:.3;cursor:default}
+.char-pos{font-size:13px;color:var(--textB)}
+
+.canvas-wrap{position:relative;width:300px;height:300px}
+.tian-grid{
+  position:absolute;inset:0;pointer-events:none;border-radius:4px;
+  background-image:
+    linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px),
+    linear-gradient(rgba(255,248,235,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,248,235,.04) 1px,transparent 1px);
+  background-size:50% 50%,50% 50%,100% 100%,100% 100%;
+  border:1px solid var(--border);
+}
+#hw-target{width:300px;height:300px;border-radius:4px;overflow:hidden}
+
+.stroke-score{
+  display:flex;gap:4px;flex-wrap:wrap;justify-content:center;min-height:24px
+}
+.stroke-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:background .3s}
+.stroke-dot.ok{background:var(--sage)}
+.stroke-dot.fail{background:var(--vermillion)}
+
+/* AWE Panel */
+.awe-panel{
+  display:none;position:fixed;top:0;right:0;bottom:0;width:300px;
+  background:rgba(14,12,10,0.96);
+  border-left:1px solid var(--border);
+  z-index:150;
+  padding:20px;overflow-y:auto;
+  backdrop-filter:blur(12px);
+  flex-direction:column;gap:16px;
+}
+.awe-panel.open{display:flex}
+.awe-close{
+  align-self:flex-end;
+  background:transparent;border:none;color:var(--textC);
+  font-size:18px;cursor:pointer;padding:4px 8px;
+}
+.awe-section{display:flex;flex-direction:column;gap:8px}
+.awe-title{font-size:11px;color:var(--textC);letter-spacing:.08em;text-transform:uppercase}
+.skill-bar-wrap{display:flex;flex-direction:column;gap:6px}
+.skill-row{display:flex;align-items:center;gap:8px}
+.skill-name{font-size:12px;color:var(--textB);width:60px;flex-shrink:0}
+.skill-track{flex:1;height:6px;background:var(--surfaceB);border-radius:3px;overflow:hidden}
+.skill-fill{height:100%;border-radius:3px;transition:width .6s ease}
+.skill-fill.listen{background:var(--blue)}
+.skill-fill.speak{background:var(--vermillion)}
+.skill-fill.write{background:var(--sage)}
+.skill-pct{font-size:11px;color:var(--textC);width:30px;text-align:right;font-variant-numeric:tabular-nums}
+
+.latency-list{display:flex;flex-direction:column;gap:4px}
+.latency-item{
+  display:flex;justify-content:space-between;
+  font-size:11px;color:var(--textB);
+  padding:5px 8px;border-radius:3px;background:var(--surface);
+}
+.latency-ms{font-variant-numeric:tabular-nums;color:var(--textC)}
+
+.weak-tag{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 8px;border-radius:20px;font-size:11px;
+  border:1px solid;margin:2px;
+}
+.weak-tag.listen{border-color:var(--blue);color:var(--blue)}
+.weak-tag.speak{border-color:var(--vermillion);color:var(--vermillion)}
+.weak-tag.write{border-color:var(--gold);color:var(--gold)}
+
+/* WRAP */
+.wrap-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;text-align:center}
+.wrap-idiom{font-family:'Noto Serif SC',serif;font-size:52px;color:var(--vermillion);letter-spacing:6px}
+.wrap-sub{font-family:'IM Fell English',serif;font-style:italic;font-size:15px;color:var(--textB);margin-top:4px}
+.wrap-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;max-width:420px}
+.wrap-stat{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:4px;padding:14px;
+  display:flex;flex-direction:column;gap:4px;
+}
+.wrap-val{font-size:30px;font-weight:500;font-variant-numeric:tabular-nums;color:var(--text)}
+.wrap-lbl{font-size:10px;color:var(--textC);text-transform:uppercase;letter-spacing:.05em}
+
+/* Export / QR */
+.export-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px 24px;max-width:420px;width:100%;
+  display:flex;flex-direction:column;gap:14px;
+}
+.export-card h3{font-size:14px;color:var(--textB)}
+.qr-wrap{display:flex;justify-content:center;padding:12px;background:#fff;border-radius:4px}
+.qr-wrap canvas{display:block}
+.export-hint{font-size:11px;color:var(--textC);text-align:center;line-height:1.6}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-bg.open{display:flex}
+.modal-box{
+  background:var(--bg3);border:1px solid var(--borderB);border-radius:var(--radius);
+  padding:32px 36px;max-width:360px;width:90%;
+  text-align:center;display:flex;flex-direction:column;gap:18px;
+}
+.modal-box h2{font-family:'IM Fell English',serif;font-size:21px;font-weight:400}
+.modal-box p{font-size:13px;color:var(--textB);line-height:1.7}
+
+.fade-in{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+.kbd-hint{font-size:11px;color:var(--textC);text-align:center}
+kbd{display:inline-block;border:1px solid var(--border);border-radius:3px;padding:1px 5px;font-family:monospace;font-size:10px;color:var(--textC)}
+
+.section-lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--textC)}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">漢字<span>Flow</span> <span style="font-size:11px;color:var(--textC);font-family:'Noto Sans SC',sans-serif;">v2</span></div>
+  <div class="header-right">
+    <div class="awe-pill" onclick="toggleAWE()" id="awe-pill">AWE ◎</div>
+    <div class="timer-pill" id="timer-pill">
+      <div class="dot" id="timer-dot"></div>
+      <span id="timer-disp">00:00</span>
+    </div>
+  </div>
+</header>
+<div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+
+<!-- AWE SIDEBAR -->
+<div class="awe-panel" id="awe-panel">
+  <button class="awe-close" onclick="toggleAWE()">✕</button>
+  <div style="font-family:'IM Fell English',serif;font-size:17px;color:var(--text)">Adaptive Weakness Engine</div>
+
+  <div class="awe-section">
+    <div class="awe-title">Skill accuracy this session</div>
+    <div class="skill-bar-wrap">
+      <div class="skill-row">
+        <div class="skill-name">Listen</div>
+        <div class="skill-track"><div class="skill-fill listen" id="awe-listen-bar" style="width:0%"></div></div>
+        <div class="skill-pct" id="awe-listen-pct">—</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-name">Speak</div>
+        <div class="skill-track"><div class="skill-fill speak" id="awe-speak-bar" style="width:0%"></div></div>
+        <div class="skill-pct" id="awe-speak-pct">—</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-name">Write</div>
+        <div class="skill-track"><div class="skill-fill write" id="awe-write-bar" style="width:0%"></div></div>
+        <div class="skill-pct" id="awe-write-pct">—</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="awe-section">
+    <div class="awe-title">Flagged weak points</div>
+    <div id="awe-weakpoints" style="display:flex;flex-wrap:wrap;gap:2px;min-height:24px">
+      <span style="font-size:12px;color:var(--textC)">None yet</span>
+    </div>
+  </div>
+
+  <div class="awe-section">
+    <div class="awe-title">Response latency (last 5)</div>
+    <div class="latency-list" id="awe-latency-list">
+      <div style="font-size:12px;color:var(--textC)">No data yet</div>
+    </div>
+  </div>
+
+  <div class="awe-section">
+    <div class="awe-title">Aural discrimination mode</div>
+    <div style="font-size:12px;color:var(--textB);line-height:1.6">
+      Active when listening accuracy drops below <span style="color:var(--blue)">70%</span>.
+      Visual Pinyin and character hints are hidden; audio-only prompts increase.
+    </div>
+    <div id="aural-status" style="font-size:12px;color:var(--textC)">Status: inactive</div>
+  </div>
+</div>
+
+<!-- ══ CONNECT ══ -->
+<div class="screen active" id="screen-connect">
+  <div class="connect-hero">
+    <div class="hero-hanzi" aria-hidden="true">漢字流</div>
+    <div class="glass-card">
+      <h2>Connect to Anki</h2>
+      <p>HanziFlow reads your due cards via AnkiConnect. Make sure Anki is open on your desktop.</p>
+      <div class="status-row" id="anki-status">
+        <span class="status-icon">◌</span>
+        <span id="anki-status-txt">Not connected</span>
+      </div>
+      <button class="btn" onclick="checkAnki()" style="align-self:flex-start">Check connection</button>
+      <hr class="divider">
+      <div class="field-group">
+        <label class="lbl">Deck</label>
+        <select id="deck-sel" disabled><option>— connect Anki first —</option></select>
+      </div>
+      <div class="field-grid">
+        <div class="field-group"><label class="lbl">Hanzi field</label><select id="f-hanzi" disabled></select></div>
+        <div class="field-group"><label class="lbl">Pinyin field</label><select id="f-pinyin" disabled></select></div>
+        <div class="field-group"><label class="lbl">English field</label><select id="f-english" disabled></select></div>
+        <div class="field-group"><label class="lbl">Audio field</label><select id="f-audio" disabled></select></div>
+      </div>
+      <hr class="divider">
+      <div class="field-group">
+        <label class="lbl">Daily new card limit</label>
+        <input type="number" id="new-limit" value="10" min="1" max="50">
+      </div>
+      <div class="btn-row">
+        <button class="btn" onclick="loadDemo()">Demo session</button>
+        <button class="btn btn-primary" id="start-btn" onclick="startSession()" disabled>Begin session →</button>
+      </div>
+      <div class="tip-text">AnkiConnect add-on: <code>2055492159</code> · Tools → Add-ons → Get Add-ons</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ WIZARD ══ -->
+<div class="screen" id="screen-wizard">
+  <div class="wizard-top">
+    <div class="step-pills">
+      <div class="pill" id="pill-1">1 Listen</div>
+      <div class="pill" id="pill-2">2 Speak</div>
+      <div class="pill" id="pill-3">3 Write</div>
+    </div>
+    <div class="card-meta">Card <strong id="c-cur">1</strong>/<strong id="c-tot">10</strong> &nbsp;·&nbsp; <span id="c-type" style="color:var(--sage)">New</span></div>
+  </div>
+
+  <div class="awe-alert" id="awe-alert" style="display:none">
+    <span>⚡</span><span id="awe-alert-msg"></span>
+  </div>
+
+  <div class="stash-strip" id="stash-strip">
+    <div class="stash-badge" id="stash-badge-ct">0</div>
+    <span>cards stashed — reviewed at session end</span>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step-panel" id="step-1">
+    <div class="section-lbl">Step 1 — Comprehension</div>
+    <div class="card-face">
+      <div class="card-hanzi" id="s1-hanzi"></div>
+      <div class="card-pinyin" id="s1-pinyin"></div>
+      <div class="card-english" id="s1-english"></div>
+      <div class="card-toggle-row">
+        <button class="toggle-chip on" id="tog-hanzi" onclick="toggleField('hanzi')">Hanzi</button>
+        <button class="toggle-chip on" id="tog-pinyin" onclick="toggleField('pinyin')">Pinyin</button>
+        <button class="toggle-chip on" id="tog-english" onclick="toggleField('english')">English</button>
+      </div>
+    </div>
+    <div class="aural-mode-notice" id="aural-notice" style="display:none">
+      🎧 Aural discrimination mode active — visual hints reduced. Try to comprehend from audio alone.
+    </div>
+    <div class="audio-row">
+      <button class="audio-btn" id="play-btn" onclick="playAudio()" title="Space = play">▶</button>
+    </div>
+
+    <!-- Etymology panel -->
+    <div class="etym-panel" id="etym-panel">
+      <div class="etym-header" onclick="toggleEtym()">
+        <span>Character etymology</span>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="etym-char" id="etym-char-preview">—</span>
+          <span style="font-size:14px;color:var(--textC)" id="etym-chevron">▾</span>
+        </div>
+      </div>
+      <div class="etym-body" id="etym-body">
+        <div class="awe-title">Radicals</div>
+        <div class="etym-radical-row" id="etym-radicals"></div>
+        <div class="awe-title" style="margin-top:4px">Historical evolution</div>
+        <div class="etym-evolution" id="etym-evolution"></div>
+        <div class="awe-title" style="margin-top:4px">Cultural context</div>
+        <div class="etym-note" id="etym-note"></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="btn-row">
+      <button class="btn" onclick="stashCard()">Stash</button>
+      <button class="btn btn-primary" onclick="goStep(2)">Understood → Speak</button>
+    </div>
+    <div class="kbd-hint"><kbd>Space</kbd> audio &nbsp; <kbd>Enter</kbd> next &nbsp; <kbd>S</kbd> stash</div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-panel" id="step-2">
+    <div class="section-lbl">Step 2 — Speech verification</div>
+    <div class="speech-zone">
+      <div class="speech-hanzi" id="s2-hanzi"></div>
+      <div class="speech-pinyin-hint" id="s2-pinyin"></div>
+      <button class="mic-btn" id="mic-btn" onclick="toggleSpeech()">🎙</button>
+      <div class="speech-feedback" id="speech-fb">Press mic and speak in Mandarin</div>
+    </div>
+    <div class="stpvo-zone" id="stpvo-zone" style="display:none">
+      <div class="section-lbl">Word order correction — STPVO</div>
+      <div class="stpvo-labels">
+        <div class="stpvo-label">Subject</div>
+        <div class="stpvo-label">Time</div>
+        <div class="stpvo-label">Place</div>
+        <div class="stpvo-label">Verb</div>
+        <div class="stpvo-label">Object</div>
+      </div>
+      <div class="stpvo-slots" id="stpvo-slots"></div>
+      <div class="word-bank-row" id="word-bank"></div>
+      <div class="btn-row">
+        <button class="btn" onclick="checkSTVPO()">Check order</button>
+        <button class="btn btn-sage" onclick="revealSTVPO()">Reveal answer</button>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="btn-row">
+      <button class="btn" onclick="goStep(1)">← Back</button>
+      <button class="btn" onclick="overrideSpeech()">I was correct (override)</button>
+      <button class="btn btn-primary" id="speech-next" onclick="goStep(3)" disabled>Correct → Write</button>
+    </div>
+    <div class="kbd-hint"><kbd>Enter</kbd> mic &nbsp; <kbd>O</kbd> override</div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-panel" id="step-3">
+    <div class="section-lbl">Step 3 — Hanzi canvas</div>
+    <div class="canvas-area">
+      <div class="canvas-tabs">
+        <button class="canvas-tab active" id="tab-animate" onclick="setMode('animate')">Animate</button>
+        <button class="canvas-tab" id="tab-trace" onclick="setMode('trace')">Trace</button>
+        <button class="canvas-tab" id="tab-quiz" onclick="setMode('quiz')">Quiz</button>
+      </div>
+      <div class="char-nav">
+        <button class="char-nav-btn" id="prev-ch" onclick="prevChar()">← prev</button>
+        <div class="char-pos" id="char-pos">1 / 1</div>
+        <button class="char-nav-btn" id="next-ch" onclick="nextChar()">next →</button>
+      </div>
+      <div class="canvas-wrap">
+        <div class="tian-grid"></div>
+        <div id="hw-target"></div>
+      </div>
+      <div class="stroke-score" id="stroke-dots"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+        <button class="btn" onclick="replayAnim()">↺ Replay</button>
+        <button class="btn" onclick="revealHW()">Show</button>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="btn-row">
+      <button class="btn" onclick="goStep(2)">← Back</button>
+      <button class="btn" onclick="stashCard()">Stash</button>
+      <button class="btn btn-primary" onclick="passCard()">Pass → Next</button>
+    </div>
+    <div class="kbd-hint"><kbd>R</kbd> replay &nbsp; <kbd>Enter</kbd> pass &nbsp; <kbd>1–4</kbd> grade</div>
+  </div>
+</div>
+
+<!-- ══ WRAP ══ -->
+<div class="screen" id="screen-wrap">
+  <div class="wrap-center">
+    <div>
+      <div class="wrap-idiom" id="wrap-idiom">加油</div>
+      <div class="wrap-sub" id="wrap-sub">Jiāyóu — "Add oil" — keep going!</div>
+    </div>
+    <div class="wrap-stats">
+      <div class="wrap-stat"><div class="wrap-val" id="ws-passed">0</div><div class="wrap-lbl">Passed</div></div>
+      <div class="wrap-stat"><div class="wrap-val" id="ws-stashed">0</div><div class="wrap-lbl">Stashed</div></div>
+      <div class="wrap-stat"><div class="wrap-val" id="ws-time">0m</div><div class="wrap-lbl">Time</div></div>
+    </div>
+
+    <!-- Export / QR -->
+    <div class="export-card">
+      <h3>Export session · continue on mobile</h3>
+      <div class="qr-wrap"><canvas id="qr-canvas"></canvas></div>
+      <div class="export-hint">Scan with your phone to load this session state — no Anki needed on mobile.</div>
+      <div class="btn-row" style="justify-content:center">
+        <button class="btn" onclick="copyExportJSON()">Copy JSON</button>
+        <button class="btn btn-gold" onclick="downloadExport()">Download .json</button>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <button class="btn" onclick="reviewStash()" id="stash-review-btn" style="display:none">
+        Review stash (<span id="ws-stash-ct">0</span>)
+      </button>
+      <button class="btn btn-primary" onclick="location.reload()">New session</button>
+    </div>
+  </div>
+</div>
+
+<!-- TIMEBOX MODAL -->
+<div class="modal-bg" id="timebox-modal">
+  <div class="modal-box">
+    <h2>25 minutes reached</h2>
+    <p id="modal-msg">You've hit your daily timebox.</p>
+    <div class="btn-row" style="justify-content:center">
+      <button class="btn" onclick="closeModal();wrapNow()">Wrap up</button>
+      <button class="btn btn-primary" onclick="closeModal()">Keep going</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- #app -->
+
+<script>
+// ════════════════════════════════════════════════════════
+// ETYMOLOGY DATABASE (HSK 1-3 common characters)
+// ════════════════════════════════════════════════════════
+const ETYM_DB = {
+  '安': {
+    radicals: [{zh:'宀',meaning:'roof / shelter',strokes:3},{zh:'女',meaning:'woman',strokes:3}],
+    evolution: ['𠀌','安','安'],
+    evoLabels: ['Oracle Bone','Bronze','Modern'],
+    note: 'A woman sheltered under a roof — in ancient China this image embodied total peace and security for the household. The character captures the idea that safety begins at home.'
+  },
+  '明': {
+    radicals: [{zh:'日',meaning:'sun',strokes:4},{zh:'月',meaning:'moon',strokes:4}],
+    evolution: ['𤾐','明','明'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'Sun and moon together — the two great sources of natural light. Their union creates the concept of brightness, clarity, and understanding itself.'
+  },
+  '好': {
+    radicals: [{zh:'女',meaning:'woman',strokes:3},{zh:'子',meaning:'child',strokes:3}],
+    evolution: ['𡛷','好','好'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'A woman beside a child — the ancient image of goodness, harmony, and completion. Some scholars also read it as the joy of new life.'
+  },
+  '休': {
+    radicals: [{zh:'人',meaning:'person',strokes:2},{zh:'木',meaning:'tree / wood',strokes:4}],
+    evolution: ['休','休','休'],
+    evoLabels: ['Bronze','Seal','Modern'],
+    note: 'A person leaning against a tree — the universal image of rest. This pictographic logic has been unchanged for over three thousand years.'
+  },
+  '男': {
+    radicals: [{zh:'田',meaning:'field / rice paddy',strokes:5},{zh:'力',meaning:'strength / power',strokes:2}],
+    evolution: ['𤰇','男','男'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'Strength applied to the field. In the agrarian civilization of ancient China, a man was defined by his labour in the paddy fields — the character encodes this social role directly.'
+  },
+  '木': {
+    radicals: [{zh:'木',meaning:'the character itself is a radical',strokes:4}],
+    evolution: ['𣎳','木','木'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'One of the oldest pictographs — a tree with roots below and branches above. The radical 木 seeds hundreds of characters related to trees, wood, and growth.'
+  },
+  '日': {
+    radicals: [{zh:'日',meaning:'the character itself is a radical',strokes:4}],
+    evolution: ['☉','𡆸','日'],
+    evoLabels: ['Oracle Bone','Bronze','Modern'],
+    note: 'Originally drawn as a circle with a dot — the sun and its core. The dot distinguishes it from 口 (mouth). 日 seeds all characters related to time, light, and heat.'
+  },
+  '月': {
+    radicals: [{zh:'月',meaning:'the character itself is a radical',strokes:4}],
+    evolution: ['🌙','𠔥','月'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'The crescent moon — one of the most stable pictographs in Chinese. 月 also doubles as the radical for 肉 (flesh/meat), leading to many body-part characters.'
+  },
+  '山': {
+    radicals: [{zh:'山',meaning:'the character itself is a radical',strokes:3}],
+    evolution: ['𡶤','山','山'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'Three mountain peaks rendered as brushstrokes — a direct sketch of the landscape. 山 appears in place names, nature poetry, and spiritual concepts of stillness and permanence.'
+  },
+  '水': {
+    radicals: [{zh:'水',meaning:'the character itself is a radical',strokes:4}],
+    evolution: ['𠄡','𣳊','水'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'Flowing water shown as a central current with side streams. As the radical 氵 it influences hundreds of characters related to rivers, liquids, and states of flow.'
+  },
+  '火': {
+    radicals: [{zh:'火',meaning:'the character itself is a radical',strokes:4}],
+    evolution: ['𠔥','𤆴','火'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'Flames rising — a direct pictograph of fire. As a radical (灬 or 火) it appears in characters for cooking, heat, light, and passion.'
+  },
+  '学': {
+    radicals: [{zh:'子',meaning:'child',strokes:3},{zh:'冖',meaning:'cover / roof',strokes:2}],
+    evolution: ['學','学','学'],
+    evoLabels: ['Traditional','Simplified','Modern'],
+    note: 'A child under a sheltering structure — learning happens in a protected space, nurtured and guided. The traditional form 學 includes hands passing knowledge downward.'
+  },
+  '人': {
+    radicals: [{zh:'人',meaning:'the character itself is a radical',strokes:2}],
+    evolution: ['𠂉','亻','人'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'A standing person seen from the side, legs apart. One of the oldest and most productive pictographs — 人 or 亻 appears in countless characters involving human beings, roles, and relationships.'
+  },
+  '大': {
+    radicals: [{zh:'大',meaning:'the character itself is a radical',strokes:3}],
+    evolution: ['𠂉','大','大'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'A person with arms spread wide — embodying largeness, greatness, and abundance. The same figure with a dot above becomes 天 (sky/heaven), and a dot below becomes 太 (great/excessive).'
+  },
+  '心': {
+    radicals: [{zh:'心',meaning:'the character itself is a radical',strokes:4}],
+    evolution: ['𤔘','𢗓','心'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'A pictograph of the physical heart — in Chinese philosophy the heart is also the seat of mind, emotion, and consciousness. As radical 忄 it seeds all characters involving feeling and thought.'
+  },
+  '口': {
+    radicals: [{zh:'口',meaning:'the character itself is a radical',strokes:3}],
+    evolution: ['𠙵','囗','口'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'An open mouth — simple, direct, and enormously productive. 口 appears in characters for speaking, eating, singing, and calling. It also represents openings, gates, and entrances by extension.'
+  },
+  '时': {
+    radicals: [{zh:'日',meaning:'sun / time',strokes:4},{zh:'寸',meaning:'inch / small measure',strokes:3}],
+    evolution: ['時','时','时'],
+    evoLabels: ['Traditional','Simplified','Modern'],
+    note: 'The sun measured in small increments — time itself. The traditional form 時 pairs 日 with 寺 (temple), a place where time was marked by bells. The simplified form keeps the essence.'
+  },
+  '友': {
+    radicals: [{zh:'又',meaning:'right hand / again',strokes:2}],
+    evolution: ['𠂇','友','友'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'Two right hands reaching toward each other — a handshake across time. Friendship in the oracle bone script was literally two hands meeting. The gesture defines the relationship.'
+  },
+  '国': {
+    radicals: [{zh:'囗',meaning:'enclosure / border',strokes:3},{zh:'玉',meaning:'jade',strokes:5}],
+    evolution: ['國','国','国'],
+    evoLabels: ['Traditional','Simplified','Modern'],
+    note: 'A treasure (jade, or a weapon in older forms) enclosed within a border — a nation is defined by what it protects within its boundaries. The simplified form uses 玉 (jade), the most precious material in Chinese civilization.'
+  },
+  '中': {
+    radicals: [{zh:'中',meaning:'the character itself is a radical',strokes:4}],
+    evolution: ['𠀃','中','中'],
+    evoLabels: ['Oracle Bone','Seal','Modern'],
+    note: 'A vertical line piercing the center of a rectangle — an arrow hitting the bullseye. 中 means middle, center, and China itself (中国, the Middle Kingdom), the country that considered itself the center of the world.'
+  }
+};
+
+const DEMO_CARDS = [
+  {hanzi:'学习',pinyin:'xuéxí',english:'to study / to learn',audio:null,type:'New',words:null},
+  {hanzi:'朋友',pinyin:'péngyou',english:'friend',audio:null,type:'New',words:null},
+  {hanzi:'我今天去图书馆学习',pinyin:'Wǒ jīntiān qù túshūguǎn xuéxí',english:'I go to the library to study today',audio:null,type:'Review',words:['我','今天','图书馆','去','学习']},
+  {hanzi:'安心',pinyin:'ānxīn',english:'peace of mind / to feel at ease',audio:null,type:'New',words:null},
+  {hanzi:'时间',pinyin:'shíjiān',english:'time',audio:null,type:'New',words:null},
+  {hanzi:'明白',pinyin:'míngbai',english:'to understand / clear',audio:null,type:'New',words:null},
+];
+
+const IDIOMS = [
+  {zh:'加油',py:'Jiāyóu',en:'"Add oil" — keep going!'},
+  {zh:'熟能生巧',py:'Shú néng shēng qiǎo',en:'"Practice makes perfect"'},
+  {zh:'学无止境',py:'Xué wú zhǐ jìng',en:'"Learning has no end"'},
+  {zh:'坚持就是胜利',py:'Jiānchí jiùshì shènglì',en:'"Persistence is victory"'},
+  {zh:'一步一个脚印',py:'Yī bù yī gè jiǎoyìn',en:'"One step, one footprint"'},
+];
+
+// ════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════
+const S = {
+  cards: [], stash: [],
+  idx: 0, step: 1,
+  passed: 0,
+  sessionStart: null, timerInt: null, timeboxFired: false,
+  isDemo: false,
+  hw: null, chars: [], charIdx: 0, canvasMode: 'animate',
+  strokeTotal: 0, strokeOk: 0,
+  speechRec: null, speechActive: false, speechPassed: false,
+  // AWE
+  awe: {
+    listen: {attempts:0, passed:0},
+    speak:  {attempts:0, passed:0},
+    write:  {attempts:0, passed:0},
+    latency: [],        // [{hanzi, ms}]
+    weakpoints: {},     // {hanzi: ['listen'|'speak'|'write']}
+    auralMode: false,
+  },
+  cardStart: null,       // timestamp when card loaded
+  // field visibility
+  showHanzi: true, showPinyin: true, showEnglish: true,
+};
+
+// ════════════════════════════════════════════════════════
+// ANKI
+// ════════════════════════════════════════════════════════
+async function anki(action, params={}) {
+  const r = await fetch('http://localhost:8765',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,version:6,params})});
+  const d = await r.json();
+  if(d.error) throw new Error(d.error);
+  return d.result;
+}
+
+async function checkAnki() {
+  const row = document.getElementById('anki-status');
+  const txt = document.getElementById('anki-status-txt');
+  txt.textContent = 'Connecting…';
+  try {
+    await anki('version');
+    row.style.borderColor = 'var(--sage)';
+    row.querySelector('.status-icon').textContent = '✓';
+    txt.textContent = 'Connected to AnkiConnect';
+    await loadDecks();
+  } catch {
+    row.style.borderColor = 'var(--vermillion)';
+    row.querySelector('.status-icon').textContent = '✗';
+    txt.textContent = 'Cannot reach Anki — is it open?';
+  }
+}
+
+async function loadDecks() {
+  const decks = await anki('deckNames');
+  const sel = document.getElementById('deck-sel');
+  sel.innerHTML = decks.map(d=>`<option>${d}</option>`).join('');
+  sel.disabled = false;
+  sel.onchange = loadFields;
+  await loadFields();
+  document.getElementById('start-btn').disabled = false;
+}
+
+async function loadFields() {
+  const deck = document.getElementById('deck-sel').value;
+  const ids = await anki('findCards',{query:`deck:"${deck}"`});
+  if(!ids.length) return;
+  const info = await anki('cardsInfo',{cards:[ids[0]]});
+  const fields = Object.keys(info[0].fields);
+  ['f-hanzi','f-pinyin','f-english','f-audio'].forEach(id=>{
+    const s=document.getElementById(id);
+    s.innerHTML=fields.map(f=>`<option>${f}</option>`).join('');
+    s.disabled=false;
+  });
+  const g = cs => fields.find(f=>cs.some(c=>f.toLowerCase().includes(c)))||fields[0];
+  document.getElementById('f-hanzi').value = g(['hanzi','front','character','simplified','word']);
+  document.getElementById('f-pinyin').value = g(['pinyin','pronunciation','reading']);
+  document.getElementById('f-english').value = g(['english','back','meaning','translation']);
+  document.getElementById('f-audio').value = g(['audio','sound']);
+}
+
+async function startSession() {
+  const deck = document.getElementById('deck-sel').value;
+  const limit = +document.getElementById('new-limit').value||10;
+  const dueIds = await anki('findCards',{query:`deck:"${deck}" is:due`});
+  const newIds = await anki('findCards',{query:`deck:"${deck}" is:new`});
+  const all = [...dueIds,...newIds.slice(0,limit)];
+  if(!all.length){alert('No due cards found.');return;}
+  const infos = await anki('cardsInfo',{cards:all.slice(0,30)});
+  const fH=document.getElementById('f-hanzi').value;
+  const fP=document.getElementById('f-pinyin').value;
+  const fE=document.getElementById('f-english').value;
+  const fA=document.getElementById('f-audio').value;
+  S.cards = infos.map((c,i)=>({
+    cardId:c.cardId,
+    hanzi: strip(c.fields[fH]?.value||''),
+    pinyin: strip(c.fields[fP]?.value||''),
+    english: strip(c.fields[fE]?.value||''),
+    audioFile: extractAudio(c.fields[fA]?.value||''),
+    type: i<dueIds.length?'Review':'New',
+    words: null,
+  }));
+  S.isDemo = false;
+  begin();
+}
+
+function loadDemo() {
+  S.cards = JSON.parse(JSON.stringify(DEMO_CARDS));
+  S.isDemo = true;
+  begin();
+}
+
+function strip(h){const d=document.createElement('div');d.innerHTML=h;return d.textContent||''}
+function extractAudio(v){const m=v.match(/\[sound:([^\]]+)\]/);return m?m[1]:null}
+
+// ════════════════════════════════════════════════════════
+// SESSION
+// ════════════════════════════════════════════════════════
+function begin() {
+  S.idx=0; S.stash=[]; S.passed=0;
+  S.sessionStart=Date.now(); S.timeboxFired=false;
+  resetAWE();
+  showScreen('screen-wizard');
+  loadCard(0);
+  startTimer();
+}
+
+function loadCard(i) {
+  if(i>=S.cards.length){endLoop();return;}
+  const c=S.cards[i];
+  S.step=1; S.speechPassed=false;
+  S.cardStart=Date.now();
+  document.getElementById('c-cur').textContent=i+1;
+  document.getElementById('c-tot').textContent=S.cards.length;
+  const lbl=document.getElementById('c-type');
+  lbl.textContent=c.type;
+  lbl.style.color=c.type==='New'?'var(--sage)':'var(--gold)';
+
+  // Field defaults — aural mode overrides
+  S.showHanzi=true; S.showPinyin=!S.awe.auralMode; S.showEnglish=true;
+  syncFieldToggles();
+
+  document.getElementById('s1-hanzi').textContent=c.hanzi;
+  document.getElementById('s1-pinyin').textContent=c.pinyin;
+  document.getElementById('s1-english').textContent=c.english;
+
+  document.getElementById('s2-hanzi').textContent=c.hanzi;
+  document.getElementById('s2-pinyin').textContent=c.pinyin;
+  document.getElementById('speech-fb').textContent='Press mic and speak in Mandarin';
+  document.getElementById('speech-fb').className='speech-feedback';
+  document.getElementById('speech-next').disabled=true;
+  document.getElementById('stpvo-zone').style.display='none';
+
+  document.getElementById('aural-notice').style.display=S.awe.auralMode?'block':'none';
+
+  loadEtymology(c.hanzi);
+  showAWEAlert();
+  goStep(1);
+  updateProgress();
+}
+
+function goStep(n) {
+  S.step=n;
+  [1,2,3].forEach(i=>{
+    document.getElementById(`step-${i}`).classList.toggle('active',i===n);
+    const p=document.getElementById(`pill-${i}`);
+    p.className='pill'+(i<n?' done':i===n?' active':'');
+  });
+  if(n===3) initHW();
+}
+
+function passCard() {
+  // AWE write score
+  if(S.strokeTotal>0) {
+    S.awe.write.attempts++;
+    const ratio=S.strokeOk/S.strokeTotal;
+    if(ratio>=0.7) S.awe.write.passed++;
+    else flagWeak(S.cards[S.idx].hanzi,'write');
+  }
+  logLatency();
+  S.passed++;
+  if(!S.isDemo) syncAnki(S.cards[S.idx].cardId,true);
+  S.idx++;
+  updateStash();
+  if(S.idx>=S.cards.length){endLoop();return;}
+  loadCard(S.idx);
+}
+
+function stashCard() {
+  logLatency();
+  S.stash.push(S.cards[S.idx]);
+  if(!S.isDemo) syncAnki(S.cards[S.idx].cardId,false);
+  S.idx++;
+  updateStash();
+  if(S.idx>=S.cards.length){endLoop();return;}
+  loadCard(S.idx);
+}
+
+function updateStash(){
+  const n=S.stash.length;
+  document.getElementById('stash-badge-ct').textContent=n;
+  document.getElementById('stash-strip').style.display=n>0?'flex':'none';
+  document.getElementById('stash-header-ct') && (document.getElementById('stash-header-ct').textContent=n);
+  updateAWEPanel();
+}
+
+function endLoop(){
+  stopTimer();
+  const elapsed=Math.round((Date.now()-S.sessionStart)/60000);
+  document.getElementById('ws-passed').textContent=S.passed;
+  document.getElementById('ws-stashed').textContent=S.stash.length;
+  document.getElementById('ws-time').textContent=elapsed+'m';
+  document.getElementById('ws-stash-ct').textContent=S.stash.length;
+  document.getElementById('stash-review-btn').style.display=S.stash.length?'inline-block':'none';
+  const idiom=IDIOMS[Math.floor(Math.random()*IDIOMS.length)];
+  document.getElementById('wrap-idiom').textContent=idiom.zh;
+  document.getElementById('wrap-sub').textContent=`${idiom.py} — ${idiom.en}`;
+  buildExport();
+  showScreen('screen-wrap');
+}
+
+function reviewStash(){S.cards=[...S.stash];S.stash=[];begin();}
+
+// ════════════════════════════════════════════════════════
+// AUDIO
+// ════════════════════════════════════════════════════════
+let _audio=null;
+function playAudio() {
+  const c=S.cards[S.idx];
+  S.awe.listen.attempts++;
+  const btn=document.getElementById('play-btn');
+  if(c.audioFile){
+    anki('retrieveMediaFile',{filename:c.audioFile})
+      .then(b64=>{
+        if(_audio){_audio.pause();_audio=null;}
+        const a=new Audio('data:audio/mp3;base64,'+b64);
+        _audio=a; btn.classList.add('playing');
+        a.play(); a.onended=()=>btn.classList.remove('playing');
+      })
+      .catch(()=>tts(c.hanzi,btn));
+  } else { tts(c.hanzi,btn); }
+}
+
+function tts(txt,btn){
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(txt);
+  u.lang='zh-CN'; u.rate=S.awe.auralMode?0.7:0.85;
+  btn.classList.add('playing');
+  u.onend=()=>btn.classList.remove('playing');
+  window.speechSynthesis.speak(u);
+}
+
+// ════════════════════════════════════════════════════════
+// FIELD TOGGLES
+// ════════════════════════════════════════════════════════
+function toggleField(f){
+  if(f==='hanzi'){S.showHanzi=!S.showHanzi;}
+  if(f==='pinyin'){S.showPinyin=!S.showPinyin;}
+  if(f==='english'){S.showEnglish=!S.showEnglish;}
+  syncFieldToggles();
+}
+function syncFieldToggles(){
+  const c=S.cards[S.idx];
+  document.getElementById('s1-hanzi').style.opacity=S.showHanzi?'1':'0';
+  document.getElementById('s1-pinyin').style.opacity=S.showPinyin?'1':'0';
+  document.getElementById('s1-english').style.opacity=S.showEnglish?'1':'0';
+  document.getElementById('tog-hanzi').classList.toggle('on',S.showHanzi);
+  document.getElementById('tog-pinyin').classList.toggle('on',S.showPinyin);
+  document.getElementById('tog-english').classList.toggle('on',S.showEnglish);
+}
+
+// ════════════════════════════════════════════════════════
+// ETYMOLOGY
+// ════════════════════════════════════════════════════════
+function loadEtymology(hanzi){
+  // Try first char, then each char
+  let data=null, foundChar='';
+  for(const ch of hanzi.split('')){
+    if(ETYM_DB[ch]){data=ETYM_DB[ch];foundChar=ch;break;}
+  }
+  document.getElementById('etym-char-preview').textContent=foundChar||hanzi[0]||'—';
+  const body=document.getElementById('etym-body');
+  if(!data){
+    document.getElementById('etym-radicals').innerHTML='<span style="font-size:12px;color:var(--textC)">No etymology data for this character yet.</span>';
+    document.getElementById('etym-evolution').innerHTML='';
+    document.getElementById('etym-note').textContent='';
+    return;
+  }
+  document.getElementById('etym-radicals').innerHTML=data.radicals.map(r=>`
+    <div class="radical-chip">
+      <div class="radical-zh">${r.zh}</div>
+      <div class="radical-meaning">${r.meaning}</div>
+      <div class="radical-stroke">${r.strokes} strokes</div>
+    </div>`).join('');
+  document.getElementById('etym-evolution').innerHTML=data.evolution.map((ch,i)=>`
+    <div class="evo-stage">
+      <div class="evo-char">${ch}</div>
+      <div class="evo-label">${data.evoLabels[i]}</div>
+    </div>${i<data.evolution.length-1?'<div class="evo-arrow">→</div>':''}`).join('');
+  document.getElementById('etym-note').textContent=data.note;
+}
+
+function toggleEtym(){
+  const b=document.getElementById('etym-body');
+  const open=b.classList.toggle('open');
+  document.getElementById('etym-chevron').textContent=open?'▴':'▾';
+}
+
+// ════════════════════════════════════════════════════════
+// SPEECH
+// ════════════════════════════════════════════════════════
+function toggleSpeech(){
+  if(S.speechActive){stopSpeech();return;}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){
+    document.getElementById('speech-fb').textContent='Speech API not available — use Chrome or override manually';
+    return;
+  }
+  const rec=new SR(); rec.lang='zh-CN'; rec.maxAlternatives=5;
+  S.speechRec=rec; S.speechActive=true;
+  document.getElementById('mic-btn').classList.add('listening');
+  document.getElementById('speech-fb').textContent='Listening…';
+
+  rec.onresult=(e)=>{
+    const c=S.cards[S.idx];
+    const transcripts=Array.from(e.results[0]).map(a=>a.transcript.replace(/\s/g,''));
+    const target=c.hanzi.replace(/\s/g,'');
+    const ok=transcripts.some(t=>t===target||similarity(t,target)>0.85);
+    S.awe.speak.attempts++;
+    if(ok){
+      S.awe.speak.passed++;
+      document.getElementById('speech-fb').className='speech-feedback ok';
+      document.getElementById('speech-fb').textContent=`Heard: ${e.results[0][0].transcript} ✓`;
+      S.speechPassed=true;
+      document.getElementById('speech-next').disabled=false;
+    } else {
+      flagWeak(c.hanzi,'speak');
+      document.getElementById('speech-fb').className='speech-feedback fail';
+      document.getElementById('speech-fb').textContent=`Heard: ${e.results[0][0].transcript} — try word order ↓`;
+      if(c.words) showSTVPO(c.words);
+    }
+    stopSpeech();
+    updateAWEPanel();
+    checkAuralMode();
+  };
+  rec.onerror=()=>{
+    document.getElementById('speech-fb').textContent='Could not hear — try again or override';
+    stopSpeech();
+  };
+  rec.start();
+}
+function stopSpeech(){
+  S.speechActive=false;
+  document.getElementById('mic-btn').classList.remove('listening');
+  try{S.speechRec&&S.speechRec.stop();}catch{}
+}
+function overrideSpeech(){
+  S.speechPassed=true;
+  S.awe.speak.attempts++; S.awe.speak.passed++;
+  document.getElementById('speech-fb').className='speech-feedback ok';
+  document.getElementById('speech-fb').textContent='(manually marked correct)';
+  document.getElementById('speech-next').disabled=false;
+  updateAWEPanel();
+}
+
+function similarity(a,b){
+  // Simple char overlap ratio
+  const sa=new Set(a.split(''));
+  let hit=0; for(const ch of b.split('')) if(sa.has(ch)) hit++;
+  return hit/Math.max(a.length,b.length);
+}
+
+// ════════════════════════════════════════════════════════
+// STPVO
+// ════════════════════════════════════════════════════════
+let _dragWord=null, _dragFrom=null;
+
+function showSTVPO(words){
+  document.getElementById('stpvo-zone').style.display='flex';
+  const slots=document.getElementById('stpvo-slots');
+  slots.innerHTML=Array(5).fill(0).map((_,i)=>`<div class="stpvo-slot" id="slot-${i}" ondragover="ev.preventDefault()" ondrop="dropSlot(event,${i})"></div>`).join('');
+  const bank=document.getElementById('word-bank');
+  const shuffled=[...words].sort(()=>Math.random()-.5);
+  bank.innerHTML=shuffled.map(w=>`<div class="word-chip" draggable="true" data-word="${w}" ondragstart="startDrag(event,'${w}','bank')">${w}</div>`).join('');
+
+  // Fix ondragover inline — use addEventListener
+  document.querySelectorAll('.stpvo-slot').forEach((sl,i)=>{
+    sl.addEventListener('dragover',e=>e.preventDefault());
+    sl.addEventListener('drop',e=>dropSlot(e,i));
+  });
+  document.getElementById('word-bank').addEventListener('dragover',e=>e.preventDefault());
+  document.getElementById('word-bank').addEventListener('drop',e=>dropBank(e));
+}
+
+function startDrag(e,word,from){_dragWord=word;_dragFrom=from;e.target.classList.add('dragging')}
+function dropSlot(e,i){
+  e.preventDefault();
+  const slot=document.getElementById(`slot-${i}`);
+  // Return existing chip to bank
+  if(slot.firstChild){document.getElementById('word-bank').appendChild(slot.firstChild);}
+  const chip=document.querySelector(`[data-word="${_dragWord}"]`);
+  if(chip){chip.classList.remove('dragging');chip.classList.add('placed');slot.appendChild(chip);}
+}
+function dropBank(e){
+  e.preventDefault();
+  const chip=document.querySelector(`[data-word="${_dragWord}"].placed`);
+  if(chip){chip.classList.remove('placed');document.getElementById('word-bank').appendChild(chip);}
+}
+
+function checkSTVPO(){
+  const c=S.cards[S.idx];
+  if(!c.words) return;
+  const placed=Array.from({length:5},(_,i)=>{
+    const s=document.getElementById(`slot-${i}`);
+    return s.firstChild?s.firstChild.dataset.word:null;
+  }).filter(Boolean);
+  const ok=placed.length===c.words.length&&placed.every((w,i)=>w===c.words[i]);
+  if(ok){
+    S.speechPassed=true;
+    document.getElementById('speech-next').disabled=false;
+    document.getElementById('speech-fb').className='speech-feedback ok';
+    document.getElementById('speech-fb').textContent='Word order correct ✓';
+  } else {
+    document.getElementById('speech-fb').className='speech-feedback fail';
+    document.getElementById('speech-fb').textContent='Not quite — keep adjusting';
+  }
+}
+
+function revealSTVPO(){
+  const c=S.cards[S.idx];
+  if(!c.words) return;
+  c.words.forEach((w,i)=>{
+    const slot=document.getElementById(`slot-${i}`);
+    slot.innerHTML='';
+    const chip=document.createElement('div');
+    chip.className='word-chip placed';
+    chip.dataset.word=w;
+    chip.textContent=w;
+    slot.appendChild(chip);
+  });
+  document.getElementById('word-bank').innerHTML='';
+}
+
+// ════════════════════════════════════════════════════════
+// HANZI WRITER — with real-time stroke validation
+// ════════════════════════════════════════════════════════
+function initHW(){
+  const c=S.cards[S.idx];
+  S.chars=c.hanzi.replace(/\s/g,'').split('');
+  S.charIdx=0; S.strokeTotal=0; S.strokeOk=0;
+  updateCharNav();
+  renderChar();
+}
+
+function renderChar(){
+  const ch=S.chars[S.charIdx];
+  document.getElementById('char-pos').textContent=`${S.charIdx+1} / ${S.chars.length}: ${ch}`;
+  document.getElementById('hw-target').innerHTML='';
+  document.getElementById('stroke-dots').innerHTML='';
+  if(S.hw){S.hw=null;}
+  if(!window.HanziWriter){
+    document.getElementById('hw-target').innerHTML=`<div style="display:flex;align-items:center;justify-content:center;height:300px;font-family:'Noto Serif SC',serif;font-size:140px;color:var(--text);opacity:.1">${ch}</div>`;
+    return;
+  }
+  try {
+    S.hw=HanziWriter.create('hw-target',ch,{
+      width:300,height:300,padding:20,
+      strokeColor:'#f0e8d8',
+      outlineColor:'rgba(240,232,216,0.1)',
+      drawingColor:'#d94f3a',
+      highlightColor:'#5a8a5a',
+      showCharacter: S.canvasMode!=='quiz',
+      showOutline:true,
+      strokeAnimationSpeed:0.9,
+      delayBetweenStrokes:180,
+      onLoadCharDataSuccess:(data)=>{
+        buildStrokeDots(data.strokes?data.strokes.length:0);
+        if(S.canvasMode==='animate') S.hw.animateCharacter();
+        else if(S.canvasMode==='trace'||S.canvasMode==='quiz'){
+          S.hw.quiz({
+            leniency:0.9,
+            onMistake:(strokeData)=>{markStroke(strokeData.strokeNum,false);},
+            onCorrectStroke:(strokeData)=>{markStroke(strokeData.strokeNum,true);},
+            onComplete:()=>{
+              // All strokes complete
+              document.getElementById('speech-fb') && null;
+            }
+          });
+        }
+      },
+      onLoadCharDataError:()=>{
+        document.getElementById('hw-target').innerHTML=`<div style="display:flex;align-items:center;justify-content:center;height:300px;flex-direction:column;gap:8px"><div style="font-family:'Noto Serif SC',serif;font-size:110px;color:var(--text);opacity:.15">${ch}</div><div style="font-size:12px;color:var(--textC)">Stroke data unavailable</div></div>`;
+      }
+    });
+  } catch(e) {console.warn('HW error:',e);}
+}
+
+function buildStrokeDots(n){
+  S.strokeTotal+=n; // accumulate across chars
+  const wrap=document.getElementById('stroke-dots');
+  wrap.innerHTML='';
+  for(let i=0;i<n;i++){
+    const d=document.createElement('div');
+    d.className='stroke-dot';
+    d.id=`sd-${S.charIdx}-${i}`;
+    wrap.appendChild(d);
+  }
+}
+
+function markStroke(num,ok){
+  const d=document.getElementById(`sd-${S.charIdx}-${num}`);
+  if(d){d.classList.add(ok?'ok':'fail');}
+  if(ok) S.strokeOk++;
+  S.awe.write.attempts++;
+  if(ok) S.awe.write.passed++;
+  updateAWEPanel();
+}
+
+function replayAnim(){
+  if(S.hw&&S.canvasMode==='animate') S.hw.animateCharacter();
+  else renderChar();
+}
+function revealHW(){if(S.hw) S.hw.showCharacter();}
+
+function setMode(m){
+  S.canvasMode=m;
+  ['animate','trace','quiz'].forEach(n=>document.getElementById(`tab-${n}`).classList.toggle('active',n===m));
+  renderChar();
+}
+
+function prevChar(){if(S.charIdx>0){S.charIdx--;renderChar();updateCharNav();}}
+function nextChar(){if(S.charIdx<S.chars.length-1){S.charIdx++;renderChar();updateCharNav();}}
+function updateCharNav(){
+  document.getElementById('prev-ch').disabled=S.charIdx===0;
+  document.getElementById('next-ch').disabled=S.charIdx===S.chars.length-1;
+}
+
+// ════════════════════════════════════════════════════════
+// AWE
+// ════════════════════════════════════════════════════════
+function resetAWE(){
+  S.awe={listen:{attempts:0,passed:0},speak:{attempts:0,passed:0},write:{attempts:0,passed:0},latency:[],weakpoints:{},auralMode:false};
+  updateAWEPanel();
+}
+
+function flagWeak(hanzi,skill){
+  if(!S.awe.weakpoints[hanzi]) S.awe.weakpoints[hanzi]=new Set();
+  S.awe.weakpoints[hanzi].add(skill);
+}
+
+function logLatency(){
+  if(!S.cardStart) return;
+  const ms=Date.now()-S.cardStart;
+  S.awe.latency.push({hanzi:S.cards[S.idx]?.hanzi||'?',ms});
+  if(S.awe.latency.length>20) S.awe.latency.shift();
+  S.cardStart=null;
+}
+
+function checkAuralMode(){
+  const a=S.awe.listen;
+  if(a.attempts>=3){
+    const ratio=a.passed/a.attempts;
+    S.awe.auralMode=ratio<0.7;
+    document.getElementById('aural-status').textContent=
+      S.awe.auralMode?'Status: ACTIVE — listening is your weak point':'Status: inactive';
+    document.getElementById('aural-status').style.color=S.awe.auralMode?'var(--blue)':'var(--textC)';
+  }
+}
+
+function showAWEAlert(){
+  const wp=S.awe.weakpoints[S.cards[S.idx]?.hanzi];
+  const el=document.getElementById('awe-alert');
+  if(wp&&wp.size>0){
+    el.style.display='flex';
+    document.getElementById('awe-alert-msg').textContent=
+      `AWE: Previously weak in ${[...wp].join(', ')} for this card — pay extra attention.`;
+  } else { el.style.display='none'; }
+}
+
+function pct(a){return a.attempts?Math.round(a.passed/a.attempts*100):null;}
+
+function updateAWEPanel(){
+  const stats=[
+    {id:'listen',data:S.awe.listen},
+    {id:'speak', data:S.awe.speak},
+    {id:'write', data:S.awe.write},
+  ];
+  stats.forEach(({id,data})=>{
+    const p=pct(data);
+    document.getElementById(`awe-${id}-bar`).style.width=(p||0)+'%';
+    document.getElementById(`awe-${id}-pct`).textContent=p!==null?p+'%':'—';
+  });
+  // Weakpoints
+  const wp=S.awe.weakpoints;
+  const keys=Object.keys(wp);
+  const wpEl=document.getElementById('awe-weakpoints');
+  if(keys.length){
+    wpEl.innerHTML=keys.map(h=>[...wp[h]].map(skill=>`<span class="weak-tag ${skill}">${h} · ${skill}</span>`).join('')).join('');
+  } else {
+    wpEl.innerHTML='<span style="font-size:12px;color:var(--textC)">None yet</span>';
+  }
+  // Latency
+  const ll=document.getElementById('awe-latency-list');
+  const recent=[...S.awe.latency].slice(-5).reverse();
+  if(recent.length){
+    ll.innerHTML=recent.map(l=>`<div class="latency-item"><span>${l.hanzi}</span><span class="latency-ms">${(l.ms/1000).toFixed(1)}s</span></div>`).join('');
+  } else {
+    ll.innerHTML='<div style="font-size:12px;color:var(--textC)">No data yet</div>';
+  }
+}
+
+function toggleAWE(){
+  document.getElementById('awe-panel').classList.toggle('open');
+  updateAWEPanel();
+}
+
+// ════════════════════════════════════════════════════════
+// TIMER
+// ════════════════════════════════════════════════════════
+function startTimer(){
+  S.timerInt=setInterval(()=>{
+    const el=Math.floor((Date.now()-S.sessionStart)/1000);
+    const m=String(Math.floor(el/60)).padStart(2,'0');
+    const s=String(el%60).padStart(2,'0');
+    document.getElementById('timer-disp').textContent=`${m}:${s}`;
+    if(el>=25*60&&!S.timeboxFired){S.timeboxFired=true;fireTimebox();}
+    if(el>=25*60){
+      document.getElementById('timer-pill').classList.add('warn');
+      document.getElementById('timer-dot').classList.add('warn');
+    }
+  },1000);
+}
+function stopTimer(){clearInterval(S.timerInt);}
+
+function fireTimebox(){
+  const acc=S.awe.speak.attempts?pct(S.awe.speak):null;
+  const msg=document.getElementById('modal-msg');
+  if(acc!==null&&acc<75){
+    msg.textContent=`Your accuracy is ${acc}% — let's wrap up and protect tomorrow's progress. Review your stash when ready.`;
+  } else if(acc!==null&&acc>=90){
+    msg.textContent=`Your accuracy is ${acc}% — great momentum! Keep going or wrap up beautifully.`;
+  } else {
+    msg.textContent="You've hit your 25-minute timebox. Wrap up or keep going.";
+  }
+  document.getElementById('timebox-modal').classList.add('open');
+}
+function closeModal(){document.getElementById('timebox-modal').classList.remove('open');}
+function wrapNow(){endLoop();}
+
+// ════════════════════════════════════════════════════════
+// EXPORT / QR
+// ════════════════════════════════════════════════════════
+function buildExport(){
+  const payload={
+    version:'2.0',
+    exported: new Date().toISOString(),
+    sessionMinutes: Math.round((Date.now()-S.sessionStart)/60000),
+    passed: S.passed,
+    stash: S.stash,
+    awe:{
+      listen: S.awe.listen,
+      speak:  S.awe.speak,
+      write:  S.awe.write,
+      weakpoints: Object.fromEntries(Object.entries(S.awe.weakpoints).map(([k,v])=>[k,[...v]])),
+      latency: S.awe.latency,
+    }
+  };
+  const json=JSON.stringify(payload,null,2);
+  window._exportJSON=json;
+  // QR code — points to data URL with base64 payload
+  const b64=btoa(unescape(encodeURIComponent(json)));
+  const dataUrl=`data:application/json;base64,${b64}`;
+  // QR can only hold ~2-3kb reliably; use a short version if too large
+  const shortPayload={v:'2',ts:payload.exported,passed:S.passed,stashCount:S.stash.length,weakpoints:Object.fromEntries(Object.entries(S.awe.weakpoints).map(([k,v])=>[k,[...v]]))};
+  const qrData='hanziflow://import?data='+encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(shortPayload)))));
+  try {
+    QRCode.toCanvas(document.getElementById('qr-canvas'),qrData,{width:180,color:{dark:'#f0e8d8',light:'#ffffff'}});
+  } catch(e){console.warn('QR error:',e);}
+}
+
+function copyExportJSON(){
+  navigator.clipboard.writeText(window._exportJSON||'{}').then(()=>alert('JSON copied to clipboard'));
+}
+
+function downloadExport(){
+  const blob=new Blob([window._exportJSON||'{}'],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`hanziflow-session-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+}
+
+// ════════════════════════════════════════════════════════
+// PROGRESS & SCREENS
+// ════════════════════════════════════════════════════════
+function updateProgress(){
+  const done=S.passed+S.stash.length;
+  const total=S.cards.length;
+  document.getElementById('prog-fill').style.width=(total?done/total*100:0)+'%';
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById(id);
+  el.classList.add('active','fade-in');
+  setTimeout(()=>el.classList.remove('fade-in'),400);
+}
+
+async function syncAnki(cardId,passed){
+  try{await anki('answerCards',{answers:[{cardId,ease:passed?3:1}]});}
+  catch(e){console.warn('Sync failed:',e.message);}
+}
+
+// ════════════════════════════════════════════════════════
+// KEYBOARD
+// ════════════════════════════════════════════════════════
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT') return;
+  const st=S.step;
+  if(e.code==='Space'){e.preventDefault();if(st===1)playAudio();}
+  if(e.code==='Enter'){
+    e.preventDefault();
+    if(st===1) goStep(2);
+    else if(st===2&&!document.getElementById('speech-next').disabled) goStep(3);
+    else if(st===3) passCard();
+  }
+  if((e.key==='s'||e.key==='S')&&st>=1) stashCard();
+  if((e.key==='o'||e.key==='O')&&st===2) overrideSpeech();
+  if((e.key==='r'||e.key==='R')&&st===3) replayAnim();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+{
+  "安": {
+    "radicals": [
+      { "zh": "宀", "meaning": "roof / shelter", "strokes": 3 },
+      { "zh": "女", "meaning": "woman",          "strokes": 3 }
+    ],
+    "evolution": ["𠀌", "安", "安"],
+    "evoLabels": ["Oracle Bone", "Bronze", "Modern"],
+    "note": "A woman sheltered under a roof — in ancient China this image embodied total peace and security for the household. The character captures the idea that safety begins at home."
+  },
+  "明": {
+    "radicals": [
+      { "zh": "日", "meaning": "sun",  "strokes": 4 },
+      { "zh": "月", "meaning": "moon", "strokes": 4 }
+    ],
+    "evolution": ["𤾐", "明", "明"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "Sun and moon together — the two great sources of natural light. Their union creates the concept of brightness, clarity, and understanding itself."
+  },
+  "好": {
+    "radicals": [
+      { "zh": "女", "meaning": "woman", "strokes": 3 },
+      { "zh": "子", "meaning": "child", "strokes": 3 }
+    ],
+    "evolution": ["𡛷", "好", "好"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "A woman beside a child — the ancient image of goodness, harmony, and completion. Some scholars also read it as the joy of new life."
+  },
+  "休": {
+    "radicals": [
+      { "zh": "人", "meaning": "person",      "strokes": 2 },
+      { "zh": "木", "meaning": "tree / wood", "strokes": 4 }
+    ],
+    "evolution": ["休", "休", "休"],
+    "evoLabels": ["Bronze", "Seal", "Modern"],
+    "note": "A person leaning against a tree — the universal image of rest. This pictographic logic has been unchanged for over three thousand years."
+  },
+  "男": {
+    "radicals": [
+      { "zh": "田", "meaning": "field / rice paddy",    "strokes": 5 },
+      { "zh": "力", "meaning": "strength / power",      "strokes": 2 }
+    ],
+    "evolution": ["𤰇", "男", "男"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "Strength applied to the field. In the agrarian civilization of ancient China, a man was defined by his labour in the paddy fields — the character encodes this social role directly."
+  },
+  "木": {
+    "radicals": [
+      { "zh": "木", "meaning": "the character itself is a radical", "strokes": 4 }
+    ],
+    "evolution": ["𣎳", "木", "木"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "One of the oldest pictographs — a tree with roots below and branches above. The radical 木 seeds hundreds of characters related to trees, wood, and growth."
+  },
+  "日": {
+    "radicals": [
+      { "zh": "日", "meaning": "the character itself is a radical", "strokes": 4 }
+    ],
+    "evolution": ["☉", "𡆸", "日"],
+    "evoLabels": ["Oracle Bone", "Bronze", "Modern"],
+    "note": "Originally drawn as a circle with a dot — the sun and its core. The dot distinguishes it from 口 (mouth). 日 seeds all characters related to time, light, and heat."
+  },
+  "月": {
+    "radicals": [
+      { "zh": "月", "meaning": "the character itself is a radical", "strokes": 4 }
+    ],
+    "evolution": ["🌙", "𠔥", "月"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "The crescent moon — one of the most stable pictographs in Chinese. 月 also doubles as the radical for 肉 (flesh/meat), leading to many body-part characters."
+  },
+  "山": {
+    "radicals": [
+      { "zh": "山", "meaning": "the character itself is a radical", "strokes": 3 }
+    ],
+    "evolution": ["𡶤", "山", "山"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "Three mountain peaks rendered as brushstrokes — a direct sketch of the landscape. 山 appears in place names, nature poetry, and spiritual concepts of stillness and permanence."
+  },
+  "水": {
+    "radicals": [
+      { "zh": "水", "meaning": "the character itself is a radical", "strokes": 4 }
+    ],
+    "evolution": ["𠄡", "𣳊", "水"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "Flowing water shown as a central current with side streams. As the radical 氵 it influences hundreds of characters related to rivers, liquids, and states of flow."
+  },
+  "火": {
+    "radicals": [
+      { "zh": "火", "meaning": "the character itself is a radical", "strokes": 4 }
+    ],
+    "evolution": ["𠔥", "𤆴", "火"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "Flames rising — a direct pictograph of fire. As a radical (灬 or 火) it appears in characters for cooking, heat, light, and passion."
+  },
+  "学": {
+    "radicals": [
+      { "zh": "子", "meaning": "child",        "strokes": 3 },
+      { "zh": "冖", "meaning": "cover / roof", "strokes": 2 }
+    ],
+    "evolution": ["學", "学", "学"],
+    "evoLabels": ["Traditional", "Simplified", "Modern"],
+    "note": "A child under a sheltering structure — learning happens in a protected space, nurtured and guided. The traditional form 學 includes hands passing knowledge downward."
+  },
+  "人": {
+    "radicals": [
+      { "zh": "人", "meaning": "the character itself is a radical", "strokes": 2 }
+    ],
+    "evolution": ["𠂉", "亻", "人"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "A standing person seen from the side, legs apart. One of the oldest and most productive pictographs — 人 or 亻 appears in countless characters involving human beings, roles, and relationships."
+  },
+  "大": {
+    "radicals": [
+      { "zh": "大", "meaning": "the character itself is a radical", "strokes": 3 }
+    ],
+    "evolution": ["𠂉", "大", "大"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "A person with arms spread wide — embodying largeness, greatness, and abundance. The same figure with a dot above becomes 天 (sky/heaven), and a dot below becomes 太 (great/excessive)."
+  },
+  "心": {
+    "radicals": [
+      { "zh": "心", "meaning": "the character itself is a radical", "strokes": 4 }
+    ],
+    "evolution": ["𤔘", "𢗓", "心"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "A pictograph of the physical heart — in Chinese philosophy the heart is also the seat of mind, emotion, and consciousness. As radical 忄 it seeds all characters involving feeling and thought."
+  },
+  "口": {
+    "radicals": [
+      { "zh": "口", "meaning": "the character itself is a radical", "strokes": 3 }
+    ],
+    "evolution": ["𠙵", "囗", "口"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "An open mouth — simple, direct, and enormously productive. 口 appears in characters for speaking, eating, singing, and calling. It also represents openings, gates, and entrances by extension."
+  },
+  "时": {
+    "radicals": [
+      { "zh": "日", "meaning": "sun / time",             "strokes": 4 },
+      { "zh": "寸", "meaning": "inch / small measure",   "strokes": 3 }
+    ],
+    "evolution": ["時", "时", "时"],
+    "evoLabels": ["Traditional", "Simplified", "Modern"],
+    "note": "The sun measured in small increments — time itself. The traditional form 時 pairs 日 with 寺 (temple), a place where time was marked by bells. The simplified form keeps the essence."
+  },
+  "友": {
+    "radicals": [
+      { "zh": "又", "meaning": "right hand / again", "strokes": 2 }
+    ],
+    "evolution": ["𠂇", "友", "友"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "Two right hands reaching toward each other — a handshake across time. Friendship in the oracle bone script was literally two hands meeting. The gesture defines the relationship."
+  },
+  "国": {
+    "radicals": [
+      { "zh": "囗", "meaning": "enclosure / border", "strokes": 3 },
+      { "zh": "玉", "meaning": "jade",               "strokes": 5 }
+    ],
+    "evolution": ["國", "国", "国"],
+    "evoLabels": ["Traditional", "Simplified", "Modern"],
+    "note": "A treasure (jade, or a weapon in older forms) enclosed within a border — a nation is defined by what it protects within its boundaries. The simplified form uses 玉 (jade), the most precious material in Chinese civilization."
+  },
+  "中": {
+    "radicals": [
+      { "zh": "中", "meaning": "the character itself is a radical", "strokes": 4 }
+    ],
+    "evolution": ["𠀃", "中", "中"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "A vertical line piercing the center of a rectangle — an arrow hitting the bullseye. 中 means middle, center, and China itself (中国, the Middle Kingdom), the country that considered itself the center of the world."
+  }
+}
