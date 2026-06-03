@@ -12,6 +12,7 @@
 import HanziWriter from 'hanzi-writer';
 import { S, $ } from './state.js';
 import { recordStroke, updateAWEPanel } from './awe.js';
+import { renderEtymology } from './etymology.js';
 
 const HW_OPTS_BASE = () => {
   const root = getComputedStyle(document.documentElement);
@@ -44,6 +45,7 @@ export function renderChar() {
   if (!ch) return;
 
   $('char-pos').textContent = `${S.charIdx + 1} / ${S.chars.length}: ${ch}`;
+  renderEtymology(ch, S.cards[S.idx]?.hanzi);
   const target = $('hw-target');
   target.innerHTML = '';
   $('stroke-dots').innerHTML = '';

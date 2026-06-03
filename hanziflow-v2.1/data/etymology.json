@@ -166,5 +166,87 @@
     "evolution": ["𠀃", "中", "中"],
     "evoLabels": ["Oracle Bone", "Seal", "Modern"],
     "note": "A vertical line piercing the center of a rectangle — an arrow hitting the bullseye. 中 means middle, center, and China itself (中国, the Middle Kingdom), the country that considered itself the center of the world."
+  },
+  "我": {
+    "radicals": [
+      { "zh": "戈", "meaning": "spear / halberd (weapon)", "strokes": 4 }
+    ],
+    "evolution": ["🪓", "📜", "我"],
+    "evoLabels": ["Oracle Bone ~1200 BC", "Seal Script", "Modern"],
+    "note": "Originally a pictograph of a halberd — a serrated battle-axe on a pole. The left side resembles 手 (hand) but is actually the weapon's handle; the right side is 戈, the serrated blade. The pronunciation was borrowed (假借 jiǎjiè) to write the word for 'I', and the weapon meaning was completely forgotten. The 戈 radical survives in 战 (war), 武 (military), and 戒 (caution) — reminders of the origin. Every time a Chinese speaker says 我, they are etymologically holding an ancient battle axe."
+  },
+  "了": {
+    "radicals": [
+      { "zh": "了", "meaning": "the character itself is a radical", "strokes": 2 }
+    ],
+    "evolution": ["𠃌", "了", "了"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "One of the simplest strokes in the script — a single curved hook. The oracle bone form 𠃌 is thought to depict a swaddled infant, arms bound at the sides: something tightly wrapped, finished, complete. From this image grew the word liǎo — to finish, to end, to settle. Over time the same character was borrowed as the grammatical particle le, placed after a verb to mark a completed action. The same tiny hook that once pictured a bundled child now signals, thousands of years later, that something is done."
+  },
+  "会": {
+    "radicals": [
+      { "zh": "人", "meaning": "person",          "strokes": 2 },
+      { "zh": "云", "meaning": "cloud / steam",   "strokes": 4 }
+    ],
+    "evolution": ["會", "會", "会"],
+    "evoLabels": ["Oracle Bone", "Traditional", "Simplified"],
+    "note": "The oracle bone form 會 shows a lid sealed over a vessel with steam rising from below — the image of a pot brought together at the top. From this concrete picture of closing and containing, the meaning expanded outward: things gathering → people assembling → 开会, to hold a meeting. Then a further leap: gathering implies readiness and capability, so 会 also came to mean 'can' or 'be able to' — to have the skill or means for something. One character, one lid on a steaming pot, and from it grew assembly, skill, and possibility."
+  },
+  "他": {
+    "radicals": [
+      { "zh": "亻(人)", "meaning": "person (semantic component)", "strokes": 2 },
+      { "zh": "也",     "meaning": "phonetic: provides the sound tā/tuó", "strokes": 3 }
+    ],
+    "evolution": ["佗", "他", "他"],
+    "evoLabels": ["Origin 佗 (tuó)", "Borrowed 假借", "Modern"],
+    "note": "亻(person) + 也 (phonetic). The twist: 他 was never originally a pronoun. The character 佗 (tuó) meant 'other, different' — hence 他人 (other people) — while 他 itself had a rather different, unflattering meaning in the Shuowen Jiezi. The character was borrowed (假借, jiǎjiè) as a sound-loan for the 3rd person pronoun, the same technique used for 我 and 了 — ancient Chinese frequently hijacked existing characters for new grammatical words. Before this, classical Chinese used 彼 (bǐ), 其 (qí), and 伊 (yī) for he/she. The modern three-way split — 他 (he), 她 (she), 它 (it) — was invented by poet and linguist 刘半农 (Liu Bannong) in the 1920s, barely a century ago. Memory hook: 亻+ 也 = 'person… also' → 'that other person' → 'he'."
+  },
+  "怎": {
+    "radicals": [
+      { "zh": "乍", "meaning": "sudden, abrupt", "strokes": 5 },
+      { "zh": "心", "meaning": "heart / mind", "strokes": 4 }
+    ],
+    "evolution": ["怎", "怎", "怎"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "note": "乍 (zhà) originally depicted something sudden — like a person abruptly stopping — paired with 心 (heart). The combination asks: \"What suddenly hits the heart?\" → \"How could this be?!\" → \"How / Why?\" So 怎 is literally asking your heart about something sudden — capturing surprise, confusion, and bewilderment in a single character. Every time you ask 怎样? (how is it?), you're invoking an ancient picture of sudden shock hitting the heart."
+  },
+  "么": {
+    "radicals": [
+      { "zh": "幺", "meaning": "tiny, small", "strokes": 3 }
+    ],
+    "evolution": ["麼", "麼", "么"],
+    "evoLabels": ["Traditional", "Traditional", "Modern"],
+    "note": "么 is the simplified form of 麼. In many languages, question words come from words meaning 'small/tiny' (think English 'what' from 'hwæt'). 幺 means 'tiny,' and 麼 was borrowed for its sound to become a question tag. So 么 by itself means nothing — it's just a question marker, like a '?' in speech. When you add 么 to the end of a statement, you're borrowing an ancient word for 'tiny' to transform that sentence into a gentle, colloquial question."
+  },
+  "说": {
+    "radicals": [
+      { "zh": "言", "meaning": "speech / words — a mouth with sound coming out", "strokes": 7 },
+      { "zh": "兌", "meaning": "exchange — two people facing each other exchanging something", "strokes": 7 }
+    ],
+    "evolution": ["言+兌", "說", "说"],
+    "evoLabels": ["Oracle Bone", "Traditional 說", "Simplified"],
+    "compounds": [
+      { "word": "说话", "pinyin": "shuō huà", "meaning": "to speak / talk" },
+      { "word": "小说", "pinyin": "xiǎo shuō", "meaning": "novel (lit. small talk)" },
+      { "word": "传说", "pinyin": "chuán shuō", "meaning": "legend (passed-down speech)" },
+      { "word": "说谎", "pinyin": "shuō huǎng", "meaning": "to lie" },
+      { "word": "游说", "pinyin": "yóu shuì", "meaning": "to lobby / persuade (shuì tone)" }
+    ],
+    "note": "言 (mouth with speech rising from it) + 兌 (two people facing each other, exchanging). Speaking is literally the exchange of words. The same 兌 radical seeds 悦 (yuè = joyful — an exchange that pleases the heart) and 税/稅 (shuì = tax — your exchange with the state). 说 itself has two readings: shuō (everyday speech) and the classical shuì (to persuade, as in 游说 — to travel and convince). In Confucianism, 言 carries enormous moral weight — 言而有信, 'let your words be trustworthy,' is one of the cardinal virtues. Every time you say 说, you invoke a 3,000-year-old image of two people exchanging breath and meaning across a threshold."
+  },
+  "做": {
+    "radicals": [
+      { "zh": "亻", "meaning": "person — the human radical (亻= 人 leaning left)", "strokes": 2 },
+      { "zh": "乍", "meaning": "abruptly begin; pictograph of cutting cloth (labor)", "strokes": 5 }
+    ],
+    "evolution": ["乍", "作", "做"],
+    "evoLabels": ["Oracle Bone 乍", "Classical 作 (zuò)", "Folk form 做"],
+    "compounds": [
+      { "word": "做人", "pinyin": "zuò rén", "meaning": "to conduct oneself" },
+      { "word": "做梦", "pinyin": "zuò mèng", "meaning": "to dream (lit. make a dream)" },
+      { "word": "做饭", "pinyin": "zuò fàn", "meaning": "to cook" },
+      { "word": "做客", "pinyin": "zuò kè", "meaning": "to be a guest" }
+    ],
+    "note": "乍 is the heart of 做 — a 3,000-year-old pictograph of a person cutting cloth: someone in the act of labor. It evolved into 作 (classical: to rise up and begin work), then the folk script added another 亻 to make 做, emphasizing who is doing the action. 做 handles concrete, everyday tasks (做饭 = cook, 做梦 = dream); its twin 作 survives in literary contexts (作品 = artwork, 作文 = composition). In speech they are nearly interchangeable, but 做人 — how you conduct yourself as a human being — remains one of the most distinctly Confucian phrases in the language."
   }
 }

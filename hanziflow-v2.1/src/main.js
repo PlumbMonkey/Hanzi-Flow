@@ -16,6 +16,7 @@ import {
 } from './wizard.js';
 import { copyExportJSON, downloadExport } from './export.js';
 import { DEMO_CARDS } from './demo.js';
+import { loadPairsDB, getPairs, getDeckMeta, buildPairSessionCards, exportAnkiTsv } from './pairs.js';
 import {
   loadNewCardLimit, loadNextDayTarget, clearNextDayTarget,
 } from './persistence.js';
@@ -23,8 +24,12 @@ import {
 // ── Bootstrap ────────────────────────────────────────────────
 async function bootstrap() {
   await loadEtymologyDB();
+  await loadPairsDB();
   hydrateAWE();
   updateAWEPanel();
+  renderPairsList();
+
+
 
   // Hydrate new-card limit input from persisted value or next-day target
   const nextTarget = loadNextDayTarget();
@@ -50,6 +55,8 @@ function wireEvents() {
   $('deck-sel').addEventListener('change', refreshFieldsFromDeck);
   $('start-demo').addEventListener('click', startDemoSession);
   $('start-session').addEventListener('click', handleStartSession);
+  $('start-pairs').addEventListener('click', startPairsSession);
+  $('export-anki-pairs').addEventListener('click', exportAnkiTsv);
 
   // Step 1
   document.querySelectorAll('[data-toggle]').forEach((el) =>
@@ -194,6 +201,59 @@ async function handleStartSession() {
 function startDemoSession() {
   const cards = JSON.parse(JSON.stringify(DEMO_CARDS));
   beginSession({ cards, isDemo: true });
+}
+
+function startPairsSession() {
+  const cards = buildPairSessionCards();
+  if (!cards.length) return;
+  beginSession({ cards, isDemo: true });
+}
+
+function renderPairsList() {
+  const el = $('pairs-list');
+  if (!el) return;
+  const meta  = getDeckMeta();
+  const pairs = getPairs();
+
+  // Deck header — name + card number
+  const deckName = meta.name
+    ? `<div class="pairs-deck-name">${meta.name} <span class="pairs-deck-romanized">${meta.namePinyin ?? ''}</span> <span class="pairs-deck-en">${meta.nameEn ?? ''}</span></div>`
+    : '';
+
+  // Active pairs list
+  const pairsHtml = pairs.length
+    ? pairs.map((p) => `
+        <div class="pair-row">
+          <div class="pair-chars">${p.characters.map((c) =>
+            `<span class="pair-char-chip">${c.hanzi}<span class="pair-chip-py">${c.pinyin}</span></span>`
+          ).join('<span class="pair-vs">vs</span>')}</div>
+          <div class="pair-title-sub">${p.subtitle} <span class="pair-card-num">Card ${p.cardNumber}</span></div>
+        </div>`).join('')
+    : '<div style="font-size:12px;color:var(--muted)">No pairs loaded.</div>';
+
+  // Error map
+  const errorMapHtml = (meta.errorMap ?? []).map((err) => {
+    const active = err.status === 'active';
+    return `<div class="error-map-row ${active ? 'error-active' : 'error-planned'}">
+      <span class="error-num">#${err.id}</span>
+      <span class="error-chars">${err.chars.join('↔')}</span>
+      <span class="error-pattern">${err.pattern}</span>
+      <span class="error-status-badge">${active ? 'active' : 'planned'}</span>
+    </div>`;
+  }).join('');
+
+  // Next card teaser
+  const next = meta.nextCard;
+  const nextHtml = next ? `
+    <div class="pairs-next-card">
+      <span class="pairs-next-label">Next · Card ${next.number}</span>
+      <span class="pairs-next-chars">${next.chars.join(' vs ')} <span class="pairs-next-py">(${next.charsPinyin.join(' / ')})</span></span>
+      <span class="pairs-next-focus">${next.focus}</span>
+    </div>` : '';
+
+  el.innerHTML = deckName + pairsHtml
+    + (errorMapHtml ? `<div class="error-map-wrap"><div class="pairs-section-lbl">User error map</div>${errorMapHtml}</div>` : '')
+    + nextHtml;
 }
 
 // ── Keyboard ─────────────────────────────────────────────────

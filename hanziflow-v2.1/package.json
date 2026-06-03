@@ -10,6 +10,7 @@
     "preview": "vite preview --port 5500"
   },
   "dependencies": {
+    "@xenova/transformers": "^2.17.2",
     "hanzi-writer": "^3.5.0",
     "qrcode": "^1.5.3"
   },

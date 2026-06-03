@@ -250,6 +250,92 @@ select option { background: var(--paper); color: var(--ink); }
   color: var(--ink-light);
 }
 
+/* ── Minimal Pairs card ───────────────────────────────────── */
+.pairs-card { margin-top: 0; }
+
+/* Deck name header */
+.pairs-deck-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  color: var(--ink);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--stroke);
+  margin-bottom: 4px;
+}
+.pairs-deck-romanized { font-size: 13px; color: var(--muted); font-family: sans-serif; margin-left: 4px; }
+.pairs-deck-en { font-size: 11px; color: var(--muted); font-family: sans-serif; font-style: italic; }
+
+/* Pair rows */
+.pair-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--stroke);
+}
+.pair-row:last-child { border-bottom: none; }
+.pair-chars { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pair-char-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--paper-warm);
+  border: 1px solid var(--stroke);
+  border-radius: 4px;
+  padding: 6px 14px;
+  gap: 2px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 26px;
+  color: var(--ink);
+}
+.pair-chip-py { font-size: 11px; color: var(--muted); font-family: sans-serif; }
+.pair-vs { font-size: 11px; color: var(--muted); padding: 0 2px; }
+.pair-title-sub { font-size: 11px; color: var(--muted); padding-left: 2px; }
+.pair-card-num { color: var(--gold); font-size: 10px; margin-left: 4px; }
+
+/* Error map */
+.pairs-section-lbl {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.error-map-wrap { margin-top: 10px; }
+.error-map-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 12px;
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--stroke);
+}
+.error-map-row:last-child { border-bottom: none; }
+.error-num { color: var(--muted); min-width: 20px; }
+.error-chars { font-family: 'Noto Serif SC', serif; font-size: 14px; color: var(--ink); min-width: 52px; }
+.error-pattern { color: var(--ink-light); flex: 1; }
+.error-status-badge { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; padding: 1px 5px; border-radius: 3px; }
+.error-active .error-status-badge { background: var(--vermillion-glow); color: var(--vermillion); }
+.error-planned .error-status-badge { background: var(--paper-warm); color: var(--muted); border: 1px solid var(--stroke); }
+.error-planned .error-chars { opacity: 0.5; }
+
+/* Next card teaser */
+.pairs-next-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--paper-warm);
+  border: 1px solid var(--stroke);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+}
+.pairs-next-label { font-size: 10px; color: var(--gold); letter-spacing: 0.07em; text-transform: uppercase; }
+.pairs-next-chars { font-family: 'Noto Serif SC', serif; font-size: 16px; color: var(--ink); }
+.pairs-next-py { font-size: 12px; color: var(--muted); font-family: sans-serif; }
+.pairs-next-focus { font-size: 11px; color: var(--ink-light); }
+
 /* ── WIZARD ───────────────────────────────────────────────── */
 .wizard-top {
   display: flex;
@@ -471,6 +557,44 @@ select option { background: var(--paper); color: var(--ink); }
 .evo-char { font-family: 'Noto Serif SC', serif; font-size: 24px; color: var(--ink-light); }
 .evo-label { font-size: 9px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
 .evo-arrow { color: var(--muted); font-size: 14px; }
+
+/* Step 3 card info bar */
+.s3-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 0 10px;
+}
+.s3-card-pinyin { font-size: 17px; color: var(--ink-light); letter-spacing: 1px; }
+.s3-card-english { font-size: 13px; color: var(--muted); }
+
+/* Etymology context line */
+.etym-context-line { display: flex; flex-direction: column; gap: 6px; }
+.etym-ctx-sentence {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  letter-spacing: 4px;
+  color: var(--ink-light);
+  text-align: center;
+}
+.etym-ctx-highlight { color: var(--gold); font-weight: 700; }
+
+/* Compound chips */
+.compound-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fbf8f0;
+  border: 1px solid var(--stroke);
+  border-radius: 4px;
+  padding: 8px 12px;
+  gap: 3px;
+  min-width: 72px;
+}
+.compound-word { font-family: 'Noto Serif SC', serif; font-size: 18px; color: var(--ink); }
+.compound-pinyin { font-size: 10px; color: var(--muted); letter-spacing: 0.04em; }
+.compound-meaning { font-size: 10px; color: var(--ink-light); text-align: center; }
 
 /* ── STEP 2 — Speech ─────────────────────────────────────── */
 .speech-zone {

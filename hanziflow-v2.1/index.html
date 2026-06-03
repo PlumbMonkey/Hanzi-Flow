@@ -123,6 +123,20 @@
         Confirm AnkiConnect is running: <a href="http://localhost:8765" target="_blank" rel="noopener" style="color:var(--gold)">open localhost:8765</a> — you should see a blank page (not an error).
       </div>
     </div>
+
+    <div class="paper-card pairs-card">
+      <h2>Minimal Pairs <span style="font-size:14px;color:var(--muted);font-family:sans-serif">墨语 Mò Yǔ</span></h2>
+      <p>Characters that sound alike — drilled back-to-back so your ear and hand learn to tell them apart.</p>
+      <div id="pairs-list"></div>
+      <hr class="divider">
+      <div class="btn-row">
+        <button class="btn" id="export-anki-pairs" title="Download Anki import file">⬇ Anki deck (.txt)</button>
+        <button class="btn btn-primary" id="start-pairs">Practice pairs →</button>
+      </div>
+      <div class="tip-text">
+        Anki import: File → Import → select the .txt file → Note type: <strong>Basic</strong> → Import.
+      </div>
+    </div>
   </div>
 </section>
 
@@ -167,24 +181,6 @@
     </div>
     <div class="audio-row">
       <button class="audio-btn" id="play-btn" title="Space = play">▶</button>
-    </div>
-
-    <div class="etym-panel" id="etym-panel">
-      <div class="etym-header" id="etym-header">
-        <span>Character etymology</span>
-        <div style="display:flex;align-items:center;gap:10px">
-          <span class="etym-char" id="etym-char-preview">—</span>
-          <span style="font-size:14px;color:var(--muted)" id="etym-chevron">▾</span>
-        </div>
-      </div>
-      <div class="etym-body" id="etym-body">
-        <div class="awe-title">Radicals</div>
-        <div class="etym-radical-row" id="etym-radicals"></div>
-        <div class="awe-title" style="margin-top:4px">Historical evolution</div>
-        <div class="etym-evolution" id="etym-evolution"></div>
-        <div class="awe-title" style="margin-top:4px">Cultural context</div>
-        <div class="etym-note" id="etym-note"></div>
-      </div>
     </div>
 
     <hr class="divider">
@@ -232,6 +228,10 @@
   <!-- ────  STEP 3  ──── -->
   <div class="step-panel" id="step-3">
     <div class="section-lbl">Step 3 — Hanzi canvas</div>
+    <div class="s3-card-info">
+      <div class="s3-card-pinyin" id="s3-pinyin"></div>
+      <div class="s3-card-english" id="s3-english"></div>
+    </div>
     <div class="canvas-area">
       <div class="canvas-tabs">
         <button class="canvas-tab active" data-mode="animate">Animate</button>
@@ -253,6 +253,29 @@
         <button class="btn" id="hw-show">Show</button>
       </div>
     </div>
+    <div class="etym-panel" id="etym-panel">
+      <div class="etym-header" id="etym-header">
+        <span>Character etymology</span>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="etym-char" id="etym-char-preview">—</span>
+          <span style="font-size:14px;color:var(--muted)" id="etym-chevron">▾</span>
+        </div>
+      </div>
+      <div class="etym-body" id="etym-body">
+        <div id="etym-context-line" style="display:none"></div>
+        <div class="awe-title">Radicals</div>
+        <div class="etym-radical-row" id="etym-radicals"></div>
+        <div class="awe-title" style="margin-top:4px">Historical evolution</div>
+        <div class="etym-evolution" id="etym-evolution"></div>
+        <div class="awe-title" style="margin-top:4px">Cultural context</div>
+        <div class="etym-note" id="etym-note"></div>
+        <div id="etym-compounds-wrap" style="display:none">
+          <div class="awe-title">Key compounds</div>
+          <div class="etym-radical-row" id="etym-compounds"></div>
+        </div>
+      </div>
+    </div>
+
     <hr class="divider">
     <div class="btn-row">
       <button class="btn" data-action="go-step-2">← Back</button>

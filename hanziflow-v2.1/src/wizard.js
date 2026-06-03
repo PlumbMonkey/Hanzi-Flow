@@ -69,6 +69,9 @@ export function loadCard(i) {
   $('speech-next').disabled = true;
   hideSTPVO();
 
+  $('s3-pinyin').textContent = c.pinyin;
+  $('s3-english').textContent = c.english;
+
   $('aural-notice').style.display = S.awe.auralMode ? 'block' : 'none';
 
   renderEtymology(c.hanzi);

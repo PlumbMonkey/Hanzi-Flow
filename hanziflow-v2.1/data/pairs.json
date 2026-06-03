@@ -1,0 +1,110 @@
+{
+  "meta": {
+    "name": "墨语",
+    "namePinyin": "Mò Yǔ",
+    "nameEn": "Ink Language",
+    "description": "Minimal pairs deck — characters that look or sound similar, drilled back-to-back so ear and hand learn to tell them apart.",
+    "version": "1.0",
+    "currentCard": "001",
+    "updated": "2026-06-02",
+    "pronunciationRules": [
+      {
+        "group": "Flat tongue (舌尖前音)",
+        "initials": ["z", "c", "s"],
+        "description": "Tongue tip flat, just behind lower front teeth. Like a relaxed smile 😊.",
+        "examples": ["做 zuò", "字 zì", "四 sì"]
+      },
+      {
+        "group": "Curled tongue (舌尖后音 — retroflexes)",
+        "initials": ["zh", "ch", "sh", "r"],
+        "description": "Tongue tip curled back toward the roof of the mouth 🤫. Feels like whispering 'shhh'.",
+        "examples": ["说 shuō", "是 shì", "人 rén"]
+      }
+    ],
+    "errorMap": [
+      {
+        "id": 1,
+        "chars": ["做", "说"],
+        "pattern": "z- vs sh-, same -uo vowel",
+        "note": "Flat vs curled tongue. Card 001 — active.",
+        "status": "active",
+        "pairId": "zuo-shuo"
+      },
+      {
+        "id": 2,
+        "chars": ["想", "上"],
+        "pattern": "x- vs sh-, same -ang vowel",
+        "note": "x- is blade-palatal (front of mouth); sh- is retroflex (curled back). Planned.",
+        "status": "planned",
+        "pairId": "xiang-shang"
+      },
+      {
+        "id": 3,
+        "chars": ["说", "输"],
+        "pattern": "-uo vs -u, same sh- initial",
+        "note": "Vowel distinction. Planned.",
+        "status": "planned",
+        "pairId": "shuo-shu"
+      },
+      {
+        "id": 4,
+        "chars": ["你"],
+        "pattern": "n- initial unclear",
+        "note": "n- vs l- confusion, or n- dropping entirely. Planned.",
+        "status": "planned",
+        "pairId": "ni-li"
+      }
+    ],
+    "nextCard": {
+      "number": "002",
+      "chars": ["是", "十"],
+      "charsPinyin": ["shì", "shí"],
+      "focus": "sh- curl + tone 4 (falling) vs tone 2 (rising)"
+    },
+    "homework": [
+      { "icon": "🎧", "task": "Forvo × 5 each: forvo.com/word/做/ and forvo.com/word/说/" },
+      { "icon": "✍️", "task": "Hanzi Flow writing session × 3 each" },
+      { "icon": "👅", "task": "Tongue drill: alternate 做-说 10×" },
+      { "icon": "🗣️", "task": "Record yourself: 我会做，不会说。 (Wǒ huì zuò, bù huì shuō.)" }
+    ]
+  },
+  "pairs": [
+    {
+      "id": "zuo-shuo",
+      "cardNumber": "001",
+      "title": "做 vs 说",
+      "subtitle": "to do vs to say",
+      "prompt": "哪个是 zuò？哪个是 shuō？",
+      "promptEn": "Which is zuò? Which is shuō?",
+      "trapZone": {
+        "confusion": "我会做 → heard as 我会说",
+        "reason": "Same vowel (-uo), different initial: z- (tongue flat behind teeth) vs sh- (tongue curled back).",
+        "drill": [
+          { "zh": "我会做！", "py": "Wǒ huì zuò!", "en": "I can do it!" },
+          { "zh": "我会说！", "py": "Wǒ huì shuō!", "en": "I can say it!" },
+          { "zh": "我会做，不会说。", "py": "Wǒ huì zuò, bù huì shuō.", "en": "I can do it, but I can't say it." }
+        ]
+      },
+      "characters": [
+        {
+          "hanzi": "做",
+          "pinyin": "zuò",
+          "english": "to do / to make",
+          "tone": "4th — falling",
+          "pronunciation": "dzwuh (like 'dz' + 'waw', falling hard)",
+          "calligraphy": "Left 亻 is TALL and THIN (a standing person). Right 乍 is WIDE (arms spread). NARROW ║ WIDE. Stroke 7 (长横) is the backbone — hold it steady.",
+          "culture": "做人 (zuò rén) — 'how to be a person' — is one of the most important phrases in the Confucian tradition. Not what you do, but how you live."
+        },
+        {
+          "hanzi": "说",
+          "pinyin": "shuō",
+          "english": "to say / to speak",
+          "tone": "1st — flat, high",
+          "pronunciation": "sh-WOR (like 'sh' in shoe + 'wor' held flat)",
+          "calligraphy": "Left 言 is TALL (7 strokes — the speech radical). Right 兌 is SHORT. TALL ║ SHORT — like one person speaking, the other listening.",
+          "culture": "小说 (xiǎo shuō) means 'novel' — literally 'small talk'. Classical scholars considered fiction minor speech compared to serious texts. Your favorite books were once called gossip."
+        }
+      ]
+    }
+  ]
+}
