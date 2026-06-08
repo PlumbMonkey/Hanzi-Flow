@@ -69,8 +69,7 @@ export function loadCard(i) {
   $('speech-next').disabled = true;
   hideSTPVO();
 
-  $('s3-pinyin').textContent = c.pinyin;
-  $('s3-english').textContent = c.english;
+  renderS3Info(c);
 
   $('aural-notice').style.display = S.awe.auralMode ? 'block' : 'none';
 
@@ -78,6 +77,40 @@ export function loadCard(i) {
   showAWEAlert();
   goStep(1);
   updateProgress();
+}
+
+// ── Step 3 info rendering ───────────────────────────────────
+/**
+ * Split a pinyin string (with or without spaces) into individual syllables.
+ * Returns an array of syllable strings, or [pinyin] if parsing fails.
+ */
+function splitPinyin(pinyin) {
+  const clean = pinyin.trim().replace(/\s+/g, '');
+  const PINYIN_RE = /(zh|ch|sh|[bpmfdtnlgkhjqxrzcsyw])?([\u0101\u00e1\u01ce\u00e0\u0113\u00e9\u011b\u00e8\u012b\u00ed\u01d0\u00ec\u014d\u00f3\u01d2\u00f2\u016b\u00fa\u01d4\u00f9\u01d6\u01d8\u01da\u01dcaeiouüv]+)(ng|n|r)?/gi;
+  const syllables = clean.match(PINYIN_RE);
+  return syllables && syllables.length > 0 ? syllables : [pinyin];
+}
+
+/**
+ * Render the step-3 info bar: full hanzi phrase (as highlight-able spans),
+ * pinyin (as per-syllable spans when count matches), and English.
+ */
+function renderS3Info(c) {
+  const chars = c.hanzi.replace(/\s/g, '').split('');
+  $('s3-hanzi').innerHTML = chars
+    .map((ch, i) => `<span class="s3-char" data-ci="${i}">${ch}</span>`)
+    .join('');
+
+  const syllables = splitPinyin(c.pinyin);
+  if (syllables.length === chars.length) {
+    $('s3-pinyin').innerHTML = syllables
+      .map((s, i) => `<span class="s3-tok" data-ci="${i}">${s}</span>`)
+      .join('\u200a');
+  } else {
+    $('s3-pinyin').textContent = c.pinyin;
+  }
+
+  $('s3-english').textContent = c.english;
 }
 
 // ── Step routing ──────────────────────────────────────────────

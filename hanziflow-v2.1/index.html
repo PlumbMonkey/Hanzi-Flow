@@ -158,6 +158,9 @@
     <span>⚡</span><span id="awe-alert-msg"></span>
   </div>
 
+  <div class="wizard-body">
+
+  <div class="wizard-main">
   <div class="stash-strip" id="stash-strip">
     <div class="stash-badge" id="stash-badge-ct">0</div>
     <span>cards stashed — reviewed at session end</span>
@@ -229,6 +232,7 @@
   <div class="step-panel" id="step-3">
     <div class="section-lbl">Step 3 — Hanzi canvas</div>
     <div class="s3-card-info">
+      <div class="s3-card-hanzi" id="s3-hanzi"></div>
       <div class="s3-card-pinyin" id="s3-pinyin"></div>
       <div class="s3-card-english" id="s3-english"></div>
     </div>
@@ -284,6 +288,22 @@
     </div>
     <div class="kbd-hint"><kbd>R</kbd> replay &nbsp; <kbd>Enter</kbd> pass &nbsp; <kbd>S</kbd> stash</div>
   </div>
+  </div><!-- /.wizard-main -->
+
+  <!-- ────  PAIRS SIDEBAR  ──── -->
+  <aside class="wizard-pairs-side">
+    <div class="wizard-pairs-header">
+      Minimal Pairs
+      <span class="wizard-pairs-sub">墨语 · Mò Yǔ</span>
+    </div>
+    <div id="pairs-list-side" class="pairs-list-side"></div>
+    <div class="wizard-pairs-footer">
+      <button class="btn" id="export-anki-pairs-side" title="Download Anki import file">⬇ Anki</button>
+      <button class="btn btn-primary" id="start-pairs-side">Practice →</button>
+    </div>
+  </aside>
+
+  </div><!-- /.wizard-body -->
 </section>
 
 <!-- ─────────────────────────  WRAP  ───────────────────────── -->

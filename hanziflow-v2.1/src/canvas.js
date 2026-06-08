@@ -144,4 +144,20 @@ export function nextChar() {
 function updateCharNav() {
   $('prev-ch').disabled = S.charIdx === 0;
   $('next-ch').disabled = S.charIdx >= S.chars.length - 1;
+  updateS3Highlights();
+}
+
+function updateS3Highlights() {
+  const idx    = S.charIdx;
+  const single = S.chars.length === 1;
+  document.querySelectorAll('#s3-hanzi .s3-char').forEach((el) => {
+    const ci = parseInt(el.dataset.ci, 10);
+    el.classList.toggle('s3-char-active', ci === idx);
+    el.classList.toggle('s3-char-dim',   !single && ci !== idx);
+  });
+  document.querySelectorAll('#s3-pinyin .s3-tok').forEach((el) => {
+    const ci = parseInt(el.dataset.ci, 10);
+    el.classList.toggle('s3-tok-active', ci === idx);
+    el.classList.toggle('s3-tok-dim',   !single && ci !== idx);
+  });
 }

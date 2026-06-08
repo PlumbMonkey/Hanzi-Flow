@@ -5,8 +5,8 @@
     "nameEn": "Ink Language",
     "description": "Minimal pairs deck — characters that look or sound similar, drilled back-to-back so ear and hand learn to tell them apart.",
     "version": "1.0",
-    "currentCard": "001",
-    "updated": "2026-06-02",
+    "currentCard": "005",
+    "updated": "2026-06-08",
     "pronunciationRules": [
       {
         "group": "Flat tongue (舌尖前音)",
@@ -53,10 +53,66 @@
         "note": "n- vs l- confusion, or n- dropping entirely. Planned.",
         "status": "planned",
         "pairId": "ni-li"
+      },
+      {
+        "id": 5,
+        "chars": ["他", "什么"],
+        "pattern": "nǚ vs nǐ vowel, fast-speech compression of shénme → sme",
+        "note": "女/你 tone-3 vowel confusion; 什么 elision in natural speech. Card 002 — active.",
+        "status": "active",
+        "pairId": "ta-shenme"
+      },
+      {
+        "id": 6,
+        "chars": ["在", "那", "是"],
+        "pattern": "z- (flat) vs n- (nasal tap) vs sh- (retroflex) — all 1-syllable function words",
+        "note": "在→那→是 are speech recognition's worst nightmare. Card 003 — active.",
+        "status": "active",
+        "pairId": "zai-ting"
+      },
+      {
+        "id": 7,
+        "chars": ["听", "庭"],
+        "pattern": "perfect homophones — same sound tíng, different tone",
+        "note": "听 (tīng, 1st) vs 庭 (tíng, 2nd) — app picks wrong char when tone is off. Card 003.",
+        "status": "active",
+        "pairId": "zai-ting"
+      },
+      {
+        "id": 8,
+        "chars": ["哪", "去"],
+        "pattern": "n- nasal tap vs q- (ch sound), tone 3 (dipping) vs tone 4 (falling)",
+        "note": "哪 (which/where) + common traps with 听 (listening vs 庭 temple). Card 004 — active.",
+        "status": "active",
+        "pairId": "na-qu"
+      },
+      {
+        "id": 9,
+        "chars": ["聽著說", "听他说"],
+        "pattern": "Listening comprehension trap: 著 (zhe, light particle) vs 他 (tā, he)",
+        "note": "聽著說 (listened to speaking) vs 听他说 (listen to him speak) — same tone pattern, different consonants. Card 004.",
+        "status": "active",
+        "pairId": "na-qu"
+      },
+      {
+        "id": 10,
+        "chars": ["说", "游"],
+        "pattern": "visual trap: 口 shape in 兑 (wide/short) vs 口 in 斿 (tall/narrow)",
+        "note": "说 has 讠(speech) + 兑 with SQUATTING 口. 游 has 氵(water) + 斿 with STRETCHING 口. Same mouth radical, different outfit. Card 005 — active.",
+        "status": "active",
+        "pairId": "shuo-you"
+      },
+      {
+        "id": 11,
+        "chars": ["在", "再"],
+        "pattern": "perfect homophones — both zài (tone 4), only context separates them",
+        "note": "在 (at/now/existing) vs 再 (again/repeat). 你在听我说吗 vs 你再听我说吗 — ear cannot distinguish. Card 005.",
+        "status": "active",
+        "pairId": "shuo-you"
       }
     ],
     "nextCard": {
-      "number": "002",
+      "number": "006",
       "chars": ["是", "十"],
       "charsPinyin": ["shì", "shí"],
       "focus": "sh- curl + tone 4 (falling) vs tone 2 (rising)"
@@ -65,10 +121,186 @@
       { "icon": "🎧", "task": "Forvo × 5 each: forvo.com/word/做/ and forvo.com/word/说/" },
       { "icon": "✍️", "task": "Hanzi Flow writing session × 3 each" },
       { "icon": "👅", "task": "Tongue drill: alternate 做-说 10×" },
-      { "icon": "🗣️", "task": "Record yourself: 我会做，不会说。 (Wǒ huì zuò, bù huì shuō.)" }
+      { "icon": "🗣️", "task": "Record yourself: 我会做，不会说。 (Wǒ huì zuò, bù huì shuō.)" },
+      { "icon": "🎧", "task": "Forvo × 5 each: forvo.com/word/他/ and forvo.com/word/什么/" },
+      { "icon": "👄", "task": "Lip drill: 女 (round lips) vs 你 (spread lips) — alternate 10×" },
+      { "icon": "🗣️", "task": "Record yourself: 你做什么工作？她做什么工作？他们在说什么？" },
+      { "icon": "🎧", "task": "Forvo × 5 each: forvo.com/word/哪/ and forvo.com/word/去/" },
+      { "icon": "✍️", "task": "Hanzi Flow writing session × 3 each" },
+      { "icon": "👅", "task": "Tone drill: 哪 (3rd dipping ↙↗) vs 去 (4th falling ↘)" },
+      { "icon": "🗣️", "task": "Record yourself: 你在听我说吗？你去哪里？ (Are you listening to me? Where are you going?)" },
+      { "icon": "🎧", "task": "Forvo × 5: forvo.com/word/听/ (listen — 1st tone HIGH FLAT)" },
+      { "icon": "👄", "task": "Consonant trap: 聽著說 vs 听他说 (著 zhe vs 他 tā) — say 10× each" },
+      { "icon": "🎧", "task": "Forvo × 5 each: forvo.com/word/说/#zh and forvo.com/word/游/#zh" },
+      { "icon": "👁️", "task": "Visual drill: draw 口 inside 兑 (WIDE/SHORT) and inside 斿 (TALL/NARROW) — say aloud the difference" },
+      { "icon": "👅", "task": "Tongue drill: 说 (sh- curled) vs 游 (y- glide) — alternate 10×" },
+      { "icon": "🗣️", "task": "Record yourself: 你在听我说吗？你喜欢游泳吗？(Are you listening? Do you like swimming?)" },
+      { "icon": "🎧", "task": "Listening trap drill: 你在(zài)听我说吗 vs 你再(zài)听我说吗 — can you hear the difference? (You cannot — use context!)" }
     ]
   },
   "pairs": [
+    {
+      "id": "shuo-you",
+      "cardNumber": "005",
+      "title": "说 vs 游",
+      "subtitle": "to speak vs to swim/roam — visual 口 trap",
+      "prompt": "哪个是说？哪个是游？",
+      "promptEn": "Which is shuō? Which is yóu?",
+      "trapZone": {
+        "confusion": "你再听我说吗 → 你在听我说吗；你做什麼工作 → 你做什么工作；说's 口 vs 游's 口 — SAME radical, different shape",
+        "reason": "在 (zài, at/now) and 再 (zài, again) are perfect homophones — tone 4, identical consonant and vowel. Only context separates them. Visual trap: 说 has 讠(speech) + 兑 whose 口 is WIDE & SHORT (squatting 🧘), while 游 has 氵(water) + 斿 whose 口 is TALL & NARROW (stretching 🧍). Same mouth radical — completely different outfit. Your eye catches this once trained!",
+        "drill": [
+          { "zh": "你在听我说吗？", "py": "Nǐ zài tīng wǒ shuō ma?", "en": "Are you listening to me?" },
+          { "zh": "他在说什么？", "py": "Tā zài shuō shénme?", "en": "What is he saying?" },
+          { "zh": "你喜欢游泳吗？", "py": "Nǐ xǐhuān yóuyǒng ma?", "en": "Do you like swimming?" }
+        ]
+      },
+      "characters": [
+        {
+          "hanzi": "说",
+          "pinyin": "shuō",
+          "english": "to speak / to say / to explain",
+          "tone": "1st — flat, steady (——), like holding a note",
+          "pronunciation": "shwō (start with English 'sh' then round lips for 'wō'. Hold flat and steady — don't let it rise or fall.)",
+          "calligraphy": "NARROW ║ WIDE balance. 讠is TALL & NARROW on left — the speech radical reaching up. 兑 is WIDE on right. Focus: the 口 inside 兑 is WIDE & SHORT — it's SQUATTING, not stretching! Don't make it tall.",
+          "culture": "游说 (yóu shuì) = 'travel + speak' — ancient Chinese diplomats would roam from kingdom to kingdom speaking to persuade kings. This is literally 'roam and speak'. A 3000-year-old career in rhetoric! 小说 (xiǎo shuō) = novel, literally 'small talk' — classical scholars considered fiction minor speech.",
+          "etymology": "Radical breakdown: 讠(speech) + 兑 (joyful open mouth). 讠is simplified 言 = SPEECH. 兑 originally showed a person LAUGHING with mouth WIDE OPEN — exchanging words with JOY. Ancient story (3000 years ago): 兑 = person with wide laughing mouth. Add speech radical = speaking with pleasure → to speak, to say, to explain. What each part MEANS: 讠= words coming out, 兑 = happy/exchange (also gives sound)."
+        },
+        {
+          "hanzi": "游",
+          "pinyin": "yóu",
+          "english": "to swim / to travel / to roam",
+          "tone": "2nd — rising (↗), like asking 'huh?'",
+          "pronunciation": "yōw (start with 'y' like 'yes', then round lips and lift tone upward ↗. Sounds like 'yo' with a rising tail.)",
+          "calligraphy": "NARROW ║ WIDE balance. 氵is TALL & NARROW on left — three water drops standing tall. 斿 is WIDE on right. Focus: the 口 inside 斿 is TALL & NARROW — it's STRETCHING UP to match 斿's height! The opposite of 说's squatting 口.",
+          "culture": "游山玩水 (yóu shān wán shuǐ) = 'roam mountains, play water' — the CLASSIC Chinese ideal of leisure. Every Chinese landscape painting shows someone 游-ing through nature. 游说 (yóu shuì) pairs with 说: roam AND speak together.",
+          "etymology": "Radical breakdown: 氵(water) + 斿 (streaming flag/banner). 氵= three water drops = WATER. 斿 was a PICTURE of a flag waving in the wind (3500 years ago) — movement, streaming, roaming. One of the oldest characters. 氵+ 斿 = moving THROUGH water → to swim, to travel, to wander. What each part MEANS: 氵= water, 斿 = moving/streaming (also gives sound yóu)."
+        }
+      ]
+    },
+    {
+      "id": "na-qu",
+      "cardNumber": "004",
+      "title": "哪 vs 去 (with 听)",
+      "subtitle": "which/where vs to go (listening comprehension)",
+      "prompt": "哪个是 nǎ？哪个是 qù？ 你在听吗？",
+      "promptEn": "Which is nǎ? Which is qù? Are you listening?",
+      "trapZone": {
+        "confusion": "聽著說 → 听他说 (著 zhe vs 他 tā); 茶不會說 → 他不會做 (茶 chá vs 他 tā, 說 shuō vs 做 zuò); 早打累工作 → 哪里 (nǎlǐ → zǎo dǎ lèi, tone pattern collapse)",
+        "reason": "哪 (nǎ, dipping tone 3↘↗) vs 早 (zǎo, dipping tone 3↘↗) — identical tone pattern! The n- vs z- initial completely shifted but listener's brain matched the TONE and misheard the whole phrase. This is why 哪里 (where) completely collapses to 早打累 (early hit tired) in fast speech — the tone pattern MATCHED. 茶 chá uses curled tongue (ch-), 他 tā uses tap (t-). 說 shuō is curled tongue, 做 zuò is flat tongue. Homophones like 聽著(listened + particle) vs 听他 exploit the identical consonant cluster but different following consonant.",
+        "drill": [
+          { "zh": "你在听我说吗？你去哪里？", "py": "Nǐ zài tīng wǒ shuō ma? Nǐ qù nǎlǐ?", "en": "Are you listening to me? Where are you going?" },
+          { "zh": "他不会做，茶才会说。", "py": "Tā bù huì zuò, chá cái huì shuō.", "en": "He can't do it, but tea can speak!" },
+          { "zh": "听他说，别听著那个。", "py": "Tīng tā shuō, bié tīng zhe nàge.", "en": "Listen to him speak, don't keep listening to that one." }
+        ]
+      },
+      "characters": [
+        {
+          "hanzi": "哪",
+          "pinyin": "nǎ",
+          "english": "which / where",
+          "tone": "3rd — dipping (down↘ then up↗), like 'naaa' with a dip in the middle",
+          "pronunciation": "nah (n- nasal tap, tongue taps the ridge behind teeth. Then ǎ vowel dips LOW then rises back). Start at middle, DROP LOW, rise back up — naǎ↘↗",
+          "calligraphy": "NARROW ║ WIDE balance. 口 (mouth) is SMALL & HIGH on the left — don't drop it low! 那 spreads WIDE on the right. The mouth is positioned high and small because you're ASKING — your mouth is open but focused upward in curiosity.",
+          "culture": "哪 is NEVER used alone in speech — always pairs: 哪里 (nǎlǐ, where), 哪个 (nǎge, which one), 哪個 (nǎge, trad. — same). 哪个 is the #1 spoken question in daily life! In classical texts 那 (that one over there) evolved into 哪 (which one asking). RADICAL: 口 (mouth asking) + 那 (that one) = 'WHICH that one?!'",
+          "etymology": "Radical breakdown: 口 (mouth) + 那 (that). Ancient story (~3000 yrs ago): You point your hand at something and ask with your mouth: 'THAT one?!' 那 = pointing finger + city radical. 哪 = add mouth because you SPEAK it. What each part MEANS: 口 = you MUST ask out loud, 那 = that one over there, 哪 = WHICH one?!"
+        },
+        {
+          "hanzi": "去",
+          "pinyin": "qù",
+          "english": "to go / past / previous",
+          "tone": "4th — sharp falling (high↘flat!), like saying NO!",
+          "pronunciation": "chyoo (q- is like 'ch' in 'church' but softer. Drop hard and fast from high to low.) Sounds like 'chew' without the 'w'. Start HIGH, drop HARD & FAST → 'chyoo!'⬇️",
+          "calligraphy": "TALL ║ SHORT balance. Top 大 spreads wide (shoulders open like walking). Bottom 厶 is compact (feet walking away). Don't make it too big. The 厶 bottom — it's the 'footsteps' leaving!",
+          "culture": "去 is both 'to go' AND 'past/previous'. 去年 (qùnián, last year) = the year that WENT away. 去过 (qùguo, have been to) = went and came back. One character = going AND returning! 大 (person) over 厶 (private/self departing) — person leaving = GO! Ancient picture: person standing at door, steps OUT → that's 'to go'.",
+          "etymology": "Radical breakdown: 大 (person) over 厶 (private/self). Ancient story (~3500 yrs ago): Picture a person 大 standing at a door 囗 (enclosure = home). Person steps OUT → that's 'to go' 去! Simplified 去 keeps this image: top = person, bottom = leaving motion. MEANING: 大 = person with arms spread, 厶 = the private self departing, 去 = person + departure = GO! 🚶"
+        },
+        {
+          "hanzi": "听",
+          "pinyin": "tīng",
+          "english": "to listen / obedient",
+          "tone": "1st — high flat (———), like singing a held note",
+          "pronunciation": "ting (t- with tongue tapped hard against teeth, then -ing nasal. Hold the tone HIGH and FLAT — teeeeng 🔔 Don't let it drop!)",
+          "calligraphy": "NARROW ║ WIDE balance. 耳 (ear) is TALL & NARROW on the left — make it TALL, it's your ear straining to hear! 口+斤 is WIDER on the right. Focus on: 耳 must be TALL — don't squish it.",
+          "culture": "听话 (tīng huà, tone 1) = 'obedient / well-behaved' — literally 'listens to words'. A good child 听妈妈的话 (listens to mom). In Qi Gong 氣功, 'listening with your heart' (用心听) means sensing energy, not just sound. Your 心 heart is the REAL ear! Traditional 聽 = 耳 (ear) + 悳 (virtue) + 直 (straight) + 心 (heart) — true listening = ear + heart together! This is why 聽 has 心 hidden inside. Mencius said: 耳不聪目不明 = 'If ears don't listen, eyes don't see' — all senses start from the 心 heart!",
+          "etymology": "RADICAL breakdown: 耳 (ear) + 口 + 斤. Traditional 聽 = 耳 (ear) + 悳 (virtue) + 直 (straight) + 心 (heart). Ancient story (~3000 yrs ago): Your 耳 ear catches the sound, but your 心 heart decides if it MATTERS. True listening = ear + heart together! MEANING: 耳 = physical hearing, 心 = spiritual attention, 听 = BOTH together = real listening 👂🫀"
+        }
+      ]
+    },
+    {
+      "id": "zai-ting",
+      "cardNumber": "003",
+      "title": "在 vs 听",
+      "subtitle": "at/in/existing vs to listen",
+      "prompt": "哪个是 zài？哪个是 tīng？",
+      "promptEn": "Which is zài? Which is tīng?",
+      "trapZone": {
+        "confusion": "你在听我说吗？→ 你那庭我说吗？ (在→那, 听→庭); 怎么了？→ 真不辣; 他不会做→他不会說; 你在哪里工作？→ 您是哪里工作？",
+        "reason": "在 (z-, flat tongue) vs 那 (n-, tongue taps ridge) vs 是 (sh-, tongue curled back) are all 1-syllable function words — speech recognition's #1 enemy. 听 (tīng, 1st tone) and 庭 (tíng, 2nd tone) are perfect homophones — correct pronunciation, wrong character chosen by app. 你→您 is a formality default, not a pronunciation error.",
+        "drill": [
+          { "zh": "你在听我说吗？", "py": "Nǐ zài tīng wǒ shuō ma?", "en": "Are you listening to me?" },
+          { "zh": "他在哪里工作？", "py": "Tā zài nǎlǐ gōngzuò?", "en": "Where does he work?" },
+          { "zh": "怎么了？", "py": "Zěn me le?", "en": "What's wrong?" }
+        ]
+      },
+      "characters": [
+        {
+          "hanzi": "在",
+          "pinyin": "zài",
+          "english": "at / in / existing",
+          "tone": "4th — sharp falling, like saying NO!",
+          "pronunciation": "dzai (tongue flat, air flows free — z- is unvoiced, tongue doesn't vibrate). Drop hard and fast — dzai⬇️",
+          "calligraphy": "TALL ║ SHORT balance. 土 (earth/soil) on the bottom — the horizontal stroke 横 sits FLAT, it's the ground the seedling grows from. 才 (young sprout) above it reaching upward. Let the final 横 breathe — it anchors everything.",
+          "culture": "在 is one of the TOP 10 most-used characters in all of Chinese — it's the glue word. 我在家 (I'm AT home). 他在这 (He IS here). Without 在 you can barely describe where anything is. A seedling sprouting on ground — 'something EXISTING at a place'."
+        },
+        {
+          "hanzi": "听",
+          "pinyin": "tīng",
+          "english": "to listen",
+          "tone": "1st — high flat, like singing a held note",
+          "pronunciation": "tʰiŋ (tongue flat BEHIND teeth for t-, then -ing nasal ending). Hold the tone HIGH and FLAT — ting━━ — don't let it drop!",
+          "calligraphy": "NARROW ║ WIDE balance. 耳 (ear) radical on the LEFT — make it TALL and narrow, it's the ear standing up at attention. Right side is wider and open. The ear leans in to hear.",
+          "culture": "听话 (tīng huà) = 'obedient / well-behaved' — literally 'listens to words'. A good child 听妈妈的话 (listens to mom). In the traditional character 聽, three radicals combine: 耳 (ear) + 口 (mouth) + 心 (heart) — true listening means your ear, the speaker's mouth, AND your heart are all engaged. Not just hearing — obeying through attention."
+        }
+      ]
+    },
+    {
+      "id": "ta-shenme",
+      "cardNumber": "002",
+      "title": "他 vs 什么",
+      "subtitle": "he/she/it vs what",
+      "prompt": "哪个是 tā？哪个是 shénme？",
+      "promptEn": "Which is tā? Which is shénme?",
+      "trapZone": {
+        "confusion": "女作什麼工作？ → heard as 你做什么工作？",
+        "reason": "女 nǚ and 你 nǐ share tone 3 and the same n- initial. The difference is the vowel: 女 = ü (round lips), 你 = i (spread lips). In fast speech they collapse into each other. 什么 also compresses to 'sme' in natural speech.",
+        "drill": [
+          { "zh": "你做什么工作？", "py": "Nǐ zuò shénme gōngzuò?", "en": "What work do you do?" },
+          { "zh": "她做什么工作？", "py": "Tā zuò shénme gōngzuò?", "en": "What work does she do?" },
+          { "zh": "他们在说什么？", "py": "Tāmen zài shuō shénme?", "en": "What are they saying?" }
+        ]
+      },
+      "characters": [
+        {
+          "hanzi": "他",
+          "pinyin": "tā",
+          "english": "he / she / it",
+          "tone": "1st — flat, high",
+          "pronunciation": "tah (flat, like a doctor saying 'open and say ahh')",
+          "calligraphy": "Left 亻 is TALL and THIN (standing person). Right 也 is WIDE with a sweeping hook. NARROW ║ WIDE — a person reaching toward someone else. Stroke 5 (the hook) — let it fling outward like you're pointing.",
+          "culture": "In the 1920s, 刘半农 (Liú Bànnóng) created 她 (女+也) for 'she' and 它 for 'it'. Before that, 他 was used for everyone — men and women. So in classical texts, 他 could be anyone. Context was everything."
+        },
+        {
+          "hanzi": "什么",
+          "pinyin": "shénme",
+          "english": "what",
+          "tone": "什 = 2nd (rising), 么 = neutral",
+          "pronunciation": "shun-muh (rising then flat). In fast speech compresses to 'sme' — you will NOT understand real speech without knowing this.",
+          "calligraphy": "什: left 亻 NARROW, right 十 wide and crossed. 么: just 3 strokes — tiny, almost invisible. NARROW ║ TINY. Don't overwrite 么 — keep it small.",
+          "culture": "什么 evolved from 甚物 ('what thing?') over centuries of spoken erosion. 么 used to be the full word 物 (thing) — a thousand years of fast speech compressed it into a neutral suffix. Every 什么 is a fossil."
+        }
+      ]
+    },
     {
       "id": "zuo-shuo",
       "cardNumber": "001",

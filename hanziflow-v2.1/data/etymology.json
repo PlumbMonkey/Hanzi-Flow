@@ -248,5 +248,68 @@
       { "word": "做客", "pinyin": "zuò kè", "meaning": "to be a guest" }
     ],
     "note": "乍 is the heart of 做 — a 3,000-year-old pictograph of a person cutting cloth: someone in the act of labor. It evolved into 作 (classical: to rise up and begin work), then the folk script added another 亻 to make 做, emphasizing who is doing the action. 做 handles concrete, everyday tasks (做饭 = cook, 做梦 = dream); its twin 作 survives in literary contexts (作品 = artwork, 作文 = composition). In speech they are nearly interchangeable, but 做人 — how you conduct yourself as a human being — remains one of the most distinctly Confucian phrases in the language."
-  }
+  },
+  "什么": {
+    "radicals": [
+      { "zh": "什", "meaning": "from 甚 (shén) — what / which", "strokes": 4 },
+      { "zh": "么", "meaning": "from 物 (wù) — thing (now just a suffix)", "strokes": 3 }
+    ],
+    "evolution": ["甚物", "甚麼", "什么"],
+    "evoLabels": ["Classical 甚物", "Traditional 甚麼", "Modern"],
+    "compounds": [
+      { "word": "什么东西", "pinyin": "shénme dōngxi", "meaning": "what thing (emphatic)" },
+      { "word": "为什么", "pinyin": "wèi shénme", "meaning": "why (lit. for what)" },
+      { "word": "没什么", "pinyin": "méi shénme", "meaning": "it's nothing / never mind" },
+      { "word": "什么都", "pinyin": "shénme dōu", "meaning": "everything / anything" }
+    ],
+    "note": "什么 began life as two full words: 甚 (shén, 'what/which') + 物 (wù, 'thing'). Literally: 'what thing?' Over centuries of spoken erosion, 甚物 → 甚麼 → 什么, the full word 物 shrinking to the light suffix 么. The same compression happens in English: 'what thing' → 'what.' Today 么 by itself has no independent meaning — it exists only as a grammatical echo of the thing it once named. So every time you ask 你吃什么？you are asking 'you eat what-thing?' — a fossil of a full sentence compressed into two syllables by a thousand years of fast speech."  },
+  "哪": {
+    "radicals": [
+      { "zh": "口", "meaning": "mouth — asking", "strokes": 3 },
+      { "zh": "那", "meaning": "that one (over there)", "strokes": 7 }
+    ],
+    "evolution": ["那", "哪", "哪"],
+    "evoLabels": ["Proto-form 那", "Early 哪", "Modern"],
+    "compounds": [
+      { "word": "哪里", "pinyin": "nǎlǐ", "meaning": "where (formal) / where (humble polite)" },
+      { "word": "哪个", "pinyin": "nǎge", "meaning": "which one (most common spoken form)" },
+      { "word": "哪天", "pinyin": "nǎtiān", "meaning": "which day / some day" },
+      { "word": "哪儿", "pinyin": "nǎr", "meaning": "where (colloquial —哪里 compressed)" }
+    ],
+    "note": "哪 is NEVER used alone in speech — always pairs with 里/个/天/儿. The radical breakdown tells the story: 口 (mouth) + 那 (that one). In ancient Chinese, you would point 你的手 (your hand) at something and ask with your 口 mouth: 'THAT one?!' The original character was just 那 (that), but when spoken as a QUESTION word, speakers added 口 to mark the pragmatic shift: from declarative 'that' to interrogative 'which that?' Over centuries, the new form 哪 took over the interrogative function entirely. Today 那 (that) and 哪 (which) are sharply split by speech act, not etymology. The character encodes a crucial insight: in Chinese, asking requires the mouth to be explicitly present. Memory hook: QUESTION MARK is MOUTH shape 👄 asking 'which?'"
+  },
+  "去": {
+    "radicals": [
+      { "zh": "大", "meaning": "person (with arms spread)", "strokes": 3 },
+      { "zh": "厶", "meaning": "private / self / departing", "strokes": 3 }
+    ],
+    "evolution": ["𠀌", "去", "去"],
+    "evoLabels": ["Oracle Bone", "Bronze", "Modern"],
+    "compounds": [
+      { "word": "去年", "pinyin": "qùnián", "meaning": "last year (the year that went)" },
+      { "word": "去过", "pinyin": "qùguo", "meaning": "have been to (went and came back)" },
+      { "word": "去世", "pinyin": "qùshì", "meaning": "to pass away (euphemism: leave the world)" },
+      { "word": "过去", "pinyin": "guòqù", "meaning": "past / go over" },
+      { "word": "未来", "pinyin": "wèilái", "meaning": "future (opposite: not-come, not-go)" }
+    ],
+    "note": "去 is one of the ancient four directional verbs (来 lái come, 去 qù go, 往 wǎng go-to, 还 huán return-to). The pictograph is startling in its directness: 大 (person) standing at a door, taking the step OUT — that physical motion is 'to go.' But 去 also means 'past' and 'previous' because in Chinese temporal logic, the past is the direction you WENT (and left behind). 去年 (qùnián) = 'the year that went away.' 去 is the character that embodies motion away, passage of time, and farewell in one form. A 3,000-year-old picture of walking out a door still shapes every Chinese temporal reference.",
+    "etymology": "Radical breakdown: 大 (person) over 厶 (departing self). The original oracle bone form shows a person inside a 囗 (enclosure = home) with strokes indicating departure. The modern simplified form keeps the essence: top = person, bottom = the private self in motion away. This is why 去 can mean both physical departure and temporal pastness — they're the same trajectory through space-time."
+  },
+  "听": {
+    "radicals": [
+      { "zh": "耳", "meaning": "ear (physical hearing)", "strokes": 6 },
+      { "zh": "口", "meaning": "mouth (the speaker)", "strokes": 3 },
+      { "zh": "斤", "meaning": "strength / effort", "strokes": 4 }
+    ],
+    "evolution": ["聽", "聽", "听"],
+    "evoLabels": ["Traditional 聽", "Traditional full form", "Simplified"],
+    "compounds": [
+      { "word": "听话", "pinyin": "tīng huà", "meaning": "obedient / well-behaved (lit. listens-to-words)" },
+      { "word": "听力", "pinyin": "tīng lì", "meaning": "listening ability / hearing" },
+      { "word": "听众", "pinyin": "tīngzhòng", "meaning": "audience" },
+      { "word": "听觉", "pinyin": "tīngjué", "meaning": "auditory sense" },
+      { "word": "用心听", "pinyin": "yòngxīn tīng", "meaning": "listen with your heart (deep attention)" }
+    ],
+    "note": "The traditional form 聽 reveals the philosophy: 耳 (ear) + 悳 (virtue/heart) + 直 (straight) + 心 (heart). Later simplified to 聽 with 耳 (ear) + 德 (virtue) + 心 (heart), then to modern 听 with 耳 + 口 + 斤. But the core truth remains: true listening in Chinese philosophy is NOT just hearing. It's ear + mouth + heart + effort all engaged together. The famous Confucian concept: 听而后言 (listen first, then speak), captures the moral weight. In Qi Gong 氣功, '用心听' (listening with your heart) means sensing qi/energy, not just sound. Your 心 heart is the REAL ear. This is why 听话 doesn't just mean 'obedient' — it means your ear, heart, and effort are all aligned with what's being said. Mencius: 耳不聪目不明 'If ears don't listen with the whole being, eyes don't see clearly' — all senses start from the 心 heart.",
+    "etymology": "The traditional character 聽 breaks down: 耳 (ear, physical hearing) + 悳 (virtue, suggesting moral/emotional dimension) + 直 (straight/direct) + 心 (heart). The simplified form 听 keeps just 耳 (ear) + 口 (mouth) + 斤 (effort). But both versions encode the same truth: listening involves the physical ear, social context (the mouth/speaker), and dedicated effort. It's never passive."  }
 }

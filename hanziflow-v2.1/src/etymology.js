@@ -22,8 +22,13 @@ export async function loadEtymologyDB() {
 export function renderEtymology(hanzi, contextSentence = null) {
   if (!hanzi) return;
   let data = null, foundChar = '';
-  for (const ch of hanzi.split('')) {
-    if (DB[ch]) { data = DB[ch]; foundChar = ch; break; }
+  // Try full word first (e.g. 什么), then fall back character-by-character
+  if (DB[hanzi]) {
+    data = DB[hanzi]; foundChar = hanzi;
+  } else {
+    for (const ch of hanzi.split('')) {
+      if (DB[ch]) { data = DB[ch]; foundChar = ch; break; }
+    }
   }
 
   $('etym-char-preview').textContent = foundChar || hanzi[0] || '—';

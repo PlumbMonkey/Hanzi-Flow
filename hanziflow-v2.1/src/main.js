@@ -28,6 +28,7 @@ async function bootstrap() {
   hydrateAWE();
   updateAWEPanel();
   renderPairsList();
+  renderPairsSidebar();
 
 
 
@@ -57,6 +58,8 @@ function wireEvents() {
   $('start-session').addEventListener('click', handleStartSession);
   $('start-pairs').addEventListener('click', startPairsSession);
   $('export-anki-pairs').addEventListener('click', exportAnkiTsv);
+  $('start-pairs-side').addEventListener('click', startPairsSession);
+  $('export-anki-pairs-side').addEventListener('click', exportAnkiTsv);
 
   // Step 1
   document.querySelectorAll('[data-toggle]').forEach((el) =>
@@ -254,6 +257,23 @@ function renderPairsList() {
   el.innerHTML = deckName + pairsHtml
     + (errorMapHtml ? `<div class="error-map-wrap"><div class="pairs-section-lbl">User error map</div>${errorMapHtml}</div>` : '')
     + nextHtml;
+}
+
+function renderPairsSidebar() {
+  const el = $('pairs-list-side');
+  if (!el) return;
+  const pairs = getPairs();
+  if (!pairs.length) {
+    el.innerHTML = '<div style="font-size:12px;color:var(--muted)">No pairs loaded.</div>';
+    return;
+  }
+  el.innerHTML = pairs.map((p) => `
+    <div class="pair-row">
+      <div class="pair-chars">${p.characters.map((c) =>
+        `<span class="pair-char-chip">${c.hanzi}<span class="pair-chip-py">${c.pinyin}</span></span>`
+      ).join('<span class="pair-vs">vs</span>')}</div>
+      <div class="pair-title-sub">${p.title} <span class="pair-card-num">Card ${p.cardNumber}</span></div>
+    </div>`).join('');
 }
 
 // ── Keyboard ─────────────────────────────────────────────────

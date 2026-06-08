@@ -125,13 +125,17 @@ body::after {
 .screen { display: none; min-height: calc(100vh - 51px); padding: 36px 28px; max-width: 780px; margin: 0 auto; }
 .screen.active { display: flex; flex-direction: column; }
 
+/* Wizard screen gets a wider viewport to accommodate the pairs sidebar */
+#screen-wizard { max-width: 1140px; }
+
 /* ── CONNECT ──────────────────────────────────────────────── */
 .connect-hero {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 24px;
   text-align: center;
 }
@@ -143,6 +147,8 @@ body::after {
   opacity: 0.06;
   letter-spacing: -2px;
   user-select: none;
+  width: 100%;
+  order: -1;
 }
 
 .paper-card {
@@ -252,6 +258,78 @@ select option { background: var(--paper); color: var(--ink); }
 
 /* ── Minimal Pairs card ───────────────────────────────────── */
 .pairs-card { margin-top: 0; }
+
+/* ── Wizard 2-column body ─────────────────────────────────── */
+.wizard-body {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+  align-items: flex-start;
+}
+.wizard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+/* Pairs sidebar */
+.wizard-pairs-side {
+  width: 268px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #fbf8f0;
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  padding: 16px;
+  position: sticky;
+  top: 72px;
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+}
+.wizard-pairs-header {
+  font-family: 'IM Fell English', serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--stroke);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.wizard-pairs-sub {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 11px;
+  color: var(--muted);
+  font-style: normal;
+}
+.pairs-list-side .pair-row {
+  padding: 8px 0;
+}
+.pairs-list-side .pair-char-chip {
+  font-size: 20px;
+  padding: 4px 10px;
+}
+.pairs-list-side .error-map-wrap { display: none; }
+.pairs-list-side .pairs-next-card { display: none; }
+.wizard-pairs-footer {
+  display: flex;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--stroke);
+}
+.wizard-pairs-footer .btn { flex: 1; padding: 7px 8px; font-size: 12px; }
+
+/* Collapse sidebar on narrow viewports */
+@media (max-width: 860px) {
+  .wizard-pairs-side { display: none; }
+  #screen-wizard { max-width: 780px; }
+}
 
 /* Deck name header */
 .pairs-deck-name {
@@ -566,8 +644,24 @@ select option { background: var(--paper); color: var(--ink); }
   gap: 2px;
   padding: 6px 0 10px;
 }
+.s3-card-hanzi {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 30px;
+  letter-spacing: 8px;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.s3-char {
+  display: inline-block;
+  transition: color 0.2s, opacity 0.2s;
+}
+.s3-char-active { color: var(--vermillion); }
+.s3-char-dim    { opacity: 0.3; }
 .s3-card-pinyin { font-size: 17px; color: var(--ink-light); letter-spacing: 1px; }
 .s3-card-english { font-size: 13px; color: var(--muted); }
+.s3-tok { display: inline; transition: color 0.2s, opacity 0.2s; }
+.s3-tok-active { color: var(--vermillion); font-weight: 600; }
+.s3-tok-dim    { opacity: 0.3; }
 
 /* Etymology context line */
 .etym-context-line { display: flex; flex-direction: column; gap: 6px; }
