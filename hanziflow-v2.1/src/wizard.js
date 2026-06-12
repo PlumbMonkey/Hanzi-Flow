@@ -20,6 +20,7 @@ import { saveNewCardLimit, loadNewCardLimit } from './persistence.js';
 
 // ── Session lifecycle ─────────────────────────────────────────
 export function beginSession({ cards, isDemo, fieldMap, newCardLimit }) {
+  stopTimer();
   resetSession();
   S.cards = cards;
   S.isDemo = isDemo;

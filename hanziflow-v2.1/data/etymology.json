@@ -311,5 +311,97 @@
       { "word": "用心听", "pinyin": "yòngxīn tīng", "meaning": "listen with your heart (deep attention)" }
     ],
     "note": "The traditional form 聽 reveals the philosophy: 耳 (ear) + 悳 (virtue/heart) + 直 (straight) + 心 (heart). Later simplified to 聽 with 耳 (ear) + 德 (virtue) + 心 (heart), then to modern 听 with 耳 + 口 + 斤. But the core truth remains: true listening in Chinese philosophy is NOT just hearing. It's ear + mouth + heart + effort all engaged together. The famous Confucian concept: 听而后言 (listen first, then speak), captures the moral weight. In Qi Gong 氣功, '用心听' (listening with your heart) means sensing qi/energy, not just sound. Your 心 heart is the REAL ear. This is why 听话 doesn't just mean 'obedient' — it means your ear, heart, and effort are all aligned with what's being said. Mencius: 耳不聪目不明 'If ears don't listen with the whole being, eyes don't see clearly' — all senses start from the 心 heart.",
-    "etymology": "The traditional character 聽 breaks down: 耳 (ear, physical hearing) + 悳 (virtue, suggesting moral/emotional dimension) + 直 (straight/direct) + 心 (heart). The simplified form 听 keeps just 耳 (ear) + 口 (mouth) + 斤 (effort). But both versions encode the same truth: listening involves the physical ear, social context (the mouth/speaker), and dedicated effort. It's never passive."  }
+    "etymology": "The traditional character 聽 breaks down: 耳 (ear, physical hearing) + 悳 (virtue, suggesting moral/emotional dimension) + 直 (straight/direct) + 心 (heart). The simplified form 听 keeps just 耳 (ear) + 口 (mouth) + 斤 (effort). But both versions encode the same truth: listening involves the physical ear, social context (the mouth/speaker), and dedicated effort. It's never passive."  },
+  "里": {
+    "radicals": [
+      { "zh": "田", "meaning": "field",  "strokes": 5 },
+      { "zh": "土", "meaning": "earth / soil", "strokes": 3 }
+    ],
+    "evolution": ["里", "里", "里"],
+    "evoLabels": ["Seal", "Clerical", "Modern"],
+    "compounds": [
+      { "word": "哪里", "pinyin": "nǎlǐ", "meaning": "where" },
+      { "word": "这里", "pinyin": "zhèlǐ", "meaning": "here" },
+      { "word": "里面", "pinyin": "lǐmiàn", "meaning": "inside" },
+      { "word": "公里", "pinyin": "gōnglǐ", "meaning": "kilometre" }
+    ],
+    "note": "里 = 田 (field) over 土 (earth). Over 3000 years ago a 里 was a village unit — families living inside field plots bounded by earthen borders. 'Inside the walls' → village → neighbourhood → (later, by extension) 'inside'. As a distance unit, 一里 ≈ 500 metres, so 十里 (ten 里) was roughly an afternoon's walk between villages.",
+    "etymology": "Radical breakdown: 田 (field, top) + 土 (earth, bottom). The central vertical stroke (丨) runs through both — the spine of the character, like a boundary path cutting through the fields. 里 is the Simplified form; 裡 (with 衣, clothing) is the Traditional form used for the 'inside' sense in Taiwan/HK — same sound, same meaning, different script."
+  },
+  "法": {
+    "radicals": [
+      { "zh": "氵", "meaning": "water", "strokes": 3 },
+      { "zh": "去", "meaning": "go / remove", "strokes": 5 }
+    ],
+    "evolution": ["灋", "法", "法"],
+    "evoLabels": ["Seal (灋)", "Clerical", "Modern"],
+    "compounds": [
+      { "word": "方法", "pinyin": "fāngfǎ", "meaning": "method" },
+      { "word": "合法", "pinyin": "héfǎ", "meaning": "legal" },
+      { "word": "法律", "pinyin": "fǎlǜ", "meaning": "law" },
+      { "word": "佛法", "pinyin": "fófǎ", "meaning": "Dharma / Buddhist teaching" }
+    ],
+    "note": "The ancient form 灋 included 廌 (zhì), a mythical one-horned beast said to butt the guilty party — combined with 水 (level, like water — fairness) and 去 (to banish). Over time 廌 was dropped, leaving 法: water washing away impurity → standard → rule → law. In Buddhism 法 = Dharma (佛法) — one character carrying the entire concept of universal cosmic law.",
+    "etymology": "Radical breakdown: 氵(water, left) + 去 (go/remove, right). Originally 'to wash away' — water removing impurities. 氵= cleansing, 去 = remove the impure, leaving what is pure and standard → STANDARD → RULE → LAW → (in Buddhism) DHARMA."
+  },
+  "想": {
+    "radicals": [
+      { "zh": "相", "meaning": "appearance / look at (木 tree + 目 eye)", "strokes": 9 },
+      { "zh": "心", "meaning": "heart", "strokes": 4 }
+    ],
+    "evolution": ["想", "想", "想"],
+    "evoLabels": ["Seal", "Clerical", "Modern"],
+    "compounds": [
+      { "word": "想要", "pinyin": "xiǎng yào", "meaning": "to want" },
+      { "word": "我想你", "pinyin": "wǒ xiǎng nǐ", "meaning": "I miss you" },
+      { "word": "想家", "pinyin": "xiǎng jiā", "meaning": "to miss home, homesick" },
+      { "word": "想法", "pinyin": "xiǎngfǎ", "meaning": "idea / opinion" }
+    ],
+    "note": "想 = 相 (look carefully) + 心 (heart), placed at the bottom. ~3000 years ago this combination meant 'to look into your heart' — what appears in your heart is what you think of, desire, or miss. The 心 radical at the bottom is the cheat code: if you see 心 under a character, it's about feeling, not direction.",
+    "etymology": "Radical breakdown: 相 (木 tree + 目 eye = 'appearance') + 心 (heart, bottom). To LOOK (相) with your HEART (心) = to think of, to want, to miss. 我想你 = 'I want/miss you'."
+  },
+  "上": {
+    "radicals": [
+      { "zh": "一", "meaning": "the character itself is a pictograph — one line above another", "strokes": 3 }
+    ],
+    "evolution": ["⊥", "上", "上"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "compounds": [
+      { "word": "上去", "pinyin": "shàngqù", "meaning": "to go up" },
+      { "word": "上面", "pinyin": "shàngmiàn", "meaning": "above / on top" },
+      { "word": "上学", "pinyin": "shàngxué", "meaning": "to attend school" },
+      { "word": "上班", "pinyin": "shàngbān", "meaning": "to go to work" }
+    ],
+    "note": "上 is a pure pictograph — a short line above a long base line, drawn over 3000 years ago to mean 'the thing above'. It has no semantic radical to decompose; it IS the radical (上 itself seeds characters like 卡). 上学 and 上班 both use the 'go UP to' sense to mean attending school or work.",
+    "etymology": "A short horizontal stroke sitting above a long horizontal stroke — literally 'above'. One of the oldest and simplest characters in the script. Direction only, no heart (心) involved — contrast with 想."
+  },
+  "她": {
+    "radicals": [
+      { "zh": "女", "meaning": "woman", "strokes": 3 },
+      { "zh": "也", "meaning": "also / too (phonetic, tā)", "strokes": 3 }
+    ],
+    "evolution": ["他", "她", "她"],
+    "evoLabels": ["Pre-1920 (他 for all)", "1920 coinage", "Modern"],
+    "compounds": [
+      { "word": "她们", "pinyin": "tāmen", "meaning": "they (female group)" },
+      { "word": "她是", "pinyin": "tā shì", "meaning": "she is" }
+    ],
+    "note": "她 did not exist before 1920. Writer and linguist 刘半农 (Liú Bànnóng) proposed swapping 亻(person) for 女(woman) in 他 to create a dedicated written word for 'she' — one of the most influential single-character reforms in modern Chinese. Spoken Mandarin never changed: 他 and 她 are still perfect homophones (tā). Only the page tells them apart.",
+    "etymology": "Radical breakdown: 女 (woman, semantic) + 也 (tā, phonetic — shared with 他). Same sound as 他; the 女 radical was added in 1920 purely to mark gender in writing, with zero effect on pronunciation."
+  },
+  "吃": {
+    "radicals": [
+      { "zh": "口", "meaning": "mouth", "strokes": 3 },
+      { "zh": "乞", "meaning": "beg / phonetic (qǐ)", "strokes": 3 }
+    ],
+    "evolution": ["吃", "吃", "吃"],
+    "evoLabels": ["Seal", "Clerical", "Modern"],
+    "compounds": [
+      { "word": "吃饭", "pinyin": "chī fàn", "meaning": "to eat (a meal)" },
+      { "word": "好吃", "pinyin": "hǎochī", "meaning": "tasty" },
+      { "word": "吃苦", "pinyin": "chī kǔ", "meaning": "to endure hardship" }
+    ],
+    "note": "吃 always carries the 口 (mouth) radical — a reliable visual anchor for anything related to eating, taste, or things passing through the mouth (吃苦 'eat bitterness' = endure hardship). It shares no sound or shape with 去 (qù, to go) — when learners swap one for the other, it's a memory/sequencing slip, not a pronunciation confusion.",
+    "etymology": "Radical breakdown: 口 (mouth, semantic) + 乞 (qǐ, phonetic — originally 'to beg/ask for'). Mouth + the sound qǐ drifted to chī = 'to eat'. The mouth radical is the giveaway: if 口 is present, the character is about the mouth, voice, or eating."
+  }
 }

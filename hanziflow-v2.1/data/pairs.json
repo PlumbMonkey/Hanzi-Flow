@@ -5,8 +5,8 @@
     "nameEn": "Ink Language",
     "description": "Minimal pairs deck — characters that look or sound similar, drilled back-to-back so ear and hand learn to tell them apart.",
     "version": "1.0",
-    "currentCard": "005",
-    "updated": "2026-06-08",
+    "currentCard": "010",
+    "updated": "2026-06-12",
     "pronunciationRules": [
       {
         "group": "Flat tongue (舌尖前音)",
@@ -109,13 +109,109 @@
         "note": "在 (at/now/existing) vs 再 (again/repeat). 你在听我说吗 vs 你再听我说吗 — ear cannot distinguish. Card 005.",
         "status": "active",
         "pairId": "shuo-you"
+      },
+      {
+        "id": 12,
+        "chars": ["们", "淇"],
+        "pattern": "visual radical contrast: 亻(person) vs 氵(water)",
+        "note": "们 (plural suffix; neutral tone) vs 淇 (loan-sound in 冰淇淋). Card 006 — active.",
+        "status": "active",
+        "pairId": "men-qi"
+      },
+      {
+        "id": 13,
+        "chars": ["回", "会"],
+        "pattern": "huí vs huì tone contour + mouth closure timing",
+        "note": "Learner says huí when intending huì; lips stay open instead of closing at the end. Card 006 trap.",
+        "status": "active",
+        "pairId": "men-qi"
+      },
+      {
+        "id": 14,
+        "chars": ["周", "做"],
+        "pattern": "zh- retroflex vs z- flat-tongue swap",
+        "note": "Tongue remained flat for 做 (zuò) when it should contrast with curled zh- in 周. Card 006 trap.",
+        "status": "active",
+        "pairId": "men-qi"
+      },
+      {
+        "id": 15,
+        "chars": ["什么", "生亡"],
+        "pattern": "partial match + lexical autocorrect from shénme",
+        "note": "Brain latched onto initial sh- and guessed the remainder under speed/noise. Card 006 trap.",
+        "status": "active",
+        "pairId": "men-qi"
+      },
+      {
+        "id": 16,
+        "chars": ["想", "不"],
+        "pattern": "x- palatal + -iang glide vs b- stop + -u",
+        "note": "Core contrast for Card 007: miss/think vs NOT, with strong tone contrast (3rd vs 4th).",
+        "status": "active",
+        "pairId": "xiang-bu"
+      },
+      {
+        "id": 17,
+        "chars": ["想", "生"],
+        "pattern": "-iang glide vs -eng openness",
+        "note": "Learner confuses xiǎng and shēng under speed; fix by exaggerating the i-glide in 想.",
+        "status": "active",
+        "pairId": "xiang-bu"
+      },
+      {
+        "id": 18,
+        "chars": ["说", "做"],
+        "pattern": "same -uo rhyme, tone 1 flat vs tone 4 falling",
+        "note": "High-frequency trap surfaced again in Card 007 sentence drills.",
+        "status": "active",
+        "pairId": "xiang-bu"
+      },
+      {
+        "id": 19,
+        "chars": ["里", "裡"],
+        "pattern": "identical sound (nǎlǐ) — Simplified 里 vs Traditional 裡, script difference only",
+        "note": "Both correct. 裡 is the Traditional form (Taiwan/HK) for 'inside'; 里 is Simplified. Card 008 — active.",
+        "status": "active",
+        "pairId": "li-fa"
+      },
+      {
+        "id": 20,
+        "chars": ["你", "我"],
+        "pattern": "n- tongue-tip (你) vs w- lip-rounding (我), same tone-3 dip-rise shape",
+        "note": "你 nǐ = tongue tip behind teeth, air flows out; 我 wǒ = lips round into 'o' then open. Card 008 — active.",
+        "status": "active",
+        "pairId": "li-fa"
+      },
+      {
+        "id": 21,
+        "chars": ["想", "上"],
+        "pattern": "ɕ- flat tongue/spread lips (想) vs ʂ- curled tongue/rounded lips (上), same -ang rhyme and both falling/dipping tones",
+        "note": "Cheat code: 心 (heart) at the bottom of 想 = feeling/desire; 上 is a pure direction pictograph with no 心. Card 009 — active.",
+        "status": "active",
+        "pairId": "xiang-shang"
+      },
+      {
+        "id": 22,
+        "chars": ["他", "她"],
+        "pattern": "perfect homophones tā (1st tone) — only the written radical (亻 vs 女) differs",
+        "note": "她 was invented in 1920 by 刘半农, swapping 亻 for 女 to create a dedicated female pronoun. Card 010 — active.",
+        "status": "active",
+        "pairId": "ta-ta"
+      },
+      {
+        "id": 23,
+        "chars": ["吃", "去"],
+        "pattern": "no phonetic similarity (chī vs qù) — lexical perseveration, not a sound confusion",
+        "note": "吃 gets dropped and 去 gets doubled when 去 already appears earlier in the sentence — the brain reuses the word already in play. Card 009/010 bonus trap.",
+        "status": "active",
+        "pairId": "xiang-shang"
       }
     ],
     "nextCard": {
-      "number": "006",
-      "chars": ["是", "十"],
-      "charsPinyin": ["shì", "shí"],
-      "focus": "sh- curl + tone 4 (falling) vs tone 2 (rising)"
+      "number": "011",
+      "chars": ["说", "输"],
+      "charsPinyin": ["shuō", "shū"],
+      "focus": "-uo vs -u vowel distinction, same sh- initial"
     },
     "homework": [
       { "icon": "🎧", "task": "Forvo × 5 each: forvo.com/word/做/ and forvo.com/word/说/" },
@@ -135,10 +231,223 @@
       { "icon": "👁️", "task": "Visual drill: draw 口 inside 兑 (WIDE/SHORT) and inside 斿 (TALL/NARROW) — say aloud the difference" },
       { "icon": "👅", "task": "Tongue drill: 说 (sh- curled) vs 游 (y- glide) — alternate 10×" },
       { "icon": "🗣️", "task": "Record yourself: 你在听我说吗？你喜欢游泳吗？(Are you listening? Do you like swimming?)" },
-      { "icon": "🎧", "task": "Listening trap drill: 你在(zài)听我说吗 vs 你再(zài)听我说吗 — can you hear the difference? (You cannot — use context!)" }
+      { "icon": "🎧", "task": "Listening trap drill: 你在(zài)听我说吗 vs 你再(zài)听我说吗 — can you hear the difference? (You cannot — use context!)" },
+      { "icon": "🎧", "task": "Forvo × 5 each: forvo.com/word/们 and forvo.com/word/淇" },
+      { "icon": "👅", "task": "Mouth drill: 会(huì) lips CLOSE at the end; compare with 回(huí) lips stay more open" },
+      { "icon": "🧠", "task": "Contrast drill 10×: 什么(shénme) vs 生亡(shēngwáng) — keep -en relaxed, avoid -eng pull" },
+      { "icon": "🗣️", "task": "Record yourself: 我们今天吃冰淇淋！你会做什么工作？他们在说什么？" },
+      { "icon": "🎧", "task": "Forvo × 5 each: forvo.com/word/想 and forvo.com/word/不" },
+      { "icon": "👅", "task": "Contrast drill: 想 xiǎng (i-glide + 3rd tone dip-rise) vs 生 shēng (open vowel + flat 1st tone) — 10×" },
+      { "icon": "👄", "task": "Initial drill: 怎么 zěnme vs 人们 rénmen — z- teeth contact vs r- tongue curl, keep same -nme ending" },
+      { "icon": "🗣️", "task": "Record yourself: 你想我了，不是你生完了！他不会做，不是他不会说！" },
+      { "icon": "🎧", "task": "Forvo × 5 each: forvo.com/word/里/ and forvo.com/word/法/" },
+      { "icon": "✍️", "task": "Hanzi Flow writing session × 3 each — focus on the central 丨 spine in 里 and the flowing 氵 three dots in 法" },
+      { "icon": "👅", "task": "Tongue drill: 你 nǐ (tongue tip, n-) vs 我 wǒ (lip-round, w-) — alternate 10×" },
+      { "icon": "🗣️", "task": "Record yourself: 你在哪里工作？我会做什么？这个方法不合法。" },
+      { "icon": "🎧", "task": "Forvo × 5 each: forvo.com/word/想/ and forvo.com/word/上/" },
+      { "icon": "👄", "task": "Lip drill: 想 xiǎng (lips SPREAD, tongue flat — 'shee-AHNG') vs 上 shàng (lips ROUND, tongue curled back — 'shrr-AHNG') — alternate 10×" },
+      { "icon": "✍️", "task": "Hanzi Flow writing session × 3 each — focus on the 3 dots in 心 (想) flowing left→right→center, and the long bottom 一 stroke in 上 staying perfectly horizontal" },
+      { "icon": "🎧", "task": "Forvo × 5 each: forvo.com/word/他/, forvo.com/word/她/, forvo.com/word/吃/, and forvo.com/word/去/" },
+      { "icon": "🧠", "task": "Radical-recall drill: 他 (亻person) vs 她 (女woman) — say each aloud, then write the radical that disambiguates it, 10×" },
+      { "icon": "🗣️", "task": "Record yourself: 我想去哪里吃，不是我上去哪里去！她是哪里的人？" }
     ]
   },
   "pairs": [
+    {
+      "id": "ta-ta",
+      "cardNumber": "010",
+      "title": "他 vs 她",
+      "subtitle": "he vs she — perfect homophones, radical is the only clue",
+      "prompt": "哪个是他？哪个是她？",
+      "promptEn": "Which is 他 (he)? Which is 她 (she)?",
+      "trapZone": {
+        "confusion": "他是哪里的人？ → 她是哪里的人？ (他→她, identical sound); 你上去哪里去？ → 你想去哪里吃？ (吃 dropped, 去 doubled)",
+        "reason": "他 and 她 are perfect homophones — tā, 1st tone, identical in speech. The ONLY difference is the written radical: 亻(person, generic/male) vs 女(woman). Before 1920 there was no 她 at all — 刘半农 created it by swapping the radical, so context (or the written word) is the only way to tell them apart. Bonus trap: 吃 chī (mouth radical 口, 'to eat') and 去 qù ('to go', a pictograph of a person leaving a doorway) sound nothing alike, but if 去 already appears earlier in a sentence the brain often reuses it and drops 吃 entirely.",
+        "drill": [
+          { "zh": "她是哪里的人？", "py": "Tā shì nǎlǐ de rén?", "en": "Where is she from?" },
+          { "zh": "他想去哪里吃？", "py": "Tā xiǎng qù nǎlǐ chī?", "en": "Where does he want to go eat?" },
+          { "zh": "我想去哪里吃，不是我上去哪里去！", "py": "Wǒ xiǎng qù nǎlǐ chī, bùshì wǒ shàngqù nǎlǐ qù!", "en": "I want to go eat somewhere, not go up somewhere!" }
+        ]
+      },
+      "characters": [
+        {
+          "hanzi": "他",
+          "pinyin": "tā",
+          "english": "he / him",
+          "tone": "1st — flat, high",
+          "pronunciation": "tah (flat, like a doctor saying 'open and say ahh')",
+          "calligraphy": "Left 亻 is TALL and THIN (standing person). Right 也 is WIDE with a sweeping hook. NARROW ║ WIDE — a person reaching toward someone else.",
+          "culture": "Before the 1920s, 他 was used for everyone — men, women, even objects. In classical texts, 他 could be anyone; context was everything.",
+          "etymology": "Radical breakdown: 亻(person) + 也 (also/too) — 'that person, too'. 也 supplies the sound (tā); 亻 supplies the generic 'person' meaning."
+        },
+        {
+          "hanzi": "她",
+          "pinyin": "tā",
+          "english": "she / her",
+          "tone": "1st — flat, high",
+          "pronunciation": "tah (identical sound to 他 — only the written radical differs)",
+          "calligraphy": "Left 女 (woman) is TALL with a graceful curve. Right 也 is WIDE with a sweeping hook. NARROW ║ WIDE — same skeleton as 他, different left radical.",
+          "culture": "她 was invented in 1920 by 刘半农 (Liú Bànnóng), who swapped 亻(person) for 女(woman) to create a dedicated female pronoun — one of the most influential single-character reforms in modern Chinese.",
+          "etymology": "Radical breakdown: 女 (woman, semantic) + 也 (phonetic, tā). Identical sound to 他 — 也 supplies the sound in both characters; only the left radical (亻 vs 女) carries the meaning, and you cannot hear that difference."
+        }
+      ]
+    },
+    {
+      "id": "xiang-shang",
+      "cardNumber": "009",
+      "title": "想 vs 上",
+      "subtitle": "to want/think vs up/to go up",
+      "prompt": "哪个是想要？哪个是上去？",
+      "promptEn": "Which one means 'want'? Which one means 'go up'?",
+      "trapZone": {
+        "confusion": "你上去哪里？ → 你想去哪里吃？ (想→上, 吃 dropped); 你上去哪里去？ → 你想去哪里吃？ (doubled 去)",
+        "reason": "想 xiǎng and 上 shàng share the -ang rhyme, and both tones dip or fall, so the brain hears '___-ang' either way. The real difference is the initial: 想 starts with ɕ (tongue flat behind the lower teeth, lips spread — 'shee'); 上 starts with ʂ (tongue curled back, lips rounded — 'shr'). Cheat code: 心 (heart) at the bottom of 想 = FEELING/desire; 上 = pure direction, no heart. 吃 chī (mouth radical 口, eating) and 去 qù (a person leaving a doorway) sound nothing alike — but once 去 is already in the sentence, the brain panic-fills with it again and drops 吃.",
+        "drill": [
+          { "zh": "我想去哪里吃？", "py": "Wǒ xiǎng qù nǎlǐ chī?", "en": "Where do I want to go eat?" },
+          { "zh": "我上去哪里？", "py": "Wǒ shàngqù nǎlǐ?", "en": "Where am I going up to?" },
+          { "zh": "她是哪里的人？", "py": "Tā shì nǎlǐ de rén?", "en": "Where is she from?" }
+        ]
+      },
+      "characters": [
+        {
+          "hanzi": "想",
+          "pinyin": "xiǎng",
+          "english": "to want / to think of / to miss",
+          "tone": "3rd — dipping (low)",
+          "pronunciation": "/ɕjɑŋ/ — 'shee-AHNG', tongue flat behind lower teeth, lips spread",
+          "calligraphy": "TALL ║ SHORT. 心 (heart) sits wide at the bottom — it anchors the character. Focus stroke: the 3 dots in 心 must flow left → right → center, not random.",
+          "culture": "想 is the #1 verb for desires: 我想你 (I miss you, literally 'I want you'), 想家 (miss home, literally 'want-home').",
+          "etymology": "Radical breakdown: 相 (木 tree + 目 eye = 'appearance / look carefully') + 心 (heart) at the bottom. ~3000 years ago: 'to look into your heart' = to think, to desire, to want. What appears IN your heart = what you WANT."
+        },
+        {
+          "hanzi": "上",
+          "pinyin": "shàng",
+          "english": "up / above / to go up / to attend",
+          "tone": "4th — sharp falling",
+          "pronunciation": "/ʂɑŋ/ — 'SHR-AHNG', tongue curled back, lips rounded",
+          "calligraphy": "SHORT ║ TALL. The top 一 is short, the bottom 一 is long — the long bottom line must be perfectly horizontal, like a floor.",
+          "culture": "上 also means 'to attend': 上学 (go up to school = attend school), 上班 (go up to work = go to work).",
+          "etymology": "Pure pictograph — a short line above a long line = 'the thing above'. One of the oldest characters in Chinese; no radical to decompose, it IS the radical. 上去 = go up, 上楼 = go upstairs."
+        }
+      ]
+    },
+    {
+      "id": "li-fa",
+      "cardNumber": "008",
+      "title": "里 vs 法",
+      "subtitle": "inside/village vs law/method/Dharma",
+      "prompt": "哪个是里？哪个是法？",
+      "promptEn": "Which is lǐ? Which is fǎ?",
+      "trapZone": {
+        "confusion": "你在哪裡 → 你在哪里; 你去哪裡 → 你去哪里; 你想去哪裡 → 你想去哪里; 你做了的什麼 → 我会做什么",
+        "reason": "里 vs 裡 — same sound, different character. Both are correct: 里 is Simplified (mainland China), 裡 is Traditional (Taiwan/HK) — not an error, just a script habit. 你 vs 我 — same tone-3 dip-rise shape but different starting sound: 你 nǐ = tongue tip behind teeth, air flows out (n-); 我 wǒ = lips round into 'o' then open (w-). 做什么 vs 做了的什麼 — fast speech (快嘴) blurs 什么 (shénme) into something that sounds like 了 (le).",
+        "drill": [
+          { "zh": "你在哪里工作？", "py": "Nǐ zài nǎlǐ gōngzuò?", "en": "Where do you work?" },
+          { "zh": "我会做什么？", "py": "Wǒ huì zuò shénme?", "en": "What can I do?" },
+          { "zh": "这个方法不合法。", "py": "Zhège fāngfǎ bù héfǎ.", "en": "This method isn't legal." }
+        ]
+      },
+      "characters": [
+        {
+          "hanzi": "里",
+          "pinyin": "lǐ",
+          "english": "inside / village",
+          "tone": "3rd — dipping then rising (↘↗)",
+          "pronunciation": "lee (rhymes with 'knee', but the tone dips low then rises)",
+          "calligraphy": "TALL ║ NARROW. Focus on the central vertical stroke (丨) that pierces through 田 and 土 — it's the spine of the character.",
+          "culture": "一里 ≈ 500 metres — ancient China measured distance in 里. 十里 = 5km, roughly an afternoon's walk to the next village.",
+          "etymology": "Radical breakdown: 田 (field, top) + 土 (earth, bottom). 3000+ years ago a 里 was a village unit — families living inside measured field plots bounded by earthen borders. 'Inside the walls' → village → neighbourhood → (later) 'inside'."
+        },
+        {
+          "hanzi": "法",
+          "pinyin": "fǎ",
+          "english": "law / method / Dharma",
+          "tone": "3rd — dipping then rising (↘↗)",
+          "pronunciation": "faa (like 'far' but shorter, with the tone dipping then rising)",
+          "calligraphy": "WIDE ║ SHORT, balanced. Focus on the 氵 three dots — they should flow like water droplets, not sit as static dots.",
+          "culture": "In Buddhism 法 = Dharma (佛法) — this single character carries the entire concept of universal cosmic law. One of the most important characters in Chinese philosophy: law, method, truth, all in one.",
+          "etymology": "Radical breakdown: 氵(water, left) + 去 (go/remove, right). Originally meant 'to wash away' — water removing impurities. 氵= cleansing, 去 = remove the impure, leaving what is pure and standard → STANDARD → RULE → LAW."
+        }
+      ]
+    },
+    {
+      "id": "xiang-bu",
+      "cardNumber": "007",
+      "title": "想 vs 不",
+      "subtitle": "to miss/think vs not",
+      "prompt": "哪个是 miss？哪个是 not？",
+      "promptEn": "Which one means miss/think? Which one means not?",
+      "trapZone": {
+        "confusion": "你生完了？ → 你想我了？; 人们啦 → 怎么了？; 他不会说 → 他不会做",
+        "reason": "想 xiǎng and 生 shēng both end with -ng, but 想 has a clear i-glide before -ang while 生 has no i-glide and a more open central vowel. 怎么 zěnme and 人们 rénmen share the same -nme ending; the real cue is only the initial (z- with tongue behind teeth vs r- with tongue curled back). 说 shuō and 做 zuò share the -uo rhyme; the contrast is primarily tone contour (1st flat vs 4th falling) plus initial placement.",
+        "drill": [
+          { "zh": "你想我了，不是你生完了！", "py": "Nǐ xiǎng wǒ le, bùshì nǐ shēng wán le!", "en": "You miss me, not that you gave birth!" },
+          { "zh": "怎么了？不是人们啦！", "py": "Zěnme le? Bùshì rénmen la!", "en": "What's wrong? Not 'people'!" },
+          { "zh": "他不会做，不是他不会说！", "py": "Tā bù huì zuò, bùshì tā bù huì shuō!", "en": "He can't do it, not that he can't speak!" }
+        ]
+      },
+      "characters": [
+        {
+          "hanzi": "想",
+          "pinyin": "xiǎng",
+          "english": "to miss / to think of",
+          "tone": "3rd — dipping then rising (↘↗)",
+          "pronunciation": "shee-ahng (keep a strong i-glide before -ang; avoid sheng-like vowel)",
+          "calligraphy": "TALL ║ SHORT balance. Keep 相 stable on top and 心 compact below. Focus on 心's final curved hook (卧钩) — it carries the emotional center of the character.",
+          "culture": "想家 (xiǎng jiā, miss home) is one of the most emotionally loaded expressions during Spring Festival travel. 想你 (xiǎng nǐ, miss you) is one of the most direct intimate texts in modern Mandarin.",
+          "etymology": "Radical breakdown: 相 + 心. Early forms of 相 relate to mutual gaze or looking at each other; 心 is heart. Combined image: the heart turning toward someone not present — to think of, long for, miss."
+        },
+        {
+          "hanzi": "不",
+          "pinyin": "bù",
+          "english": "not / no",
+          "tone": "4th — sharp falling (↘)",
+          "pronunciation": "boo (short and firm, with a sharp fall; not soft or prolonged)",
+          "calligraphy": "WIDE ║ NARROW balance. Keep the top horizontal stroke steady and commanding, then let the downward structure close cleanly underneath.",
+          "culture": "不 is among the highest-frequency characters in spoken Mandarin and appears constantly in daily negation: 不是, 不会, 不想. In classical and philosophical writing, forms like 不言 ('not speaking') carry rhetorical weight.",
+          "etymology": "Commonly taught as an ancient pictographic shape linked to 'not yet' or an unfulfilled state. Over time it grammaticalized into Mandarin's universal negator: NOT."
+        }
+      ]
+    },
+    {
+      "id": "men-qi",
+      "cardNumber": "006",
+      "title": "们 vs 淇",
+      "subtitle": "plural suffix vs ice-cream loan-sound",
+      "prompt": "哪个是 plural？哪个是 ice cream？",
+      "promptEn": "Which one marks plural? Which one is in ice cream?",
+      "trapZone": {
+        "confusion": "你回周嗎? → 你会做吗？; 他做生亡工作 → 她做什么工作？; 今天冰淇淋 → 怎么了？",
+        "reason": "回(huí) and 会(huì) share h- onset, but huí rises with spread lips while huì falls and closes harder at the end. 周(zhōu) vs 做(zuò) swaps retroflex zh- (curled tongue) with flat z- (forward tongue). 什么(shénme) was chunked into 生亡(shēngwáng) because only the sh- cue was retained and the rest got guessed. 今天冰淇淋 for 怎么了 is a full lexical autocorrect: similar rhythm triggered your strongest familiar phrase.",
+        "drill": [
+          { "zh": "我们会做冰淇淋。", "py": "Wǒmen huì zuò bīngqílín.", "en": "We can make ice cream." },
+          { "zh": "他们在说什么？", "py": "Tāmen zài shuō shénme?", "en": "What are they saying?" },
+          { "zh": "你会做什么工作？", "py": "Nǐ huì zuò shénme gōngzuò?", "en": "What work do you do?" }
+        ]
+      },
+      "characters": [
+        {
+          "hanzi": "们",
+          "pinyin": "men",
+          "english": "plural suffix (for pronouns)",
+          "tone": "neutral tone — light and short",
+          "pronunciation": "mun (sounds close to English 'men', but lighter; keep it brief and unstressed)",
+          "calligraphy": "NARROW ║ TALL balance. Left 亻 must stay slim and upright; 门 on the right is fuller. Keep the person radical tight so the whole character does not sprawl.",
+          "culture": "们 is not used alone in modern Mandarin. It attaches to pronouns: 我们, 你们, 他们. Historical note: before the 1920s, 他 commonly covered all genders in writing; reform-era writers (including 刘半农) pushed modern distinctions like 她/它, while 们 stayed the productive plural suffix.",
+          "etymology": "Radical breakdown: 亻(person semantic) + 门(men phonetic). Early uses treated 门 mostly as sound; adding 亻 clarified PEOPLE as meaning. 门 alone means door, but with 亻 it becomes a plural marker for groups of people in pronouns."
+        },
+        {
+          "hanzi": "淇",
+          "pinyin": "qí",
+          "english": "qí sound in 冰淇淋 (ice cream)",
+          "tone": "2nd — rising (↗), like asking 'what?'",
+          "pronunciation": "chee (like 'cheese' without the final s), rising at the end",
+          "calligraphy": "WIDE ║ SHORT balance. Left 氵 uses three evenly spaced dots. Right 其 carries most width; avoid squeezing the water radical.",
+          "culture": "淇 originally names the Qi River (淇河) in Henan, attested in early classics such as 《诗经》. In 冰淇淋, 淇 is mostly phonetic borrowing rather than core meaning; the phrase functions as a loan translation for 'ice cream'.",
+          "etymology": "Radical breakdown: 氵(water semantic) + 其(qí phonetic). Historically tied to river naming. In modern compounds like 冰淇淋, 淇 contributes sound value more than literal semantics."
+        }
+      ]
+    },
     {
       "id": "shuo-you",
       "cardNumber": "005",

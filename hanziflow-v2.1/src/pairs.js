@@ -91,6 +91,37 @@ export function exportAnkiTsv() {
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 0);
 }
 
+/**
+ * Generates a dated, share-ready Anki TSV.
+ * Deck name and filename include the local date so each release is traceable.
+ */
+export function exportSharedAnkiTsv() {
+  const dateStamp = new Date().toISOString().slice(0, 10);
+  const cardLabel = META.currentCard ? `C${META.currentCard}` : 'CXX';
+  const lines = [
+    '#separator:tab',
+    '#html:true',
+    '#notetype:Basic',
+    `#deck:HanziFlow Shared ${dateStamp} :: ${cardLabel} Trap Pack`,
+    '#tags column:3',
+  ];
+
+  for (const pair of PAIRS) {
+    const front = buildFront(pair);
+    const back  = buildBack(pair);
+    const tags  = `hanziflow minimal-pairs shared ${pair.id}`;
+    lines.push([front, back, tags].join('\t'));
+  }
+
+  const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `hanziflow-minimal-pairs-${dateStamp}-shared.txt`;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+}
+
 // ── HTML builders ─────────────────────────────────────────────
 function e(s) {
   return String(s)

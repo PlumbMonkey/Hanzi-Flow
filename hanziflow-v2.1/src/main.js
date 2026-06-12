@@ -16,7 +16,14 @@ import {
 } from './wizard.js';
 import { copyExportJSON, downloadExport } from './export.js';
 import { DEMO_CARDS } from './demo.js';
-import { loadPairsDB, getPairs, getDeckMeta, buildPairSessionCards, exportAnkiTsv } from './pairs.js';
+import {
+  loadPairsDB,
+  getPairs,
+  getDeckMeta,
+  buildPairSessionCards,
+  exportAnkiTsv,
+  exportSharedAnkiTsv,
+} from './pairs.js';
 import {
   loadNewCardLimit, loadNextDayTarget, clearNextDayTarget,
 } from './persistence.js';
@@ -58,8 +65,10 @@ function wireEvents() {
   $('start-session').addEventListener('click', handleStartSession);
   $('start-pairs').addEventListener('click', startPairsSession);
   $('export-anki-pairs').addEventListener('click', exportAnkiTsv);
+  $('export-anki-shared').addEventListener('click', exportSharedAnkiTsv);
   $('start-pairs-side').addEventListener('click', startPairsSession);
   $('export-anki-pairs-side').addEventListener('click', exportAnkiTsv);
+  $('export-anki-shared-side').addEventListener('click', exportSharedAnkiTsv);
 
   // Step 1
   document.querySelectorAll('[data-toggle]').forEach((el) =>
