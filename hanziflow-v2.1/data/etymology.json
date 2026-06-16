@@ -360,6 +360,38 @@
     "note": "想 = 相 (look carefully) + 心 (heart), placed at the bottom. ~3000 years ago this combination meant 'to look into your heart' — what appears in your heart is what you think of, desire, or miss. The 心 radical at the bottom is the cheat code: if you see 心 under a character, it's about feeling, not direction.",
     "etymology": "Radical breakdown: 相 (木 tree + 目 eye = 'appearance') + 心 (heart, bottom). To LOOK (相) with your HEART (心) = to think of, to want, to miss. 我想你 = 'I want/miss you'."
   },
+  "不": {
+    "radicals": [
+      { "zh": "一", "meaning": "ground line / horizon", "strokes": 1 },
+      { "zh": "卜", "meaning": "sprout/divining crack shape (phonetic-graphic component)", "strokes": 2 }
+    ],
+    "evolution": ["𠀚", "不", "不"],
+    "evoLabels": ["Oracle Bone", "Seal", "Modern"],
+    "compounds": [
+      { "word": "不是", "pinyin": "bù shì", "meaning": "is not / not be" },
+      { "word": "不要", "pinyin": "bú yào", "meaning": "don't / do not want" },
+      { "word": "不会", "pinyin": "bú huì", "meaning": "cannot / will not" },
+      { "word": "不想", "pinyin": "bù xiǎng", "meaning": "do not want to" }
+    ],
+    "note": "A traditional teaching image reads 不 as a sprout pressing upward under a ground line: the emergence has not happened yet. This 'not yet fulfilled' sense aligns with its modern role as Mandarin's default negator for non-completed actions (我不去). For completed events, Mandarin usually shifts to 没 (我没去).",
+    "etymology": "Radical story: 一 as the ground line and 卜 as an upward push/sprout-like form. The semantic teaching hook is 尚未 ('not yet') — something pressing toward completion but not crossing the threshold. Over time, the character grammaticalized into the high-frequency negator 不."
+  },
+  "是": {
+    "radicals": [
+      { "zh": "日", "meaning": "sun / light / truth", "strokes": 4 },
+      { "zh": "止", "meaning": "foot / step / movement", "strokes": 4 }
+    ],
+    "evolution": ["昰", "是", "是"],
+    "evoLabels": ["Bronze/Seal", "Clerical", "Modern"],
+    "compounds": [
+      { "word": "是不是", "pinyin": "shì bú shì", "meaning": "is it or not?" },
+      { "word": "就是", "pinyin": "jiù shì", "meaning": "exactly / precisely is" },
+      { "word": "总是", "pinyin": "zǒng shì", "meaning": "always" },
+      { "word": "可是", "pinyin": "kě shì", "meaning": "but / however" }
+    ],
+    "note": "The older semantic core of 是 is 'correct, right'. From 'that is correct' it expanded into the modern copular usage 'to be' (A 是 B). This mirrors a common grammatical path across languages: assertion of correctness becomes identity linking.",
+    "etymology": "Radical story: 日 (sun, what is clear/true) over 止 (foot, step). A classic teaching gloss interprets this as walking toward what is right and true. That correctness meaning then grammaticalized into modern 'is/are' usage in Mandarin."
+  },
   "上": {
     "radicals": [
       { "zh": "一", "meaning": "the character itself is a pictograph — one line above another", "strokes": 3 }

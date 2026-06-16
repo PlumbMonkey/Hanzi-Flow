@@ -5,8 +5,8 @@
     "nameEn": "Ink Language",
     "description": "Minimal pairs deck — characters that look or sound similar, drilled back-to-back so ear and hand learn to tell them apart.",
     "version": "1.0",
-    "currentCard": "010",
-    "updated": "2026-06-12",
+    "currentCard": "011",
+    "updated": "2026-06-16",
     "pronunciationRules": [
       {
         "group": "Flat tongue (舌尖前音)",
@@ -205,10 +205,26 @@
         "note": "吃 gets dropped and 去 gets doubled when 去 already appears earlier in the sentence — the brain reuses the word already in play. Card 009/010 bonus trap.",
         "status": "active",
         "pairId": "xiang-shang"
+      },
+      {
+        "id": 24,
+        "chars": ["不", "是"],
+        "pattern": "same 4th-tone contour, high-frequency function-word collision",
+        "note": "Core contrast for Card 011: 不 (ongoing/future negation) vs 是 (to be/correct).",
+        "status": "active",
+        "pairId": "bu-shi"
+      },
+      {
+        "id": 25,
+        "chars": ["拿来", "哪里"],
+        "pattern": "tone collapse in fast speech: 2+2 vs 3+3",
+        "note": "拿来 ná lái and 哪里 nǎlǐ flatten toward the same na-li shape under speed; train tone contour + final vowel spread.",
+        "status": "active",
+        "pairId": "bu-shi"
       }
     ],
     "nextCard": {
-      "number": "011",
+      "number": "012",
       "chars": ["说", "输"],
       "charsPinyin": ["shuō", "shū"],
       "focus": "-uo vs -u vowel distinction, same sh- initial"
@@ -249,10 +265,53 @@
       { "icon": "✍️", "task": "Hanzi Flow writing session × 3 each — focus on the 3 dots in 心 (想) flowing left→right→center, and the long bottom 一 stroke in 上 staying perfectly horizontal" },
       { "icon": "🎧", "task": "Forvo × 5 each: forvo.com/word/他/, forvo.com/word/她/, forvo.com/word/吃/, and forvo.com/word/去/" },
       { "icon": "🧠", "task": "Radical-recall drill: 他 (亻person) vs 她 (女woman) — say each aloud, then write the radical that disambiguates it, 10×" },
-      { "icon": "🗣️", "task": "Record yourself: 我想去哪里吃，不是我上去哪里去！她是哪里的人？" }
+      { "icon": "🗣️", "task": "Record yourself: 我想去哪里吃，不是我上去哪里去！她是哪里的人？" },
+      { "icon": "🎧", "task": "Forvo × 5 each: forvo.com/word/不/ and forvo.com/word/是/" },
+      { "icon": "👅", "task": "Tone drill: 不 bù (short clipped 4th tone) vs 是 shì (quick retroflex 4th tone) — alternate 10×" },
+      { "icon": "🧠", "task": "Contrast drill: 不 = ongoing/future negation; 没 = completed past negation. Say paired examples 5× each." },
+      { "icon": "🗣️", "task": "Record yourself: 我不是神，你想去哪里？你去拿来！" }
     ]
   },
   "pairs": [
+    {
+      "id": "bu-shi",
+      "cardNumber": "011",
+      "title": "不 vs 是",
+      "subtitle": "not (ongoing/future) vs is/correct",
+      "prompt": "哪个是\"不\"？哪个是\"是\"？",
+      "promptEn": "Which one is 不 (not)? Which one is 是 (is/correct)?",
+      "trapZone": {
+        "confusion": "你上去哪里? → 你想去哪里？; 你去哪裡? → 你去拿來!",
+        "reason": "想 xiǎng (3rd tone) and 上 shàng (4th tone) often collapse in fast speech when the -iang/-ang contrast is reduced. 拿来 ná lái (2nd+2nd) and 哪里 nǎlǐ (3rd+3rd) can both flatten toward na-li in casual speech, so context and tone contour must carry the distinction.",
+        "drill": [
+          { "zh": "我不是神。", "py": "Wǒ bù shì shén.", "en": "I am not a god." },
+          { "zh": "你想去哪里？", "py": "Nǐ xiǎng qù nǎlǐ?", "en": "Where do you want to go?" },
+          { "zh": "你去拿来！", "py": "Nǐ qù ná lái!", "en": "Go get it and bring it here!" }
+        ]
+      },
+      "characters": [
+        {
+          "hanzi": "不",
+          "pinyin": "bù",
+          "english": "not / not yet",
+          "tone": "4th — sharp falling",
+          "pronunciation": "boo (short and clipped; do not hold the vowel)",
+          "calligraphy": "TALL ║ SHORT balance. Keep the top horizontal line stable, and let the vertical/downward motion cut cleanly through the center.",
+          "culture": "不 is not just a blunt 'no' in Mandarin usage. It is the default negator for ongoing, habitual, or future actions (我不去), while 没 marks completed negation (我没去).",
+          "etymology": "Radical story: 一 (ground line) + 卜 (sprout). A sprout presses upward but has not yet fully broken through the ground: 尚未. From this 'not yet fulfilled' image came the core negation meaning 'not'."
+        },
+        {
+          "hanzi": "是",
+          "pinyin": "shì",
+          "english": "is / correct / this is",
+          "tone": "4th — sharp falling",
+          "pronunciation": "shr (quick retroflex sh-, tongue curled back)",
+          "calligraphy": "WIDE ║ NARROW balance. Keep 日 centered above 止 so the top sits square and the lower strokes remain grounded.",
+          "culture": "是 began with the sense of 'that is right/correct' and later grammaticalized into the copular verb 'to be' in modern Mandarin.",
+          "etymology": "Radical story: 日 (sun/truth) + 止 (foot/step). The image is walking toward what is true and correct; from 'correct' it extended to 'this is...'."
+        }
+      ]
+    },
     {
       "id": "ta-ta",
       "cardNumber": "010",
