@@ -15,6 +15,7 @@
   <div class="logo">
     <span class="hanzi-mark">漢字</span><span class="accent">Flow</span>
     <span class="version">v2.1</span>
+    <span class="tagline">汉字流 — 自由学，自由悟。</span>
   </div>
   <div class="header-right">
     <div class="awe-pill" id="awe-pill">AWE ◎</div>
@@ -132,6 +133,7 @@
       <div class="btn-row">
         <button class="btn" id="export-anki-pairs" title="Download Anki import file">⬇ Anki deck (.txt)</button>
         <button class="btn" id="export-anki-shared" title="Download dated share-ready Anki deck">⬇ Share deck</button>
+        <button class="btn btn-sage" id="start-drill" title="Hear one character of each pair — pick which one you heard">🎧 Listening drill</button>
         <button class="btn btn-primary" id="start-pairs">Practice pairs →</button>
       </div>
       <div class="tip-text">
@@ -203,6 +205,7 @@
       <div class="speech-pinyin-hint" id="s2-pinyin"></div>
       <button class="mic-btn" id="mic-btn">🎙</button>
       <div class="speech-feedback" id="speech-fb">Press mic and speak in Mandarin</div>
+      <div class="speech-diag" id="speech-diag"></div>
     </div>
     <div class="stpvo-zone" id="stpvo-zone" style="display:none">
       <div class="section-lbl">Word order correction — STPVO</div>
@@ -301,11 +304,19 @@
     <div class="wizard-pairs-footer">
       <button class="btn" id="export-anki-pairs-side" title="Download Anki import file">⬇ Anki</button>
       <button class="btn" id="export-anki-shared-side" title="Download dated share-ready Anki deck">⬇ Share</button>
+      <button class="btn" id="start-drill-side" title="Listening discrimination drill">🎧 Drill</button>
       <button class="btn btn-primary" id="start-pairs-side">Practice →</button>
     </div>
   </aside>
 
   </div><!-- /.wizard-body -->
+</section>
+
+<!-- ─────────────────────────  DRILL  ───────────────────────── -->
+<section class="screen" id="screen-drill">
+  <div class="drill-center">
+    <div class="paper-card drill-card" id="drill-body"></div>
+  </div>
 </section>
 
 <!-- ─────────────────────────  WRAP  ───────────────────────── -->
@@ -319,6 +330,7 @@
       <div class="wrap-stat"><div class="wrap-val" id="ws-passed">0</div><div class="wrap-lbl">Passed</div></div>
       <div class="wrap-stat"><div class="wrap-val" id="ws-stashed">0</div><div class="wrap-lbl">Stashed</div></div>
       <div class="wrap-stat"><div class="wrap-val" id="ws-time">0m</div><div class="wrap-lbl">Time</div></div>
+      <div class="wrap-stat"><div class="wrap-val" id="ws-streak">1</div><div class="wrap-lbl">🔥 Streak</div></div>
     </div>
 
     <div style="font-size:13px;color:var(--ink-light);max-width:420px;line-height:1.7" id="wrap-pacing-msg"></div>

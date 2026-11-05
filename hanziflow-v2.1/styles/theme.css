@@ -86,6 +86,13 @@ body::after {
   font-family: 'Noto Sans SC', sans-serif;
   margin-left: 4px;
 }
+.logo .tagline {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: 'Noto Serif SC', serif;
+  margin-left: 10px;
+  letter-spacing: 0.02em;
+}
 .header-right { display: flex; align-items: center; gap: 14px; }
 
 .timer-pill {
@@ -1117,3 +1124,78 @@ kbd {
   .awe-panel { width: 88vw; }
   .field-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Speech diagnosis (Step 2 tone feedback) ────────────────── */
+.speech-diag { display: flex; flex-direction: column; gap: 6px; width: 100%; max-width: 460px; }
+.speech-diag:empty { display: none; }
+.diag-row {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 8px 12px; border: 1px solid var(--stroke); border-radius: 8px;
+  background: var(--paper-warm);
+}
+.diag-syl { font-family: 'Noto Serif SC', serif; font-size: 22px; color: var(--ink); display: flex; align-items: baseline; gap: 6px; min-width: 76px; }
+.diag-py { font-family: sans-serif; font-size: 12px; color: var(--muted); }
+.diag-badge {
+  font-size: 11px; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--stroke);
+  color: var(--ink-light); background: var(--paper);
+  white-space: nowrap;
+}
+.diag-badge.ok   { border-color: var(--sage); color: var(--sage); }
+.diag-badge.bad  { border-color: var(--vermillion); color: var(--vermillion); font-weight: 600; }
+.diag-badge.miss { color: var(--muted); border-style: dashed; }
+.diag-heard { font-size: 11px; color: var(--muted); margin-left: auto; }
+.diag-tip {
+  font-size: 12px; line-height: 1.6; color: var(--ink-light);
+  border-left: 3px solid var(--gold); padding: 6px 10px;
+  background: var(--paper-warm); border-radius: 0 6px 6px 0;
+}
+.diag-note { font-size: 12px; color: var(--muted); }
+
+/* ── Listening drill ────────────────────────────────────────── */
+.drill-center { display: flex; justify-content: center; padding: 12px 0; }
+.drill-card { width: 100%; max-width: 560px; }
+.drill-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.drill-sub { font-size: 14px; color: var(--muted); font-family: sans-serif; }
+.drill-progress { font-size: 13px; color: var(--muted); }
+.drill-inst { font-size: 13px; color: var(--ink-light); }
+.drill-choices { display: flex; gap: 14px; justify-content: center; margin: 10px 0; flex-wrap: wrap; }
+.drill-choice {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  min-width: 120px; padding: 18px 22px; cursor: pointer;
+  border: 1px solid var(--stroke); border-radius: 10px;
+  background: var(--paper-warm); color: var(--ink);
+  transition: transform 0.1s ease, border-color 0.15s ease;
+}
+.drill-choice:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--gold); }
+.drill-choice:disabled { cursor: default; }
+.drill-choice-key {
+  font-size: 10px; color: var(--muted); border: 1px solid var(--stroke);
+  border-radius: 4px; padding: 1px 6px;
+}
+.drill-choice-hanzi { font-family: 'Noto Serif SC', serif; font-size: 52px; line-height: 1.2; }
+.drill-choice-py { font-size: 13px; color: var(--muted); }
+.drill-choice.drill-correct { border-color: var(--sage); box-shadow: 0 0 0 2px var(--sage); }
+.drill-choice.drill-wrong   { border-color: var(--vermillion); box-shadow: 0 0 0 2px var(--vermillion); opacity: 0.85; }
+.drill-feedback { min-height: 20px; font-size: 14px; text-align: center; }
+.drill-feedback.ok   { color: var(--sage); }
+.drill-feedback.fail { color: var(--vermillion); }
+.drill-lesson {
+  font-size: 12px; line-height: 1.6; color: var(--ink-light);
+  border-left: 3px solid var(--vermillion); padding: 8px 12px;
+  background: var(--paper-warm); border-radius: 0 6px 6px 0;
+}
+.drill-lesson:empty { display: none; }
+.drill-lesson-title { font-weight: 700; color: var(--vermillion); margin-bottom: 4px; font-size: 12px; }
+.drill-lesson-reason { margin-top: 4px; color: var(--muted); }
+.drill-score-big { font-size: 42px; font-family: 'IM Fell English', serif; color: var(--ink); text-align: center; margin: 10px 0; }
+.drill-score-pct { font-size: 20px; color: var(--muted); }
+.drill-miss-list { display: flex; flex-direction: column; gap: 6px; }
+.drill-miss-row {
+  display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+  font-size: 13px; padding: 8px 12px;
+  border: 1px solid var(--stroke); border-radius: 8px; background: var(--paper-warm);
+}
+.drill-miss-chars { font-family: 'Noto Serif SC', serif; color: var(--ink); }
+.drill-miss-heard { color: var(--vermillion); font-size: 12px; }
+.drill-miss-none { font-size: 13px; color: var(--sage); text-align: center; padding: 8px; }
+.drill-summary-note { font-size: 11px; color: var(--muted); line-height: 1.6; margin-top: 8px; }

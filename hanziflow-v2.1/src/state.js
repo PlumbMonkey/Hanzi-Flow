@@ -44,7 +44,7 @@ export const S = {
   // AWE — session-local
   awe: {
     listen:  { attempts: 0, passed: 0 },
-    speak:   { attempts: 0, passed: 0 },
+    speak:   { attempts: 0, passed: 0, overrides: 0 },
     write:   { attempts: 0, passed: 0 },
     latency: [],          // [{ hanzi, ms }]
     weakpoints: {},       // { hanzi: Set<'listen'|'speak'|'write'> }
@@ -75,7 +75,7 @@ export function resetSession() {
   S.strokeOk = 0;
   S.awe = {
     listen:  { attempts: 0, passed: 0 },
-    speak:   { attempts: 0, passed: 0 },
+    speak:   { attempts: 0, passed: 0, overrides: 0 },
     write:   { attempts: 0, passed: 0 },
     latency: [],
     weakpoints: {},

@@ -51,6 +51,14 @@ export function recordSpeak(passed) {
   if (passed) S.awe.speak.passed++;
 }
 
+/**
+ * Manual "mark correct" override — kept out of attempts/passed so it never
+ * inflates the speak accuracy that drives dynamic pacing (§4.4).
+ */
+export function recordSpeakOverride() {
+  S.awe.speak.overrides++;
+}
+
 export function recordStroke(ok) {
   S.awe.write.attempts++;
   if (ok) S.awe.write.passed++;

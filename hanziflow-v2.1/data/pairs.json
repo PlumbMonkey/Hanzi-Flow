@@ -5,8 +5,8 @@
     "nameEn": "Ink Language",
     "description": "Minimal pairs deck — characters that look or sound similar, drilled back-to-back so ear and hand learn to tell them apart.",
     "version": "1.0",
-    "currentCard": "011",
-    "updated": "2026-06-16",
+    "currentCard": "012",
+    "updated": "2026-06-17",
     "pronunciationRules": [
       {
         "group": "Flat tongue (舌尖前音)",
@@ -221,10 +221,42 @@
         "note": "拿来 ná lái and 哪里 nǎlǐ flatten toward the same na-li shape under speed; train tone contour + final vowel spread.",
         "status": "active",
         "pairId": "bu-shi"
+      },
+      {
+        "id": 26,
+        "chars": ["工", "公"],
+        "pattern": "perfect homophones gōng (tone 1), meaning split only by context and writing",
+        "note": "工 = work/craft (I-beam shape) vs 公 = public/fair. Card 012 — active.",
+        "status": "active",
+        "pairId": "gong-zai"
+      },
+      {
+        "id": 27,
+        "chars": ["在", "再"],
+        "pattern": "perfect homophones zài (tone 4), location vs repetition",
+        "note": "在 = location/presence vs 再 = again/repeat. Core trap in 你在哪里工作. Card 012.",
+        "status": "active",
+        "pairId": "gong-zai"
+      },
+      {
+        "id": 28,
+        "chars": ["吃", "去"],
+        "pattern": "lexical substitution under pressure (ch- vs q-, no true phonetic overlap)",
+        "note": "吃 can be replaced by 去 when 去 already appears earlier in sentence planning. Card 012.",
+        "status": "active",
+        "pairId": "gong-zai"
+      },
+      {
+        "id": 29,
+        "chars": ["他", "她"],
+        "pattern": "perfect homophones tā (tone 1), radical-only written contrast",
+        "note": "Speech must rely on context; writing disambiguates with 亻 vs 女. Card 012 reinforcement.",
+        "status": "active",
+        "pairId": "gong-zai"
       }
     ],
     "nextCard": {
-      "number": "012",
+      "number": "013",
       "chars": ["说", "输"],
       "charsPinyin": ["shuō", "shū"],
       "focus": "-uo vs -u vowel distinction, same sh- initial"
@@ -273,6 +305,46 @@
     ]
   },
   "pairs": [
+    {
+      "id": "gong-zai",
+      "cardNumber": "012",
+      "title": "工 vs 在",
+      "subtitle": "work/craft vs at/in/existing",
+      "prompt": "哪个是 work？哪个是 at？",
+      "promptEn": "Which one means work? Which one means at/in?",
+      "trapZone": {
+        "confusion": "尼索遜馬公索 → 你做什么工作？; 你再拿給他們做 → 你在哪里工作？; 他不是哪里的人 → 她是哪里的人？; 我們上去哪裡去 → 你想去哪里吃？",
+        "reason": "在 and 再 are perfect homophones (zài, tone 4), so only context separates location from repetition. 工 and 公 are also perfect homophones (gōng, tone 1), so writing context must carry meaning. Additional trap chains come from lexical carry-over and tone flattening in fast speech: 吃 can be replaced by 去 when 去 is already active in planning, and 他/她 cannot be distinguished by sound alone.",
+        "drill": [
+          { "zh": "你在哪里工作？", "py": "Nǐ zài nǎlǐ gōngzuò?", "en": "Where do you work?" },
+          { "zh": "你做什么工作？", "py": "Nǐ zuò shénme gōngzuò?", "en": "What work do you do?" },
+          { "zh": "她是哪里的人？", "py": "Tā shì nǎlǐ de rén?", "en": "Where is she from?" },
+          { "zh": "你想去哪里吃？", "py": "Nǐ xiǎng qù nǎlǐ chī?", "en": "Where do you want to eat?" }
+        ]
+      },
+      "characters": [
+        {
+          "hanzi": "工",
+          "pinyin": "gōng",
+          "english": "work / craft / labor",
+          "tone": "1st — high flat",
+          "pronunciation": "goong (hold the vowel flat; lips gently rounded at the end)",
+          "calligraphy": "NARROW ║ WIDE balance. Keep the middle horizontal stroke perfectly centered between the top and bottom lines.",
+          "culture": "工匠 (gōngjiàng) means artisan/craftsman. In the old four-class model 士农工商, craftsmen were ranked last: scholars > farmers > merchants > craftsmen.",
+          "etymology": "A very old pictograph linked to tools and measured straightness (often taught via the carpenter's square). The three horizontals plus central connector became a stable 'I-beam' shape: beam, support, and connection. From tool-making and craft activity, the meaning generalized to work/labor."
+        },
+        {
+          "hanzi": "在",
+          "pinyin": "zài",
+          "english": "at / in / existing / to be present",
+          "tone": "4th — sharp falling",
+          "pronunciation": "dzai (front tongue contact, then a fast drop)",
+          "calligraphy": "TALL ║ SHORT balance. Keep the left 土 upright and stable as the ground anchor.",
+          "culture": "正在 (zhèngzài) marks ongoing action in modern Mandarin (progressive '-ing'): 我正在吃 = 'I am eating right now'.",
+          "etymology": "Common teaching breakdown: 土 (earth/ground) + 才 (sprouting form). A sprout existing on the ground became the image of presence at a location, then generalized to 'to be at/in' and grammatical progressive marking."
+        }
+      ]
+    },
     {
       "id": "bu-shi",
       "cardNumber": "011",

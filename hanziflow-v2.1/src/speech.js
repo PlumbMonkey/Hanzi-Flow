@@ -11,8 +11,10 @@
  * Manual override always available (PRD §3 Step 2).
  */
 import { S, $ } from './state.js';
-import { recordSpeak, flagWeak, checkAuralMode, updateAWEPanel } from './awe.js';
+import { recordSpeak, recordSpeakOverride, flagWeak, checkAuralMode, updateAWEPanel } from './awe.js';
 import { renderSTPVO } from './stpvo.js';
+import { renderSpeechDiagnosis, clearDiagnosis } from './tonefeedback.js';
+export { clearDiagnosis };
 
 // Brave removes Google's Chromium API key, so Web Speech API always fails there.
 const isBrave = () => typeof navigator.brave !== 'undefined';
@@ -96,6 +98,15 @@ async function blobToFloat32Array(blob) {
 
 export const SIMILARITY_THRESHOLD = 0.85;
 
+/**
+ * Strip whitespace + punctuation before matching. Anki sentence cards carry
+ * trailing 。 but speech recognition never returns it — without this, a
+ * perfect 5-character utterance scores 5/6 = 0.83 and fails the threshold.
+ */
+export function normalizeForMatch(s) {
+  return String(s || '').replace(/[\s。．，、！？；：（）〈〉《》「」『』【】…·～＂＇.,!?;:'"()[\]—–-]/g, '');
+}
+
 export function similarity(heard, target) {
   if (!heard || !target) return 0;
   const heardSet = new Set(heard.split(''));
@@ -129,23 +140,28 @@ export function toggleSpeech(onPass) {
 
   $('mic-btn').classList.add('listening');
   setFeedback('Listening…');
+  clearDiagnosis();
 
   rec.onresult = (e) => {
     const card = S.cards[S.idx];
-    const alts = Array.from(e.results[0]).map((a) => a.transcript.replace(/\s/g, ''));
-    const target = card.hanzi.replace(/\s/g, '');
+    const alts = Array.from(e.results[0]).map((a) => normalizeForMatch(a.transcript));
+    const target = normalizeForMatch(card.hanzi);
     const passed = alts.some((t) => t === target || similarity(t, target) >= SIMILARITY_THRESHOLD);
     const heard = e.results[0][0].transcript;
 
     recordSpeak(passed);
     if (passed) {
       setFeedback(`Heard: ${heard} ✓`, 'ok');
+      clearDiagnosis();
       S.speechPassed = true;
       $('speech-next').disabled = false;
       onPass?.();
     } else {
       flagWeak(card.hanzi, 'speak');
-      setFeedback(`Heard: ${heard} — try the word-order game below`, 'fail');
+      setFeedback(`Heard: ${heard} — see what went wrong below`, 'fail');
+      // Best-matching alternative gives the fairest per-syllable diagnosis
+      const best = alts.reduce((a, b) => (similarity(b, target) > similarity(a, target) ? b : a), alts[0] || '');
+      renderSpeechDiagnosis(best, target);
       if (Array.isArray(card.words) && card.words.length) {
         renderSTPVO(card.words, onPass);
       }
@@ -202,6 +218,7 @@ async function startWhisperRecording(onPass) {
 
   S.speechActive = true;
   $('mic-btn').classList.add('listening');
+  clearDiagnosis();
 
   // Kick off model loading in parallel with recording (no-op if already loaded)
   const modelPromise = loadModel();
@@ -232,19 +249,21 @@ async function startWhisperRecording(onPass) {
       const text = await transcribeAudio(float32);
 
       const card = S.cards[S.idx];
-      const heard = (text || '').replace(/\s/g, '');
-      const target = card.hanzi.replace(/\s/g, '');
+      const heard = normalizeForMatch(text);
+      const target = normalizeForMatch(card.hanzi);
       const passed = heard === target || similarity(heard, target) >= SIMILARITY_THRESHOLD;
 
       recordSpeak(passed);
       if (passed) {
         setFeedback(`Heard: ${text} ✓`, 'ok');
+        clearDiagnosis();
         S.speechPassed = true;
         $('speech-next').disabled = false;
         onPass?.();
       } else {
         flagWeak(card.hanzi, 'speak');
-        setFeedback(`Heard: ${text || '(nothing)'} — try the word-order game below`, 'fail');
+        setFeedback(`Heard: ${text || '(nothing)'} — see what went wrong below`, 'fail');
+        renderSpeechDiagnosis(heard, target);
         if (Array.isArray(card.words) && card.words.length) renderSTPVO(card.words, onPass);
       }
       updateAWEPanel();
@@ -277,7 +296,8 @@ export function overrideSpeech(onPass) {
 let activeAudio = null;
 
 export async function playCardAudio(card, retrieveAudioBase64) {
-  S.awe.listen.attempts++;
+  // listen.attempts is recorded once per card in recordComprehension();
+  // here we only track how many times this card's audio was replayed.
   S.awe.listenPlayCount++;
   const btn = $('play-btn');
 

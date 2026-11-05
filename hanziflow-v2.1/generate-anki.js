@@ -78,6 +78,6 @@ for (const pair of PAIRS) {
   lines.push([front, back, tags].join('\t'));
 }
 
-writeFileSync(join(__dirname, 'hanziflow-minimal-pairs.txt'), lines.join('\n'), 'utf8');
-console.log(`Generated ${PAIRS.length} Anki cards → hanziflow-minimal-pairs.txt`);
+writeFileSync(join(__dirname, 'exports/hanziflow-minimal-pairs.txt'), lines.join('\n'), 'utf8');
+console.log(`Generated ${PAIRS.length} Anki cards → exports/hanziflow-minimal-pairs.txt`);
 PAIRS.forEach(p => console.log(`  Card ${p.cardNumber}: ${p.title}`));

@@ -27,6 +27,7 @@ import {
 import {
   loadNewCardLimit, loadNextDayTarget, clearNextDayTarget,
 } from './persistence.js';
+import { startListeningDrill } from './drill.js';
 
 // ── Bootstrap ────────────────────────────────────────────────
 async function bootstrap() {
@@ -69,6 +70,8 @@ function wireEvents() {
   $('start-pairs-side').addEventListener('click', startPairsSession);
   $('export-anki-pairs-side').addEventListener('click', exportAnkiTsv);
   $('export-anki-shared-side').addEventListener('click', exportSharedAnkiTsv);
+  $('start-drill').addEventListener('click', startListeningDrill);
+  $('start-drill-side').addEventListener('click', startListeningDrill);
 
   // Step 1
   document.querySelectorAll('[data-toggle]').forEach((el) =>

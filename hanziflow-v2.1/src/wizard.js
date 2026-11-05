@@ -8,7 +8,7 @@ import { S, $, resetSession } from './state.js';
 import { renderEtymology } from './etymology.js';
 import { initHW } from './canvas.js';
 import { hideSTPVO } from './stpvo.js';
-import { setFeedback } from './speech.js';
+import { setFeedback, clearDiagnosis } from './speech.js';
 import { answerCard, retrieveAudioBase64 } from './anki.js';
 import {
   hydrateAWE, onCardEnter, recordComprehension,
@@ -16,7 +16,10 @@ import {
 } from './awe.js';
 import { buildExport, renderQR } from './export.js';
 import { pickIdiom } from './demo.js';
-import { saveNewCardLimit, loadNewCardLimit } from './persistence.js';
+import {
+  saveNewCardLimit, loadNewCardLimit,
+  loadLastSession, saveLastSession, loadStreak, saveStreak,
+} from './persistence.js';
 
 // ── Session lifecycle ─────────────────────────────────────────
 export function beginSession({ cards, isDemo, fieldMap, newCardLimit }) {
@@ -67,6 +70,7 @@ export function loadCard(i) {
   $('s2-hanzi').textContent = c.hanzi;
   $('s2-pinyin').textContent = c.pinyin;
   setFeedback('Press mic and speak in Mandarin');
+  clearDiagnosis();
   $('speech-next').disabled = true;
   hideSTPVO();
 
@@ -190,6 +194,16 @@ export async function endLoop() {
   // Dynamic workload pacing — adjusts tomorrow's new-card target (PRD §4.4)
   const pacing = applyDynamicPacing(loadNewCardLimit());
   $('wrap-pacing-msg').textContent = pacing.message;
+
+  // Streak — any completed session today keeps the chain alive (local dates)
+  const today = new Date().toLocaleDateString('en-CA');
+  const yesterday = new Date(Date.now() - 864e5).toLocaleDateString('en-CA');
+  const last = loadLastSession();
+  let streak = loadStreak() || 0;
+  if (last?.date !== today) streak = last?.date === yesterday ? streak + 1 : 1;
+  saveStreak(streak);
+  saveLastSession({ date: today, passed: S.passed, stashed: S.stash.length });
+  $('ws-streak').textContent = streak;
 
   buildExport({ sessionMinutes: elapsedMin });
   await renderQR();
